@@ -25,9 +25,8 @@ const myApp = new Vue({
     router,
     components: { App },
     template: '<App/>',
-    async beforeMount() {
-        let lala = await checkUser(this)
-        console.log(lala)
+    beforeMount() {
+        checkUser(this)
     }
 })
 
