@@ -4,4 +4,5 @@ const resourse = genRes();
 
 export default {
     login: (data) => resourse('v1/admin/session').post(data).then(_r).catch(_e),
+    getProfile: () => resourse('v1/admin/profile').get().then(_r).catch(_e),
 };

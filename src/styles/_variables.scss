@@ -1,0 +1,28 @@
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-family-base: $font-family-sans-serif;
+$headings-font-family: 'Rubik', sans-serif;
+
+$pagination-active-bg: $main-color;
+$pagination-active-border-color: $main-color;
+$pagination-color: $gray-900;
+$dropdown-border-color: #fff;
+$pagination-padding-x: 0.4rem;
+$pagination-focus-box-shadow: none;
+
+$input-btn-focus-box-shadow: 0 1px 1px rgba(#000, 0.1);
+
+$navbar-padding-y: 3px;
+$btn-padding-y: 0.6rem;
+$input-padding-y: 0.6rem;
+$border-radius: 0.5rem;
+// $input-bg: $gray-200;
+// $input-border-color: $gray-200;
+$nav-link-padding-y: 1.3rem;
+$nav-pills-link-active-bg: #000;
+
+
+$input-bg: rgba(#000, 0.05);
+$input-border-color: $input-bg;
+$input-focus-bg: #fff;
+$input-focus-box-shadow: $input-btn-focus-box-shadow;
+$input-focus-border-color: $input-bg;

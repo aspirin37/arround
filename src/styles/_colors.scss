@@ -1,0 +1,26 @@
+$main-color: #383340; //#185580;
+
+$gray-100: #fafafa;
+$gray-200: #f2f2f2;
+$gray-300: #e6e6e6;
+$gray-400: #cccccc;
+$gray-500: #999999;
+$gray-600: #666666;
+$gray-700: #333333;
+
+$blue-color: #037aff;
+$main-color-fade: rgba($main-color, 0.05);
+$green: #0b9a87;
+$blue: #037aff;
+$red: #e53042;
+$yellow: #f67133;
+$theme-colors: (
+  primary: $blue,
+  secondary: $gray-600,
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-800
+);

@@ -1,0 +1,170 @@
+@import "custom-bootstrap";
+@import "./common/mixins";
+// @import "./common/crop";
+@import "./common/modal";
+@import "./common/styles";
+@import "./common/tooltip";
+@import "./common/inputs";
+@import "./common/nav";
+@import "./common/typography";
+@import "./common/buttons";
+@import "./common/effects";
+@import "./common/order";
+@import "./common/dashboard";
+@import "nav";
+@import "order";
+@import "points";
+@import "courier";
+@import "support";
+
+body, html{
+  height: 100%;
+  background-color: #f8f7f9;
+  font-size: 14px;
+}
+
+.minh-100{
+  min-height: 100%;
+}
+
+.vh-100{
+  min-height: 100vh;
+}
+
+.font-size-0{
+  font-size: 0;
+}
+
+$percentage : 10%;
+.page-enter {
+  opacity: 0;
+  transform: translateX($percentage);
+}
+
+.page-enter-active {
+  transition: all .4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.page-leave-active {
+  transition: all cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  opacity: 0;
+  transform: translateX(-$percentage);
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.navbar-hover-menu{
+  &:hover{
+    .dropdown-menu{
+      display: block;
+    }
+  }
+}
+
+.profile-order-map{
+  min-height: 300px;
+}
+
+.navbar{
+  height: 48px;
+  .dropdown-menu{
+    margin-top: 0;
+    position: absolute;
+    left: auto;
+    right: 0;
+  }
+}
+
+.gm-style .gm-style-iw{
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-align: center;
+  // & + div{
+  //   display: none!important;
+  // }
+}
+
+.sign-form{
+  max-width: 320px;
+}
+
+.done-icon{
+  width: 100px;
+  height: 100px;
+}
+
+.img-bg{
+  background-image: url(./assets/bgr.png);
+  background-repeat: repeat;
+}
+
+.show-password{
+  $icon-size: 16px;
+  width: $icon-size;
+  height: $icon-size;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -($icon-size/2);
+  background-image: url(./assets/icons/eye-no.svg);
+  background-repeat: no-repeat;
+  background-size: $icon-size $icon-size;
+  &:focus{
+    outline: none;
+  }
+  &--hide{
+    background-image: url(./assets/icons/eye.svg);
+  }
+}
+
+.inline-img{
+  width: 18px;
+  height: auto;
+  max-height: 18px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.hover-show{
+  &:hover{
+    .hover-show__content{
+      display: block;
+    }
+  }
+  &__content{
+    display: none;
+  }
+}
+
+.card-instruments{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.minh-500{
+  min-height: 500px;
+}
+
+.big-info-widget{
+  min-height: 80vh;
+}
+
+.choosing-mode{
+  // background-color: $gray-300;
+  background-image: url(./assets/bgp.png);
+  background-repeat: repeat;
+  &__hidden{
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
+.tariffs-sidebar{
+  @include media-breakpoint-up(md) {
+    max-width: 280px;
+  }
+}

@@ -1,5 +1,5 @@
-import AuthApi from './auth';
+import AdminApi from './admin';
 
 export {
-    AuthApi
+    AdminApi
 };

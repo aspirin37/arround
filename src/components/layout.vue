@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import { AuthApi } from '@/services/api'
+// import { AuthApi } from '@/services/api'
 export default {
     name: 'Layout',
     data() {

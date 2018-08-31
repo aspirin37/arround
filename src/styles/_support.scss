@@ -1,0 +1,14 @@
+.ticket-sidebar{
+  min-width: 100%;
+  @include media-breakpoint-up(md) {
+    min-width: 300px;
+  }
+}
+
+.ticket-chat{
+  max-width: 600px;
+}
+
+.tickets-mh{
+  max-height: 250px;
+}

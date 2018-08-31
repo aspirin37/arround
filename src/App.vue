@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <layout v-if="!isLoginPage" />
+        <!-- <layout v-if="!isLoginPage" /> -->
         <router-view />
     </div>
 </template>
@@ -13,10 +13,11 @@ export default {
     },
     computed: {
         isLoginPage() {
-            return this.$route.path == '/login'
+            return this.$route.path == '/sign-in'
         }
     },
 }
 </script>
-<style>
+<style lang="scss">
+@import './styles/app.scss';
 </style>
