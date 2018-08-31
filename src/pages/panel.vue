@@ -2,7 +2,7 @@
     <div>
         <layout />
         <div class="container">
-            <h1 class="text-center">page</h1>
+            <h1 class="text-center mt-4">page</h1>
         </div>
     </div>
 </template>

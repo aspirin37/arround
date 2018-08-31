@@ -33,9 +33,10 @@ export default {
         }
     },
     methods: {
-        async signOut() {
-            await AdminApi.signOut()
-            this.$router.push('sign-in')
+        signOut() {
+            this.$http.delete(AdminApi.signOut).then(() => {
+                this.$router.push('sign-in')
+            })
         }
     }
 }

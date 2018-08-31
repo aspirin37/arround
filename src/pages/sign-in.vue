@@ -5,8 +5,7 @@
                 <h1 class="h3 m-0 text-light">Авторизация</h1>
             </div>
             <form v-on:submit.prevent="signIn"
-                  v-if="isSignShowed"
-                  class="px-5 py-4">
+                  class="px-5 pt-4 pb-3">
                 <div class="form-group">
                     <input type="email"
                            name="email"
@@ -29,7 +28,7 @@
                        v-bind:class="{'show-password--hide' : !showPassword}"
                        v-on:click.prevent="showPassword = !showPassword"></a>
                 </div>
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <button class="btn btn-theme btn-block"
                             type="submit">Войти</button>
                 </div>
@@ -47,18 +46,20 @@ export default {
             email: '',
             pass: '',
             errorMessage: '',
-            isSignShowed: true,
-            isPasswordSended: false,
             showPassword: false
         }
     },
     methods: {
-        async signIn() {
-            await AdminApi.signIn({
+        signIn() {
+            let options = {
                 email: this.email,
                 password: this.pass
+            }
+            this.$http.post(AdminApi.signIn, options).then(() => {
+                this.$router.push({ name: 'Panel' })
+            }).catch((err) => {
+                this.errorMessage = err.body.messages[0]
             })
-            this.$router.push({ name: 'Panel' })
         },
     }
 }
