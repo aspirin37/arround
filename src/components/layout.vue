@@ -16,7 +16,7 @@
                         <b-nav-item href="#">Еще ссылка</b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav class="ml-auto">
-                        <b-nav-item href="#"><i class="fa fa-sign-out-alt"></i> Выйти</b-nav-item>
+                        <b-nav-item @click="signOut"><i class="fa fa-sign-out-alt"></i> Выйти</b-nav-item>
                     </b-navbar-nav>
                 </b-collapse>
             </div>
@@ -24,25 +24,20 @@
     </div>
 </template>
 <script>
-// import { AuthApi } from '@/services/api'
+import { AdminApi } from '@/services/api'
 export default {
     name: 'Layout',
     data() {
         return {
-            result: null
+
         }
     },
-    // created() {
-    //     this.login()
-    // },
-    // methods: {
-    //     async login() {
-    //         this.result = await AuthApi.login({
-    //             email: 'qq@qq.qq',
-    //             password: '123'
-    //         })
-    //     }
-    // }
+    methods: {
+        async signOut() {
+            await AdminApi.signOut()
+            this.$router.push('sign-in')
+        }
+    }
 }
 </script>
 <style scoped>

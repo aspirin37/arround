@@ -16,26 +16,11 @@ export default {
     },
     data() {
         return {
-            result: null
+
         }
-    },
-    created() {
-        this.testAuth()
     },
     methods: {
-        async testAuth() {
-            // await this.login()
-            await this.getProfile()
-        },
-        async login() {
-            this.result = await AdminApi.login({
-                email: 'qq@qq.qq',
-                password: '123'
-            })
-        },
-        async getProfile() {
-            this.result = await AdminApi.getProfile()
-        }
+
     }
 }
 </script>

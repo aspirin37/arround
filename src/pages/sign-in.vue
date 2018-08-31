@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         async signIn() {
-            await AdminApi.login({
+            await AdminApi.signIn({
                 email: this.email,
                 password: this.pass
             })
