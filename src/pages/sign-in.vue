@@ -1,8 +1,11 @@
 <template>
     <div class="d-flex align-items-center vh-100 container-fluid">
         <div class="mx-auto w-100 sign-form current-shadow bg-white rounded mb-3">
-            <div class="text-center bg-theme rounded-top p-4">
-                <h1 class="h3 m-0 text-light">Авторизация</h1>
+            <div class="text-center bg-theme rounded-top px-4 py-3">
+                <img src="@/assets/logo.png"
+                     width="150"
+                     class="my-2"
+                     alt="logo">
             </div>
             <form v-on:submit.prevent="signIn"
                   class="px-5 pt-4 pb-3">
@@ -11,7 +14,7 @@
                            name="email"
                            class="form-control"
                            v-model="email"
-                           placeholder="Email"
+                           placeholder="E-mail"
                            autocomplete="email"
                            required>
                 </div>
@@ -20,7 +23,7 @@
                            name="password"
                            class="form-control"
                            v-model="pass"
-                           placeholder="Password"
+                           placeholder="Пароль"
                            required>
                     <a href="#"
                        class="show-password"
