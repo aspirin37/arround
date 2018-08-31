@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -20,7 +18,6 @@ Vue.http.interceptors.push((request, next) => {
     })
 });
 
-/* eslint-disable no-new */
 import checkUser from '@/utils/check-user';
 
 const myApp = new Vue({
@@ -29,7 +26,8 @@ const myApp = new Vue({
     components: { App },
     template: '<App/>',
     async beforeMount() {
-        await checkUser(this)
+        let lala = await checkUser(this)
+        console.log(lala)
     }
 })
 
