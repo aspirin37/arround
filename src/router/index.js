@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Panel from '@/pages/panel'
+import Panel from '@/pages/Panel'
 import SignIn from '@/pages/SignIn'
 import Models from '@/pages/Models'
 import Users from '@/pages/Users'
