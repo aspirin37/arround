@@ -4,7 +4,7 @@
             <div class="text-center cap"
                  v-if="!users.length">
                 <div class="cap__noresults ml-auto mr-auto"></div>
-                <p class="lead cap__text mb-0">Пользователей не найдено</p>
+                <p class="lead cap__text mb-0">Пользователи не найдены</p>
             </div>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height relative w-100">
@@ -23,7 +23,7 @@
 export default {
     data() {
         return {
-            users: [1, 2, 3]
+            users: []
         }
     },
     components: {},

@@ -4,7 +4,7 @@
             <div class="text-center cap"
                  v-if="!models.length">
                 <div class="cap__noresults ml-auto mr-auto"></div>
-                <p class="lead cap__text mb-0">Моделей не найдено</p>
+                <p class="lead cap__text mb-0">Модели не найдены</p>
             </div>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height w-100 relative">
@@ -13,10 +13,16 @@
                          v-if="models.length"
                          v-for="(model, i) in models"
                          :key="i">
-                        <div class="col-6 col-lg-10  p-0 flex-row">
-                            <div class="col-12 col-lg">
-                                ID<b> {{ model.idt_model }}</b>
-                            </div>
+                        <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2 p-0">
+                            <thumbnails-outer>
+                                <thumbnail :img="model.modifications[0].url_icon"
+                                           :thumb="model.modifications[0].url_icon"
+                                           :linkClasses="['circle-avatar rounded-circle mr-3 bg-light d-inline-block']"
+                                           :thumbClasses="['font-size-0']"></thumbnail>
+                            </thumbnails-outer>
+                            <!-- ID<b> {{ model.idt_model }}</b> -->
+                        </div>
+                        <div class="col-6 col-lg-8  p-0 flex-row align-items-center">
                             <div class="col-12 col-lg">
                                 Имя: <b>{{ model.name || 'Без имени' }}</b>
                             </div>
@@ -27,7 +33,7 @@
                                 Модификации: <b> {{ model.modifications.length }}</b>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-2 p-0 d-flex align-items-center justify-content-end flex-column flex-lg-row">
+                        <div class="col-12 col-lg-2 p-0 d-flex align-items-center mt-3 mt-lg-0 flex-column flex-lg-row">
                             <router-link :to="{name: 'Model', params: {id: model.idt_model, model }}"
                                          class="btn btn-sm btn-outline-theme mr-2 mb-2 align-top cursor-pointer">Редактировать</router-link>
                             <button class="btn btn-sm btn-outline-danger mr-2 align-top mb-2">Удалить</button>
@@ -41,7 +47,13 @@
 <script>
 import modelTypes from '@/utils/model-types'
 import { UserApi } from '@/services/api'
+import Thumbnail from '../components/utils/Thumbnail'
+import ThumbnailsOuter from '../components/utils/ThumbnailsOuter'
 export default {
+    components: {
+        Thumbnail,
+        ThumbnailsOuter,
+    },
     data() {
         return {
             models: [],
@@ -63,7 +75,7 @@ export default {
 <style lang="scss"
        scoped>
 .btn {
-    min-width: 105px;
+    min-width: 80%;
 
     @media (min-width: 992px) {
         min-width: auto;
