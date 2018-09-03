@@ -7,7 +7,7 @@
                 <p class="lead cap__text mb-0">Моделей не найдено</p>
             </div>
             <div class="d-flex align-items-start">
-                <div class="widget-min-height relative">
+                <div class="widget-min-height w-100 relative">
                     <div class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
                          v-if="models.length"
                          v-for="(model, i) in models"
