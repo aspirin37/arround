@@ -1,5 +1,7 @@
 import AdminApi from './admin';
+import UserApi from './user';
 
 export {
-    AdminApi
+    AdminApi,
+    UserApi,
 };

@@ -61,12 +61,10 @@ export default {
                 email: this.email,
                 password: this.pass
             };
-            this.$http
-                .post(AdminApi.signIn, options)
+            this.$http.post(AdminApi.signIn, options)
                 .then(() => {
-                    this.$router.push({ name: 'Panel' });
-                })
-                .catch(err => {
+                    this.$router.push('/models');
+                }).catch(err => {
                     this.errorMessage = 'Неверные данные';
                 });
         }

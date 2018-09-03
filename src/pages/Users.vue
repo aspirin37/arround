@@ -1,0 +1,32 @@
+<template>
+    <div>
+        <div class="widget-min-height relative">
+            <div class="text-center cap"
+                 v-if="!users.length">
+                <div class="cap__noresults ml-auto mr-auto"></div>
+                <p class="lead cap__text mb-0">Пользователей не найдено</p>
+            </div>
+            <div class="d-flex align-items-start">
+                <div class="widget-min-height relative w-100">
+                    <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
+                          v-if="users.length"
+                          v-for="(it, i) in users"
+                          :key="i">
+                        {{ it }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            users: [1, 2, 3]
+        }
+    },
+    components: {},
+    methods: {}
+}
+</script>
