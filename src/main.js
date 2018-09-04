@@ -3,12 +3,17 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueResource from 'vue-resource';
+import DeclNum from './directives/DeclNum'
+import Thousands from './directives/thousands'
+import checkUser from '@/utils/check-user';
 
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 
-Vue.config.productionTip = false
+Vue.directive('decl-num', DeclNum)
+Vue.directive('thousands', Thousands)
 
+Vue.config.productionTip = false
 Vue.http.interceptors.push((request, next) => {
     request.credentials = true;
     next(response => {
@@ -17,8 +22,6 @@ Vue.http.interceptors.push((request, next) => {
         }
     })
 });
-
-import checkUser from '@/utils/check-user';
 
 const myApp = new Vue({
     el: '#app',
