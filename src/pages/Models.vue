@@ -8,12 +8,21 @@
             </div>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height w-100 relative">
+                    <div class="d-none d-lg-flex p-4">
+                        <div class="col-2">Превью</div>
+                        <div class="col-10 p-0 display-flex flex-row">
+                            <div class="col">Имя</div>
+                            <div class="col">ID</div>
+                            <div class="col text-lg-center">Кол-во модификаций</div>
+                            <div class="col text-lg-center">Действия</div>
+                        </div>
+                    </div>
                     <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
                                  :to="{name: 'Model', params: {id: model.idt_model, model }}"
                                  v-if="models.length"
                                  v-for="(model, i) in models"
                                  :key="i">
-                        <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2 p-0">
+                        <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
                             <thumbnails-outer>
                                 <thumbnail :img="model.modifications[0].url_icon"
                                            :thumb="model.modifications[0].url_icon"
@@ -21,31 +30,21 @@
                                            :thumbClasses="['font-size-0']"></thumbnail>
                             </thumbnails-outer>
                         </div>
-                        <div class="col-6 col-lg-10  p-0 flex-row align-items-center">
+                        <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
                             <div class="col-12 col-lg">
-                                Имя: <b>{{ model.name || 'Без имени' }} </b>
-                                <!-- (ID<b> {{ model.idt_model }}</b>) -->
+                                <b>{{ model.name || 'Без имени' }} </b>
                             </div>
                             <div class="col-12 col-lg">
-                                ID:<b> {{ model.idt_model }}</b>
+                                <span class="d-lg-none">ID:</span><b> {{ model.idt_model }}</b>
                             </div>
-                            <!-- <div class="col-12 col-lg">
-                                Тип: <b> {{ modelTypes[model.idc_round_type] }}</b>
-                            </div> -->
-                            <div class="col-12 col-lg">
-                                Модификации: <b> {{ model.modifications.length }}</b>
+                            <div class="d-none d-lg-block col-lg text-lg-center">
+                                <b> {{ model.modifications.length }}</b>
                             </div>
-                            <div class="col-12 col-lg">
+                            <div class="col-12 col-lg text-lg-center">
                                 <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
                                         @click.prevent>Удалить</button>
                             </div>
                         </div>
-                        <!-- <div class="col-12 col-lg-2 p-0 d-flex align-items-center mt-3 mt-lg-0 flex-column flex-xl-row"> -->
-                        <!-- <router-link :to="{name: 'Model', params: {id: model.idt_model, model }}"
-                                         class="btn btn-sm btn-outline-theme mr-2 mb-2 align-top cursor-pointer">Подробнее</router-link> -->
-                        <!-- <button class="btn btn-sm btn-outline-danger mr-2 align-top mb-2"
-                                    @click.prevent>Удалить</button> -->
-                        <!-- </div> -->
                     </router-link>
                 </div>
             </div>
@@ -82,8 +81,13 @@ export default {
 </script>
 <style lang="scss">
 .circle-avatar--model {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
+
+    @media (min-width: 1200px) {
+        width: 50px;
+        height: 50px;
+    }
 }
 </style>
 <style lang="scss"
