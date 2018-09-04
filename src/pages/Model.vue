@@ -63,17 +63,17 @@ export default {
     },
     computed: {
         model() {
-            return this.$route.params.model || JSON.parse(localStorage.getItem('model'))
-            // return {
-            //     "idt_model": 2,
-            //     "idc_round_type": 2,
-            //     "name": "cat",
-            //     "modifications": [{ "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-            //         { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-            //         { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-            //         { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" }
-            //     ]
-            // }
+            // return this.$route.params.model || JSON.parse(localStorage.getItem('model'))
+            return {
+                "idt_model": 2,
+                "idc_round_type": 2,
+                "name": "cat",
+                "modifications": [{ "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
+                    { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
+                    { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
+                    { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" }
+                ]
+            }
         },
         count() {
             return this.model.modifications.length

@@ -7,7 +7,8 @@
                 <p class="lead cap__text mb-0">Модели не найдены</p>
             </div>
             <div class="d-flex align-items-start">
-                <div class="widget-min-height w-100 relative">
+                <div class="widget-min-height w-100 relative"
+                     v-if="models.length">
                     <div class="d-none d-lg-flex p-4">
                         <div class="col-2">Превью</div>
                         <div class="col-10 p-0 display-flex flex-row">
@@ -19,7 +20,6 @@
                     </div>
                     <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
                                  :to="{name: 'Model', params: {id: model.idt_model, model }}"
-                                 v-if="models.length"
                                  v-for="(model, i) in models"
                                  :key="i">
                         <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
