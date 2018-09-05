@@ -2,19 +2,20 @@
     <div class="widget-min-height relative">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
-                <h2>{{ model.name }}</h2>
-                <h4 v-if="count">
+                <h2 class="px-2">{{ model.name }} - ID: {{ model.idt_model }}</h2>
+                <h4 class="px-2"
+                    v-if="count">
                     <b v-thousands="count"></b>
                     <span v-decl-num="[['модификация', 'модификации', 'модификаций'], count]"></span>
                 </h4>
                 <div class="d-flex flex-wrap">
-                    <div class="col-12 col-md-6 col- mb-3"
+                    <div class="col-12 col-xl-6 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
                          :key="i">
                         <div class="current-shadow rounded bg-white p-4">
-                            <h4 class="pl-4 mb-3">{{ it.name || 'Без имени' }}</h4>
-                            <div class="d-flex">
-                                <div class="text-center mr-3">
+                            <h4 class="pl-4 mb-3">{{ it.name || 'Без имени' }} - ID: {{ it.idt_model_modif }}</h4>
+                            <div class="d-flex flex-column flex-lg-row">
+                                <div class="text-center">
                                     <thumbnails-outer class="">
                                         <thumbnail :img="it.url_icon"
                                                    :thumb="it.url_icon"
@@ -22,13 +23,19 @@
                                                    :thumbClasses="['font-size-0']"></thumbnail>
                                     </thumbnails-outer>
                                 </div>
-                                <div class="d-flex flex-column text-center">
-                                    <button class="d-block btn btn-sm btn-outline-theme mb-2"
-                                            @click="toggleModal('edit-model')">Редактировать</button>
+                                <div class="d-flex flex-column text-center p-2">
+                                    <button class="d-block btn btn-sm btn-outline-theme mb-2">
+                                        Изменить zip
+                                    </button>
+                                    <button class="d-block btn btn-sm btn-outline-theme mb-2">
+                                        Изменить sfb
+                                    </button>
                                     <button class="d-block btn btn-sm btn-outline-danger mb-auto">Удалить</button>
-                                    <a class="d-block btn btn-sm btn-link mb-2"
+                                </div>
+                                <div class="d-flex flex-row flex-lg-column text-center p-2">
+                                    <a class="btn btn--dl btn-sm btn-link mb-2"
                                        :href="it.url_archive">Скачать zip</a>
-                                    <a class="d-block btn btn-sm btn-link"
+                                    <a class="btn btn--dl btn-sm btn-link mb-2"
                                        :href="it.url_sfb">Скачать sfb</a>
                                 </div>
                             </div>
@@ -37,12 +44,6 @@
                 </div>
             </div>
         </div>
-        <modal modalSize="modal-sm"
-               modalTitle="Редактирование модели"
-               ref="edit-model">
-            <div slot="modalBody">
-            </div>
-        </modal>
     </div>
 </template>
 <script>
@@ -83,9 +84,7 @@ export default {
         localStorage.setItem('model', JSON.stringify(this.model))
     },
     methods: {
-        toggleModal(id) {
-            this.$refs[id].newIsOpen = !this.$refs[id].newIsOpen
-        },
+
     }
 }
 </script>
@@ -97,11 +96,25 @@ export default {
     &--link:focus {
         text-decoration: none !important;
     }
+
+    &--dl {
+        width: 100%;
+
+        @media only screen and (max-width: 1198px) {
+            width: 50%;
+        }
+    }
 }
 </style>
 <style lang="scss">
 .circle-avatar--model-info {
     width: 150px;
     height: 150px;
+}
+</style>
+<style lang="scss"
+       scoped>
+h2::first-letter {
+    text-transform: uppercase
 }
 </style>
