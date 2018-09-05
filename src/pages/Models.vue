@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
-                                 :to="{name: 'Model', params: {id: model.idt_model, model }}"
+                                 :to="{name: 'Model', params: {id: model.idt_model }}"
                                  v-for="(model, i) in models"
                                  :key="i">
                         <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
@@ -42,7 +42,8 @@
                             </div>
                             <div class="col-12 col-lg text-lg-center">
                                 <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
-                                        @click.prevent>Удалить</button>
+                                        @click.prevent
+                                        disabled>Удалить</button>
                             </div>
                         </div>
                     </router-link>
