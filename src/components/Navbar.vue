@@ -7,11 +7,16 @@
                  class="navbar-logo">
         </router-link>
         <nav class="navbar navbar-dark bg-theme justify-content-between w-100">
-            <ul class="navbar-nav ml-auto flex-row">
+            <ul class="navbar-nav flex-row">
                 <li class="nav-item">
                     <a href="#"
-                       class="nav-link"></a>
+                       class="nav-link"
+                       @click="$router.go(-1)">
+                        <i class="fa fa-lg fa-angle-left"></i> Назад
+                    </a>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto flex-row">
                 <li class="nav-item">
                     <a href="#"
                        class="nav-link"
