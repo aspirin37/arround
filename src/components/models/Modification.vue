@@ -4,8 +4,8 @@
             <div class="mr-4">
                 <h4 class="pl-4 mb-3">{{ modification.name || 'Без имени' }} - ID: {{ modification.idt_model_modif }}</h4>
                 <thumbnails-outer class="">
-                    <thumbnail :img="modification.url_icon"
-                               :thumb="modification.url_icon"
+                    <thumbnail :img="previewSrc"
+                               :thumb="previewSrc"
                                :linkClasses="['circle-avatar circle-avatar--model-info rounded-circle mr-3 bg-light d-inline-block']"
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
@@ -13,11 +13,13 @@
             <div class="d-flex flex-column">
                 <h4 class="pl-4 mb-3">Изменить превью:</h4>
                 <div class="mb-3">
-                    <a class="btn btn--dl btn-sm btn-link mr-auto mr-2"
-                       title="Скачать">{{ getFileName('url_icon') }}</a>
+                    <button class="btn btn--dl btn-sm btn-link mr-auto mr-2"
+                            disabled>
+                        {{ getFileName('url_icon') }}
+                    </button>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickFileUpload('sfb-upload')"></i>
-                    <span>{{ newSfbFile.name }}</span>
+                       @click="clickFileUpload('image-upload')"></i>
+                    <span>{{ newImageFile.name }}</span>
                 </div>
                 <h4 class="pl-4 mb-3">Изменить файлы:</h4>
                 <div>
@@ -38,10 +40,11 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex align-items-end mt-3"
+        <div class="d-flex align-items-end mt-4"
              v-if="isSubmitShown">
             <button class="btn btn-outline-success mr-2">Принять изменения</button>
-            <button class="btn btn-outline-secondary">Сбросить</button>
+            <button class="btn btn-outline-secondary"
+                    @click="setDefaultValues">Сбросить</button>
         </div>
         <div class="d-none">
             <input type="file"
@@ -59,6 +62,7 @@
     </div>
 </template>
 <script>
+import { clone } from '../../utils/clone'
 import Thumbnail from '../utils/Thumbnail'
 import ThumbnailsOuter from '../utils/ThumbnailsOuter'
 export default {
@@ -69,16 +73,23 @@ export default {
     },
     data() {
         return {
-            newZipFile: {
-                name: 'Файл не выбран',
-                data: null,
-            },
-            newSfbFile: {
+            newZipFile: null,
+            newSfbFile: null,
+            newImageFile: null,
+            defaultFileState: {
                 name: 'Файл не выбран',
                 data: null,
             },
             isSubmitShown: false,
         }
+    },
+    computed: {
+        previewSrc() {
+            return this.newImageFile && this.newImageFile.data ? this.newImageFile.data : this.modification.url_icon
+        }
+    },
+    created() {
+        this.setDefaultValues()
     },
     methods: {
         clickFileUpload(id) {
@@ -98,13 +109,27 @@ export default {
                         this.newSfbFile.data = reader.result;
                         this.newSfbFile.name = file.name;
                         break;
+                    case 'image-upload':
+                        this.newImageFile.data = reader.result;
+                        this.newImageFile.name = file.name;
+                        break;
                 }
+                this.isSubmitShown = true
             };
 
             reader.readAsDataURL(file);
         },
         getFileName(file) {
             return this.modification[file].substr(this.modification[file].lastIndexOf('/') + 1)
+        },
+        setDefaultValues() {
+            this.newZipFile = clone(this.defaultFileState)
+            this.newSfbFile = clone(this.defaultFileState)
+            this.newImageFile = clone(this.defaultFileState)
+            this.isSubmitShown = false
+            document.querySelectorAll('input[type=file]').forEach(it => {
+                it.value = ""
+            })
         }
     }
 }
