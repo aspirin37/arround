@@ -1,6 +1,6 @@
 <template>
     <div class="current-shadow rounded bg-white p-4">
-        <div class="d-flex flex-column flex-lg-row">
+        <div class="d-flex flex-column flex-xl-row">
             <div class="mr-4">
                 <h4 class="pl-4 mb-3">{{ modification.name || 'Без имени' }} - ID: {{ modification.idt_model_modif }}</h4>
                 <thumbnails-outer class="">
@@ -11,38 +11,51 @@
                 </thumbnails-outer>
             </div>
             <div class="d-flex flex-column">
+                <h4 class="pl-4 mb-3">Изменить превью:</h4>
+                <div class="mb-3">
+                    <a class="btn btn--dl btn-sm btn-link mr-auto mr-2"
+                       title="Скачать">{{ getFileName('url_icon') }}</a>
+                    <i class="btn-link mr-2 fa fa-edit cursor-pointer"
+                       @click="clickFileUpload('sfb-upload')"></i>
+                    <span>{{ newSfbFile.name }}</span>
+                </div>
                 <h4 class="pl-4 mb-3">Изменить файлы:</h4>
                 <div>
                     <a class="btn btn--dl btn-sm btn-link mr-2 mb-2"
                        :href="modification.url_archive"
-                       title="Скачать">{{ zipFileName }}</a>
+                       title="Скачать">{{ getFileName('url_archive') }}</a>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickZipIcon"></i>
+                       @click="clickFileUpload('zip-upload')"></i>
                     <span>{{ newZipFile.name }}</span>
                 </div>
                 <div>
                     <a class="btn btn--dl btn-sm btn-link mr-2"
                        :href="modification.url_sfb"
-                       title="Скачать">{{ sfbFileName }}</a>
+                       title="Скачать">{{ getFileName('url_sfb') }}</a>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickSfbIcon"></i>
+                       @click="clickFileUpload('sfb-upload')"></i>
                     <span>{{ newSfbFile.name }}</span>
                 </div>
             </div>
-            <div class="d-flex align-items-end ml-auto">
-                <button class="btn btn-outline-success mr-2">Принять изменения</button>
-                <button class="btn btn-outline-secondary">Сбросить</button>
-            </div>
         </div>
-        <input type="file"
-               ref="zip-upload"
-               accept="application/zip"
-               class="d-none"
-               @change="uploadFile('zip-upload', $event)" />
-        <input type="file"
-               ref="sfb-upload"
-               class="d-none"
-               @change="uploadFile('sfb-upload', $event)" />
+        <div class="d-flex align-items-end mt-3"
+             v-if="isSubmitShown">
+            <button class="btn btn-outline-success mr-2">Принять изменения</button>
+            <button class="btn btn-outline-secondary">Сбросить</button>
+        </div>
+        <div class="d-none">
+            <input type="file"
+                   ref="zip-upload"
+                   accept="application/zip"
+                   @change="uploadFile('zip-upload', $event)" />
+            <input type="file"
+                   ref="sfb-upload"
+                   @change="uploadFile('sfb-upload', $event)" />
+            <input type="file"
+                   ref="image-upload"
+                   accept="image/*"
+                   @change="uploadFile('image-upload', $event)" />
+        </div>
     </div>
 </template>
 <script>
@@ -63,23 +76,13 @@ export default {
             newSfbFile: {
                 name: 'Файл не выбран',
                 data: null,
-            }
-        }
-    },
-    computed: {
-        zipFileName() {
-            return this.modification.url_archive.substr(this.modification.url_archive.lastIndexOf('/') + 1)
-        },
-        sfbFileName() {
-            return this.modification.url_sfb.substr(this.modification.url_sfb.lastIndexOf('/') + 1)
+            },
+            isSubmitShown: false,
         }
     },
     methods: {
-        clickZipIcon() {
-            this.$refs['zip-upload'].click()
-        },
-        clickSfbIcon() {
-            this.$refs['sfb-upload'].click()
+        clickFileUpload(id) {
+            this.$refs[id].click()
         },
         uploadFile(id, evt) {
             const file = this.$refs[id].files[0];
@@ -100,6 +103,9 @@ export default {
 
             reader.readAsDataURL(file);
         },
+        getFileName(file) {
+            return this.modification[file].substr(this.modification[file].lastIndexOf('/') + 1)
+        }
     }
 }
 </script>
