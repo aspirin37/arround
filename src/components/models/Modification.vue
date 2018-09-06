@@ -1,11 +1,12 @@
 <template>
-    <form class="current-shadow rounded bg-white p-4"
+    <form class="flex-grow-1 current-shadow rounded bg-white p-4"
           @submit.prevent="submitChanges">
         <div class="d-flex flex-column flex-xl-row">
             <div class="mr-4">
                 <h4 class="pl-4 mb-3"
                     v-if="!isNameInputShown">
                     <a href="#"
+                       class="text-dashed"
                        @click="showNameInput">{{ newModificationName || 'Без имени' }}</a>
                     <small> - ID: {{ modification.idt_model_modif }}</small>
                 </h4>
@@ -178,7 +179,6 @@ export default {
 
             this.$http.put(AdminApi.updateModification, formData).then(() => {
                 this.$emit('update-model')
-                this.setDefaultValues()
             }).catch(err => {
                 console.log(err)
             });
@@ -200,4 +200,18 @@ h2::first-letter,
 h4::first-letter {
     text-transform: uppercase
 }
+
+// dash {
+//         border: none;
+//     border-bottom: 1px #337ab7 dashed;
+//     text-decoration: none !important;
+//     /* color: #337ab7; */
+//     /* color: inherit; */
+//     padding: 0;
+//     font-size: 1.14rem;
+//     margin-left: 1.5rem !important;
+//     /* line-height: 1.5; */
+//     /* font-weight: 500; */
+//     background-color: inherit;
+// }
 </style>

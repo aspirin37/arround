@@ -62,6 +62,10 @@
     @include button-variant(#fff, $blue-color, $blue-color);
 }
 
+.btn-orange {
+    @include button-variant(#fff, $orange, $orange)
+}
+
 .btn-outline-secondary {
     @include button-variant(#fff, $gray-400, $gray-400);
     // @include button-outline-variant($gray-900, $color-hover: $gray-900, $active-background: #fff, $active-border: $gray-600);

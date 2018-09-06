@@ -8,13 +8,22 @@
                     v-if="count">
                     <b v-thousands="count"></b>
                     <span v-decl-num="[['модификация', 'модификации', 'модификаций'], count]"></span>
+                    <button class="btn btn-sm btn-orange"
+                            @click.prevent="isAddPanelShown = true"
+                            :disabled="isAddPanelShown">Добавить</button>
                 </h4>
                 <div class="d-flex flex-wrap">
-                    <modification class="col-12 col-xl-6 mb-3 px-2"
-                                  @update-model="getModel"
-                                  :modification="it"
-                                  v-for="(it, i) in model.modifications"
-                                  :key="i" />
+                    <div class="d-flex col-12 col-xl-6 mb-3 px-2"
+                         v-if="isAddPanelShown">
+                        <div class="flex-grow-1 current-shadow current-shadow--orange rounded bg-white p-4">
+                        </div>
+                    </div>
+                    <div class="d-flex col-12 col-xl-6 mb-3 px-2"
+                         v-for="(it, i) in model.modifications"
+                         :key="i">
+                        <modification @update-model="getModel"
+                                      :modification="it" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,6 +39,7 @@ export default {
     data() {
         return {
             model: null,
+            isAddPanelShown: false,
         }
     },
     computed: {
@@ -68,5 +78,9 @@ export default {
 h2::first-letter,
 h4::first-letter {
     text-transform: uppercase
+}
+
+button:focus {
+    text-decoration: none;
 }
 </style>
