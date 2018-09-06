@@ -1,8 +1,19 @@
 <template>
-    <div class="current-shadow rounded bg-white p-4">
+    <form class="current-shadow rounded bg-white p-4"
+          @submit.prevent="submitChanges">
         <div class="d-flex flex-column flex-xl-row">
             <div class="mr-4">
-                <h4 class="pl-4 mb-3">{{ modification.name || 'Без имени' }} - ID: {{ modification.idt_model_modif }}</h4>
+                <h4 class="pl-4 mb-3"
+                    v-if="!isNameInputShown">
+                    <a href="#"
+                       @click="showNameInput">{{ newModificationName || 'Без имени' }}</a>
+                    <small> - ID: {{ modification.idt_model_modif }}</small>
+                </h4>
+                <input type="text"
+                       class="form-control form-control-sm mb-3"
+                       v-model="newModificationName"
+                       ref="name-input"
+                       v-else>
                 <thumbnails-outer class="">
                     <thumbnail :img="previewSrc"
                                :thumb="previewSrc"
@@ -11,29 +22,31 @@
                 </thumbnails-outer>
             </div>
             <div class="d-flex flex-column">
-                <h4 class="pl-4 mb-3">Изменить превью:</h4>
+                <h4 class="pl-4 mb-2">Превью:</h4>
                 <div class="mb-3">
                     <button class="btn btn--dl btn-sm btn-link mr-auto mr-2"
                             disabled>
-                        {{ getFileName('url_icon') }}
+                        image.png
                     </button>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
                        @click="clickFileUpload('image-upload')"></i>
                     <span>{{ newImageFile.name }}</span>
                 </div>
-                <h4 class="pl-4 mb-3">Изменить файлы:</h4>
+                <h4 class="pl-4 mb-3">Файлы:</h4>
                 <div>
                     <a class="btn btn--dl btn-sm btn-link mr-2 mb-2"
-                       :href="modification.url_archive"
-                       title="Скачать">{{ getFileName('url_archive') }}</a>
+                       :href="modification.url_archive">
+                        <i class="fa fa-download mr-2"></i> zip
+                    </a>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
                        @click="clickFileUpload('zip-upload')"></i>
                     <span>{{ newZipFile.name }}</span>
                 </div>
                 <div>
                     <a class="btn btn--dl btn-sm btn-link mr-2"
-                       :href="modification.url_sfb"
-                       title="Скачать">{{ getFileName('url_sfb') }}</a>
+                       :href="modification.url_sfb">
+                        <i class="fa fa-download mr-2"></i> sfb
+                    </a>
                     <i class="btn-link mr-2 fa fa-edit cursor-pointer"
                        @click="clickFileUpload('sfb-upload')"></i>
                     <span>{{ newSfbFile.name }}</span>
@@ -42,8 +55,10 @@
         </div>
         <div class="d-flex align-items-end mt-4"
              v-if="isSubmitShown">
-            <button class="btn btn-outline-success mr-2">Принять изменения</button>
-            <button class="btn btn-outline-secondary"
+            <button class="btn btn-sm btn-outline-success mr-2"
+                    type="submit"
+                    @click="submitChanges">Принять изменения</button>
+            <button class="btn btn-sm btn-outline-secondary"
                     @click="setDefaultValues">Сбросить</button>
         </div>
         <div class="d-none">
@@ -59,10 +74,11 @@
                    accept="image/*"
                    @change="uploadFile('image-upload', $event)" />
         </div>
-    </div>
+    </form>
 </template>
 <script>
-import { clone } from '../../utils/clone'
+import { AdminApi } from '@/services/api'
+import { clone } from '@/utils/clone'
 import Thumbnail from '../utils/Thumbnail'
 import ThumbnailsOuter from '../utils/ThumbnailsOuter'
 export default {
@@ -73,19 +89,30 @@ export default {
     },
     data() {
         return {
+            newModificationName: null,
             newZipFile: null,
             newSfbFile: null,
             newImageFile: null,
             defaultFileState: {
-                name: 'Файл не выбран',
+                name: '',
                 data: null,
+                src: null,
             },
             isSubmitShown: false,
+            isNameInputShown: false,
         }
     },
     computed: {
         previewSrc() {
-            return this.newImageFile && this.newImageFile.data ? this.newImageFile.data : this.modification.url_icon
+            return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : this.modification.url_icon
+        }
+    },
+    watch: {
+        modification: {
+            handler: function() {
+                this.setDefaultValues()
+            },
+            deep: true
         }
     },
     created() {
@@ -102,16 +129,17 @@ export default {
             reader.onload = () => {
                 switch (id) {
                     case 'zip-upload':
-                        this.newZipFile.data = reader.result;
+                        this.newZipFile.data = file;
                         this.newZipFile.name = file.name;
                         break;
                     case 'sfb-upload':
-                        this.newSfbFile.data = reader.result;
+                        this.newSfbFile.data = file;
                         this.newSfbFile.name = file.name;
                         break;
                     case 'image-upload':
-                        this.newImageFile.data = reader.result;
+                        this.newImageFile.src = reader.result;
                         this.newImageFile.name = file.name;
+                        this.newImageFile.data = file;
                         break;
                 }
                 this.isSubmitShown = true
@@ -122,14 +150,38 @@ export default {
         getFileName(file) {
             return this.modification[file].substr(this.modification[file].lastIndexOf('/') + 1)
         },
+        showNameInput() {
+            this.isNameInputShown = true
+            this.isSubmitShown = true
+            setTimeout(() => {
+                this.$refs['name-input'].focus()
+            }, 1)
+        },
         setDefaultValues() {
             this.newZipFile = clone(this.defaultFileState)
             this.newSfbFile = clone(this.defaultFileState)
             this.newImageFile = clone(this.defaultFileState)
+            this.newModificationName = this.modification.name || ''
+            this.isNameInputShown = false
             this.isSubmitShown = false
             document.querySelectorAll('input[type=file]').forEach(it => {
                 it.value = ""
             })
+        },
+        submitChanges() {
+            let formData = new FormData()
+            formData.append('idt_model_modif', this.modification.idt_model_modif);
+            if (this.newModificationName !== null) formData.append('name', this.newModificationName);
+            if (this.newImageFile.data) formData.append('image', this.newImageFile.data);
+            if (this.newZipFile.data) formData.append('archive', this.newZipFile.data);
+            if (this.newSfbFile.data) formData.append('sfb', this.newSfbFile.data);
+
+            this.$http.put(AdminApi.updateModification, formData).then(() => {
+                this.$emit('update-model')
+                this.setDefaultValues()
+            }).catch(err => {
+                console.log(err)
+            });
         }
     }
 }

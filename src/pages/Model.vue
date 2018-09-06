@@ -11,6 +11,7 @@
                 </h4>
                 <div class="d-flex flex-wrap">
                     <modification class="col-12 col-xl-6 mb-3 px-2"
+                                  @update-model="getModel"
                                   :modification="it"
                                   v-for="(it, i) in model.modifications"
                                   :key="i" />
@@ -22,15 +23,9 @@
 <script>
 import { AdminApi } from '@/services/api'
 import Modification from '../components/models/Modification'
-import Thumbnail from '../components/utils/Thumbnail'
-import ThumbnailsOuter from '../components/utils/ThumbnailsOuter'
-import Modal from '../components/utils/Modal'
 export default {
     components: {
         Modification,
-        Thumbnail,
-        ThumbnailsOuter,
-        Modal
     },
     data() {
         return {
@@ -41,19 +36,6 @@ export default {
         modelId() {
             return this.$route.params.id || localStorage.getItem('modelId')
         },
-        // model() {
-        //     // return this.$route.params.model || JSON.parse(localStorage.getItem('model'))
-        //     return {
-        //         "idt_model": 2,
-        //         "idc_round_type": 2,
-        //         "name": "cat",
-        //         "modifications": [{ "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-        //             { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-        //             { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" },
-        //             { "idt_model_modif": 2, "name": "", "url_icon": "https://devarapi.a3technology.ru/model/cat/cat.png", "url_archive": "https://devarapi.a3technology.ru/model/cat/cat.zip", "url_sfb": "https://devarapi.a3technology.ru/model/cat/cat.sfb" }
-        //         ]
-        //     }
-        // },
         count() {
             return this.model.modifications.length
         }
