@@ -1,27 +1,25 @@
 <template>
-    <form class="widget-min-height relative"
-          @submit.prevent="addModif">
+    <div class="widget-min-height relative">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
                 <h2 class="px-2">{{ modelName }} - ID: {{ modelId }}</h2>
                 <h4 class="px-2">Добавление модификации</h4>
                 <div class="d-flex col-12 col-xl-6 my-3 px-2">
                     <div class="flex-grow-1 current-shadow rounded bg-white p-4">
-                        <div class="d-flex flex-column flex-xl-row">
+                        <div class="d-flex flex-column flex-xl-row mb-5">
                             <thumbnails-outer class="mr-3">
-                                <thumbnail :img="modelPreview"
-                                           :thumb="modelPreview"
+                                <thumbnail :img="previewSrc"
+                                           :thumb="previewSrc"
                                            :linkClasses="['circle-avatar circle-avatar--add-modif rounded-circle mr-3 bg-light d-inline-block']"
                                            :thumbClasses="['font-size-0']"></thumbnail>
                             </thumbnails-outer>
                             <div class="d-flex flex-column">
-                                <div class="form-group">
+                                <div class="form-group mb-4">
                                     <label class="mb-2">Введите название:</label>
                                     <input type="text"
-                                           class="form-control mb-3"
-                                           placeholder="Новая модификация..."
+                                           class="form-control form-control--modif-name"
                                            v-model="newModificationName"
-                                           autofocus>
+                                           ref="name-input">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="d-block mb-2">Добавьте превью:</label>
@@ -48,6 +46,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <a href="#"
+                               class="btn-link btn-link--back ml-auto align-self-start"
+                               @click="$router.go(-1)">
+                                <i class="fa fa-lg fa-angle-left"></i> Назад
+                            </a>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-success mr-2"
+                                    @click="addModif"
+                                    :disabled="isSubmitDisabled">Принять изменения</button>
+                            <button class="btn btn-outline-secondary"
+                                    @click="setDefaultValues">Сбросить</button>
                         </div>
                     </div>
                 </div>
@@ -66,7 +76,7 @@
                    ref="sfb-upload"
                    @change="uploadFile('sfb-upload', $event)" />
         </div>
-    </form>
+    </div>
 </template>
 <script>
 import { AdminApi } from '@/services/api'
@@ -100,6 +110,12 @@ export default {
         },
         modelId() {
             return this.$route.params.id || localStorage.getItem('addModifModelId')
+        },
+        previewSrc() {
+            return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : ''
+        },
+        isSubmitDisabled() {
+            return !this.newZipFile.data || !this.newSfbFile.data || !this.newImageFile.data || this.newModificationName === ''
         }
     },
     created() {
@@ -107,6 +123,9 @@ export default {
         localStorage.setItem('addModifModelPreview', this.modelPreview)
         localStorage.setItem('addModifModelId', this.modelId)
         this.setDefaultValues()
+    },
+    mounted() {
+        this.$refs['name-input'].focus()
     },
     methods: {
         uploadFile(id, evt) {
@@ -149,7 +168,18 @@ export default {
             this.$refs[id].click()
         },
         addModif() {
+            let formData = new FormData()
+            formData.append('idt_model', this.modelId);
+            formData.append('name', this.newModificationName);
+            formData.append('image', this.newImageFile.data);
+            formData.append('archive', this.newZipFile.data);
+            formData.append('sfb', this.newSfbFile.data);
 
+            this.$http.post(AdminApi.updateModification, formData).then(() => {
+                this.$root.$emit('update-model')
+            }).catch(err => {
+                console.log(err)
+            });
         }
     }
 }
@@ -159,5 +189,9 @@ export default {
 h2::first-letter,
 h4::first-letter {
     text-transform: uppercase
+}
+
+.form-control--modif-name {
+    width: 230px;
 }
 </style>

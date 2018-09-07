@@ -1,6 +1,10 @@
 .btn {
     box-shadow: 0 1px 2px rgba(#000, 0.1);
 
+    &:not(.btn-sm) {
+        padding-bottom: 0.5rem;
+    }
+
     &:focus,
     &:active,
     &:active:focus {
@@ -39,6 +43,14 @@
         box-shadow: none;
         background-color: rgba(#000, 0.05);
         text-decoration: none;
+    }
+
+    &--back {
+        background: none;
+
+        &:hover {
+            background: none;
+        }
     }
 }
 

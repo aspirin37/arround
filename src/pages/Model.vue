@@ -15,8 +15,7 @@
                     <div class="d-flex col-12 col-xl-6 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
                          :key="i">
-                        <modification @update-model="getModel"
-                                      :modification="it" />
+                        <modification :modification="it" />
                     </div>
                 </div>
             </div>
@@ -51,6 +50,11 @@ export default {
         this.getModel()
         localStorage.setItem('modelId', this.modelId)
     },
+    mounted() {
+        this.$on('update-model', function() {
+            this.getModel()
+        })
+    },
     methods: {
         getModel() {
             let options = {
@@ -63,13 +67,6 @@ export default {
     }
 }
 </script>
-</style>
-<style lang="scss">
-.circle-avatar--model-info {
-    width: 150px;
-    height: 150px;
-}
-</style>
 <style lang="scss"
        scoped>
 h2::first-letter,

@@ -178,7 +178,7 @@ export default {
             if (this.newSfbFile.data) formData.append('sfb', this.newSfbFile.data);
 
             this.$http.put(AdminApi.updateModification, formData).then(() => {
-                this.$emit('update-model')
+                this.$parent.$emit('update-model')
             }).catch(err => {
                 console.log(err)
             });
