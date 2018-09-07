@@ -4,6 +4,7 @@ import Panel from '@/pages/Panel'
 import SignIn from '@/pages/SignIn'
 import Models from '@/pages/Models'
 import Model from '@/pages/Model'
+import AddModif from '@/pages/AddModif'
 import Users from '@/pages/Users'
 
 Vue.use(Router)
@@ -29,10 +30,10 @@ export default new Router({
             path: 'models/model/:id',
             name: 'Model',
             component: Model,
-            params: {
-                id: ':id',
-                model: ':model'
-            }
+        }, {
+            path: 'models/model/:id/add-modif',
+            name: 'AddModif',
+            component: AddModif
         }, {
             path: 'users',
             name: 'Users',

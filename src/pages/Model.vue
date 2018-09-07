@@ -8,16 +8,10 @@
                     v-if="count">
                     <b v-thousands="count"></b>
                     <span v-decl-num="[['модификация', 'модификации', 'модификаций'], count]"></span>
-                    <button class="btn btn-sm btn-orange"
-                            @click.prevent="isAddPanelShown = true"
-                            :disabled="isAddPanelShown">Добавить</button>
+                    <router-link :to="{name: 'AddModif', params: {id: modelId, modelName: model.name, modelPreview: model.modifications[0].url_icon}}"
+                                 class="btn btn-orange btn-sm ml-2">Добавить</router-link>
                 </h4>
                 <div class="d-flex flex-wrap">
-                    <div class="d-flex col-12 col-xl-6 mb-3 px-2"
-                         v-if="isAddPanelShown">
-                        <div class="flex-grow-1 current-shadow current-shadow--orange rounded bg-white p-4">
-                        </div>
-                    </div>
                     <div class="d-flex col-12 col-xl-6 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
                          :key="i">
@@ -31,15 +25,18 @@
 </template>
 <script>
 import { AdminApi } from '@/services/api'
-import Modification from '../components/models/Modification'
+import Modification from '@/components/models/Modification'
+import Thumbnail from '@/components/utils/Thumbnail'
+import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 export default {
     components: {
         Modification,
+        Thumbnail,
+        ThumbnailsOuter,
     },
     data() {
         return {
             model: null,
-            isAddPanelShown: false,
         }
     },
     computed: {
