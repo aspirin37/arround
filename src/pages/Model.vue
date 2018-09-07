@@ -3,7 +3,7 @@
          v-if="model">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
-                <h2 class="px-2">{{ model.name }} - ID: {{ model.idt_model }}</h2>
+                <h2 class="px-2">{{ model.name || 'Без имени' }} - ID: {{ model.idt_model }}</h2>
                 <h4 class="px-2"
                     v-if="count">
                     <b v-thousands="count"></b>

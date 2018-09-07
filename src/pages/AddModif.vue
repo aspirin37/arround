@@ -176,7 +176,7 @@ export default {
             formData.append('sfb', this.newSfbFile.data);
 
             this.$http.post(AdminApi.updateModification, formData).then(() => {
-                this.$root.$emit('update-model')
+                this.$router.push(`/models/model/${this.modelId}`)
             }).catch(err => {
                 console.log(err)
             });

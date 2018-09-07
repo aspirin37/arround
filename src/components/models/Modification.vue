@@ -179,6 +179,7 @@ export default {
 
             this.$http.put(AdminApi.updateModification, formData).then(() => {
                 this.$parent.$emit('update-model')
+                this.$router.push(`/models/model/${this.modelId}`)
             }).catch(err => {
                 console.log(err)
             });
