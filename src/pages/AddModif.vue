@@ -2,7 +2,7 @@
     <div class="widget-min-height relative">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
-                <h2 class="px-2">{{ modelName }} - ID: {{ modelId }}</h2>
+                <h2 class="px-2">{{ modelName || 'Без имени' }} - ID: {{ modelId }}</h2>
                 <h4 class="px-2">Добавление модификации</h4>
                 <div class="d-flex col-12 col-xl-6 my-3 px-2">
                     <div class="flex-grow-1 current-shadow rounded bg-white p-4">
