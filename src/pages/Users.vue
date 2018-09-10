@@ -36,6 +36,7 @@
     </div>
 </template>
 <script>
+import { UsersApi } from '@/services/api'
 import Loader from '@/components/utils/Loader'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
@@ -58,7 +59,9 @@ export default {
     },
     methods: {
         getUsers() {
-
+            this.$http.get(UsersApi.getUserList).then(res => {
+                this.users = res.body.users
+            })
         }
     }
 }

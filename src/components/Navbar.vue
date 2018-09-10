@@ -29,6 +29,7 @@
     </header>
 </template>
 <script>
+import clearCookies from '@/utils/clear-cookies'
 import { AdminApi } from '@/services/api'
 
 export default {
@@ -46,14 +47,7 @@ export default {
         async signOut() {
             await this.$http.delete(AdminApi.signOut)
             this.$router.push({ name: 'SignIn' })
-            // this.clearCookies()
-        },
-        clearCookies() {
-            document.cookie.split(";").forEach(function(c) {
-                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date()
-                    .toUTCString() + ";path=/");
-            });
-
+            clearCookies()
         }
     }
 }

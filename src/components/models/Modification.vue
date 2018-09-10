@@ -76,7 +76,7 @@
     </div>
 </template>
 <script>
-import { AdminApi } from '@/services/api'
+import { ModelApi } from '@/services/api'
 import { clone } from '@/utils/clone'
 import Thumbnail from '../utils/Thumbnail'
 import ThumbnailsOuter from '../utils/ThumbnailsOuter'
@@ -177,7 +177,7 @@ export default {
             if (this.newZipFile.data) formData.append('archive', this.newZipFile.data);
             if (this.newSfbFile.data) formData.append('sfb', this.newSfbFile.data);
 
-            this.$http.put(AdminApi.updateModification, formData).then(() => {
+            this.$http.put(ModelApi.updateModification, formData).then(() => {
                 this.$parent.$emit('update-model')
             }).catch(err => {
                 this.isSubmitDisabled = false
