@@ -1,6 +1,5 @@
 <template>
-    <form class="flex-grow-1 current-shadow rounded bg-white p-4"
-          @submit.prevent="submitChanges">
+    <div class="flex-grow-1 current-shadow rounded bg-white p-4">
         <div class="d-flex flex-column flex-xl-row">
             <div class="mr-4">
                 <h4 class="pl-4 mb-3"
@@ -57,7 +56,6 @@
         <div class="d-flex align-items-end mt-4"
              v-if="isSubmitShown">
             <button class="btn btn-sm btn-outline-success mr-2"
-                    type="submit"
                     @click="submitChanges">Принять изменения</button>
             <button class="btn btn-sm btn-outline-secondary"
                     @click="setDefaultValues">Сбросить</button>
@@ -75,7 +73,7 @@
                    accept="image/*"
                    @change="uploadFile('image-upload', $event)" />
         </div>
-    </form>
+    </div>
 </template>
 <script>
 import { AdminApi } from '@/services/api'
@@ -101,6 +99,7 @@ export default {
             },
             isSubmitShown: false,
             isNameInputShown: false,
+            isSubmitDisabled: false,
         }
     },
     computed: {
@@ -170,6 +169,7 @@ export default {
             })
         },
         submitChanges() {
+            this.isSubmitDisabled = true
             let formData = new FormData()
             formData.append('idt_model_modif', this.modification.idt_model_modif);
             if (this.newModificationName !== null) formData.append('name', this.newModificationName);
@@ -180,7 +180,7 @@ export default {
             this.$http.put(AdminApi.updateModification, formData).then(() => {
                 this.$parent.$emit('update-model')
             }).catch(err => {
-                console.log(err)
+                this.isSubmitDisabled = false
             });
         }
     }

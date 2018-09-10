@@ -11,7 +11,7 @@
         outline: none;
     }
 
-    &:hover,
+    &:hover:not(:disabled),
     &:focus {
         outline: none;
         box-shadow: 0 2px 4px rgba(#000, 0.2) !important;

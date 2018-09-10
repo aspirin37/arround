@@ -2,10 +2,11 @@
     <div>
         <div class="widget-min-height relative">
             <div class="text-center cap"
-                 v-if="!models.length">
+                 v-if="!models.length && !isLoaderShown">
                 <div class="cap__noresults ml-auto mr-auto"></div>
                 <p class="lead cap__text mb-0">Модели не найдены</p>
             </div>
+            <loader v-if="isLoaderShown"></loader>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height w-100 relative"
                      v-if="models.length">
@@ -57,14 +58,17 @@ import modelTypes from '@/utils/model-types'
 import { UserApi } from '@/services/api'
 import Thumbnail from '../components/utils/Thumbnail'
 import ThumbnailsOuter from '../components/utils/ThumbnailsOuter'
+import Loader from '@/components/utils/Loader'
 export default {
     components: {
+        Loader,
         Thumbnail,
         ThumbnailsOuter,
     },
     data() {
         return {
             models: [],
+            isLoaderShown: false,
             modelTypes
         }
     },
@@ -73,9 +77,14 @@ export default {
     },
     methods: {
         getModels() {
+            this.isLoaderShown = true
             this.$http.get(UserApi.getModels).then(res => {
                 this.models = res.body.models
+                this.isLoaderShown = false
+            }).catch(err => {
+                this.isLoaderShown = false
             })
+
         }
     }
 }

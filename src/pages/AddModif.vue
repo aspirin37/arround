@@ -99,6 +99,7 @@ export default {
                 data: null,
                 src: null,
             },
+            isSubmitLoading: false
         }
     },
     computed: {
@@ -115,7 +116,7 @@ export default {
             return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : ''
         },
         isSubmitDisabled() {
-            return !this.newZipFile.data || !this.newSfbFile.data || !this.newImageFile.data || this.newModificationName === ''
+            return !this.newZipFile.data || !this.newSfbFile.data || !this.newImageFile.data || this.newModificationName === '' || this.isSubmitLoading
         }
     },
     created() {
@@ -168,7 +169,8 @@ export default {
             this.$refs[id].click()
         },
         addModif() {
-            let formData = new FormData()
+            this.isSubmitLoading = true;
+            let formData = new FormData();
             formData.append('idt_model', this.modelId);
             formData.append('name', this.newModificationName);
             formData.append('image', this.newImageFile.data);
@@ -178,7 +180,7 @@ export default {
             this.$http.post(AdminApi.updateModification, formData).then(() => {
                 this.$router.push(`/models/model/${this.modelId}`)
             }).catch(err => {
-                console.log(err)
+                this.isSubmitLoading = false
             });
         }
     }
