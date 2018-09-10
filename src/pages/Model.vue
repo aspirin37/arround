@@ -1,9 +1,9 @@
 <template>
     <div>
-        <loader v-if="isLoaderShown"></loader>
-        <div class="widget-min-height relative"
-             v-if="model && !isLoaderShown">
-            <div class="d-flex align-items-start">
+        <div class="widget-min-height relative">
+            <loader v-if="isLoaderShown"></loader>
+            <div class="d-flex align-items-start"
+                 v-if="model">
                 <div class="widget-min-height w-100 relative">
                     <h2 class="px-2">{{ model.name || 'Без имени' }} - ID: {{ model.idt_model }}</h2>
                     <h4 class="px-2 mb-3"
