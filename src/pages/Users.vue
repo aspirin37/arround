@@ -24,17 +24,47 @@
             <loader v-if="isLoaderShown"></loader>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height relative w-100">
+                    <!-- <div class="d-none d-lg-flex p-4">
+                        <div class="col">Имя</div>
+                        <div class="col">ID</div>
+                        <div class="col">Дата регистрации</div>
+                        <div class="col">Последняя активность</div>
+                        <div class="col">Телефон</div>
+                        <div class="col">Email</div>
+                    </div> -->
                     <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
                           v-if="count"
                           v-for="(user, i) in users"
                           :key="i">
+                        <!-- <div class="col-12 col-xl">
+                            <span v-if="user.name"><b>{{user.name}}</b></span>
+                            <span v-else>Имя неизвестно</span>
+                        </div>
+                        <div class="col-12 col-xl">
+                            <span class="d-xl-none">ID: </span>
+                            <b>{{user.idt_user}}</b>
+                        </div>
+                        <div class="col-12 col-xl">
+                            <span class="d-xl-none">Дата регистрации: </span>
+                            -
+                        </div>
+                        <div class="col-12 col-xl">
+                            <span class="d-xl-none">Последняя активность: </span>-</div>
+                        <div class="col-12 col-xl">
+                            <span v-if="user.phone">{{user.phone}}</span>
+                            <span v-else>Не указан</span>
+                        </div>
+                        <div class="col-12 col-xl">
+                            <span v-if="user.email">{{user.email}}</span>
+                            <span v-else>Не указан</span>
+                        </div> -->
                         <div class="table-flex-col mb-2">
                             <div>id <b>{{user.idt_user}}</b></div>
-                            <small>Зарегистрирован: - </small>
+                            <small>Зарегистрирован: - </small><br>
                         </div>
                         <div class="table-flex-col">
-                            <b v-if="user.name">{{user.name}}</b>
-                            <span v-else>Имя неизвестно</span>
+                            <div v-if="user.name"><b>{{user.name}}</b></div>
+                            <div v-else>Имя неизвестно</div>
                         </div>
                         <div class="table-flex-col">
                             <div>{{user.phone}}</div>
@@ -49,6 +79,7 @@
                                 @pageChanged="getUsers"
                                 ref="pagination"></pagination>
                 </div>
+                <!-- <search-filter v-show="isShowFilter"></search-filter> -->
             </div>
         </div>
     </div>
@@ -59,12 +90,14 @@ import Loader from '@/components/utils/Loader'
 import Pagination from '@/components/utils/Pagination'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
+import SearchFilter from '@/components/utils/SearchFilter'
 export default {
     components: {
         Loader,
         Thumbnail,
         ThumbnailsOuter,
-        Pagination
+        Pagination,
+        SearchFilter
     },
     data() {
         return {
