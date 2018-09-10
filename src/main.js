@@ -34,5 +34,5 @@ const myApp = new Vue({
 })
 
 function signOut() {
-    myApp.$router.push('sign-in')
+    myApp.$router.push({ name: 'SignIn' })
 }

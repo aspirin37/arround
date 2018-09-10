@@ -55,7 +55,7 @@
 </template>
 <script>
 import modelTypes from '@/utils/model-types'
-import { UserApi } from '@/services/api'
+import { ModelApi } from '@/services/api'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import Loader from '@/components/utils/Loader'
@@ -78,7 +78,7 @@ export default {
     methods: {
         getModels() {
             this.isLoaderShown = true
-            this.$http.get(UserApi.getModels).then(res => {
+            this.$http.get(ModelApi.getModels).then(res => {
                 this.models = res.body.models
                 this.isLoaderShown = false
             }).catch(err => {

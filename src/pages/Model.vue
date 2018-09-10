@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-import { AdminApi } from '@/services/api'
+import { ModelApi } from '@/services/api'
 import Modification from '@/components/models/Modification'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
@@ -68,7 +68,7 @@ export default {
             let options = {
                 idt_model: this.modelId || localStorage.getItem('modelId')
             }
-            this.$http.get(AdminApi.getModel, { params: options }).then(res => {
+            this.$http.get(ModelApi.getModel, { params: options }).then(res => {
                 this.model = res.body.model
                 this.isLoaderShown = false
             }).catch(err => {

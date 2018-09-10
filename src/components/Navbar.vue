@@ -45,8 +45,8 @@ export default {
     methods: {
         async signOut() {
             await this.$http.delete(AdminApi.signOut)
-            this.$router.push('sign-in')
-            this.clearCookies()
+            this.$router.push({ name: 'SignIn' })
+            // this.clearCookies()
         },
         clearCookies() {
             document.cookie.split(";").forEach(function(c) {

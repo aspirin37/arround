@@ -76,7 +76,7 @@
     </div>
 </template>
 <script>
-import { AdminApi } from '@/services/api'
+import { ModelApi } from '@/services/api'
 import { clone } from '@/utils/clone'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
@@ -174,7 +174,7 @@ export default {
             formData.append('archive', this.newZipFile.data);
             formData.append('sfb', this.newSfbFile.data);
 
-            this.$http.post(AdminApi.updateModification, formData).then(() => {
+            this.$http.post(ModelApi.updateModification, formData).then(() => {
                 this.$router.push(`/models/model/${this.modelId}`)
             }).catch(err => {
                 this.isSubmitLoading = false

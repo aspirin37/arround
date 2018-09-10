@@ -1,7 +1,9 @@
+import ModelApi from './model';
 import AdminApi from './admin';
-import UserApi from './user';
+import UsersApi from './users';
 
 export {
+    ModelApi,
     AdminApi,
-    UserApi,
+    UsersApi,
 };

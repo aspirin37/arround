@@ -1,5 +1,20 @@
 <template>
     <div>
+        <div class="d-flex flex-wrap flex-md-nowrap align-items-center mb-3">
+            <span v-if="users.length">
+                <b v-thousands="users.length"></b>
+                <span v-decl-num="[['пользователь', 'пользователя', 'пользователей'], users.length]"></span>
+            </span>
+            <a href="#"
+               v-on:click.prevent="isFilterShown = !isFilterShown"
+               class="text-dark btn btn-link ml-auto">
+                Фильтр
+                <span class="bg-danger text-white rounded px-2"
+                      v-if="Object.values(filterOptions).length">
+                    {{Object.values(filterOptions).length}}
+                </span>
+            </a>
+        </div>
         <div class="widget-min-height relative">
             <div class="text-center cap"
                  v-if="!users.length && !isLoaderShown">
@@ -34,6 +49,8 @@ export default {
         return {
             users: [],
             isLoaderShown: false,
+            isFilterShown: true,
+            filterOptions: {},
         }
     },
     created() {

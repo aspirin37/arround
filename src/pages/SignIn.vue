@@ -62,7 +62,7 @@ export default {
                 password: this.pass
             };
             this.$http.post(AdminApi.signIn, options).then(() => {
-                this.$router.push('/models');
+                this.$router.push('/users');
             }).catch(err => {
                 this.errorMessage = 'Неверные данные';
             });
