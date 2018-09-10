@@ -25,13 +25,13 @@ export default {
     data() {
         return {
             nav: [{
-                name: 'Модели',
-                icon: 'dashboard',
-                path: '/models'
-            }, {
                 name: 'Пользователи',
                 icon: 'client',
                 path: '/users'
+            }, {
+                name: 'Модели',
+                icon: 'dashboard',
+                path: '/models'
             }]
         }
     },

@@ -45,7 +45,7 @@ export default new Router({
         component: SignIn
     }, {
         path: '*',
-        redirect: '/models',
+        redirect: '/users',
         name: '404',
     }, ]
 })

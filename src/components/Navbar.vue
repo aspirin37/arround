@@ -43,10 +43,17 @@ export default {
         }
     },
     methods: {
-        signOut() {
-            this.$http.delete(AdminApi.signOut).then(() => {
-                this.$router.push('sign-in')
-            })
+        async signOut() {
+            await this.$http.delete(AdminApi.signOut)
+            this.$router.push('sign-in')
+            this.clearCookies()
+        },
+        clearCookies() {
+            document.cookie.split(";").forEach(function(c) {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date()
+                    .toUTCString() + ";path=/");
+            });
+
         }
     }
 }
