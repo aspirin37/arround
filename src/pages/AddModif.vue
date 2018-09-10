@@ -5,8 +5,8 @@
                 <h2 class="px-2">{{ modelName || 'Без имени' }} - ID: {{ modelId }}</h2>
                 <h4 class="px-2">Добавление модификации</h4>
                 <div class="d-flex col-12 col-xl-6 my-3 px-2">
-                    <div class="flex-grow-1 current-shadow rounded bg-white p-4">
-                        <div class="d-flex flex-column flex-xl-row mb-5">
+                    <div class="current-shadow rounded bg-white p-4">
+                        <div class="d-flex flex-column flex-xl-row px-4 mb-5">
                             <thumbnails-outer class="mr-3">
                                 <thumbnail :img="previewSrc"
                                            :thumb="previewSrc"
@@ -46,18 +46,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#"
-                               class="btn-link btn-link--back ml-auto align-self-start"
-                               @click="$router.go(-1)">
-                                <i class="fa fa-lg fa-angle-left"></i> Назад
-                            </a>
                         </div>
-                        <div>
+                        <div class="d-flex flex-column flex-xl-row px-4">
                             <button class="btn btn-outline-success mr-2"
                                     @click="addModif"
                                     :disabled="isSubmitDisabled">Принять изменения</button>
-                            <button class="btn btn-outline-secondary"
+                            <button class="btn btn-outline-danger"
                                     @click="setDefaultValues">Сбросить</button>
+                            <button class="btn btn-outline-secondary ml-xl-auto"
+                                    @click="$router.go(-1)">Назад</button>
                         </div>
                     </div>
                 </div>

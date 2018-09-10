@@ -56,8 +56,8 @@
 <script>
 import modelTypes from '@/utils/model-types'
 import { UserApi } from '@/services/api'
-import Thumbnail from '../components/utils/Thumbnail'
-import ThumbnailsOuter from '../components/utils/ThumbnailsOuter'
+import Thumbnail from '@/components/utils/Thumbnail'
+import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import Loader from '@/components/utils/Loader'
 export default {
     components: {
