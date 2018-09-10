@@ -185,8 +185,16 @@ $percentage : 10%;
 
 .circle-avatar {
     &--add-modif {
-        width: 300px;
-        height: 300px;
+        width: 120px;
+        height: 120px;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include media-breakpoint-up(xl) {
+            width: 300px;
+            height: 300px;
+            margin-right: 1rem;
+        }
     }
 
     &--model-info {

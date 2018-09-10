@@ -11,10 +11,14 @@
         outline: none;
     }
 
-    &:hover:not(:disabled),
+    &:hover,
     &:focus {
         outline: none;
         box-shadow: 0 2px 4px rgba(#000, 0.2) !important;
+    }
+
+    &:disabled {
+        box-shadow: none !important;
     }
 
     &.active,

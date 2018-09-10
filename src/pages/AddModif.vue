@@ -6,12 +6,12 @@
                 <h4 class="px-2">Добавление модификации</h4>
                 <div class="d-flex col-12 col-xl-6 my-3 px-2">
                     <div class="current-shadow rounded bg-white p-4">
-                        <div class="d-flex flex-column flex-xl-row px-4 mb-5">
+                        <div class="d-flex flex-column flex-xl-row px-4 mb-3 mb-xl-5">
                             <thumbnails-outer class="mr-3">
                                 <thumbnail :img="previewSrc"
                                            :thumb="previewSrc"
-                                           :linkClasses="['circle-avatar circle-avatar--add-modif rounded-circle mr-3 bg-light d-inline-block']"
-                                           :thumbClasses="['font-size-0']"></thumbnail>
+                                           :linkClasses="['circle-avatar circle-avatar--add-modif rounded-circle bg-light d-inline-block']"
+                                           :thumbClasses="['d-flex font-size-0']"></thumbnail>
                             </thumbnails-outer>
                             <div class="d-flex flex-column">
                                 <div class="form-group mb-4">
@@ -48,10 +48,10 @@
                             </div>
                         </div>
                         <div class="d-flex flex-column flex-xl-row px-4">
-                            <button class="btn btn-outline-success mr-2"
+                            <button class="btn btn-outline-success mr-xl-2 mb-2"
                                     @click="addModif"
                                     :disabled="isSubmitDisabled">Принять изменения</button>
-                            <button class="btn btn-outline-danger"
+                            <button class="btn btn-outline-danger mb-2"
                                     @click="setDefaultValues">Сбросить</button>
                             <button class="btn btn-outline-secondary ml-xl-auto"
                                     @click="$router.go(-1)">Назад</button>
