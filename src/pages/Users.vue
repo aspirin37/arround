@@ -1,7 +1,13 @@
 <template>
     <div>
-        <div class="d-flex flex-wrap flex-md-nowrap align-items-center mb-3">
-            <span v-if="count">
+        <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative">
+            <div class="col">Имя</div>
+            <div class="col">ID</div>
+            <div class="col">Дата регистрации</div>
+            <div class="col">Последняя активность</div>
+            <div class="col">Телефон</div>
+            <div class="col">Email</div>
+            <!-- <span v-if="count">
                 <b v-thousands="count"></b>
                 <span v-decl-num="[['пользователь', 'пользователя', 'пользователей'], count]"></span>
             </span>
@@ -13,7 +19,15 @@
                       v-if="Object.values(filterOptions).length">
                     {{Object.values(filterOptions).length}}
                 </span>
-            </a>
+            </a> -->
+            <div class="filter-table-container d-flex"
+                 :class="{'filter-table-container--filter-shown': isFilterShown}">
+                <a href="#"
+                   v-on:click.prevent="isFilterShown = !isFilterShown"
+                   class="filter-btn text-dark btn btn-link ml-auto">
+                    Фильтр
+                </a>
+            </div>
         </div>
         <div class="widget-min-height relative">
             <div class="text-center cap"
@@ -36,7 +50,7 @@
                           v-if="count"
                           v-for="(user, i) in users"
                           :key="i">
-                        <!-- <div class="col-12 col-xl">
+                        <div class="col-12 col-xl">
                             <span v-if="user.name"><b>{{user.name}}</b></span>
                             <span v-else>Имя неизвестно</span>
                         </div>
@@ -57,8 +71,8 @@
                         <div class="col-12 col-xl">
                             <span v-if="user.email">{{user.email}}</span>
                             <span v-else>Не указан</span>
-                        </div> -->
-                        <div class="table-flex-col mb-2">
+                        </div>
+                        <!-- <div class="table-flex-col mb-2">
                             <div>id <b>{{user.idt_user}}</b></div>
                             <small>Зарегистрирован: - </small><br>
                         </div>
@@ -70,7 +84,7 @@
                             <div>{{user.phone}}</div>
                             <div>{{user.email}}</div>
                             <div v-if="!user.phone && !user.email">Контакты не указаны</div>
-                        </div>
+                        </div> -->
                     </span>
                     <pagination :count="count"
                                 :itemsPerPage="itemsPerPage"
@@ -104,7 +118,7 @@ export default {
         return {
             users: [],
             isLoaderShown: false,
-            isFilterShown: true,
+            isFilterShown: false,
             filterOptions: {},
             itemsPerPage: 7,
             count: null,
@@ -141,3 +155,24 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+.filter-table-container {
+    position: absolute;
+    height: 21px;
+    right: 0;
+    margin-left: 1rem;
+    width: 240px;
+
+    &--filter-shown {
+        position: relative;
+        right: -1.5rem;
+    }
+}
+
+.filter-btn {
+    position: absolute;
+    right: 0;
+
+    bottom: -9px;
+}
+</style>
