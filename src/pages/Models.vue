@@ -10,7 +10,7 @@
             <div class="d-flex align-items-start">
                 <div class="widget-min-height w-100 relative"
                      v-if="models.length">
-                    <div class="d-none d-lg-flex p-4">
+                    <div class="d-none d-lg-flex p-4 font-weight-bold">
                         <div class="col-2">Превью</div>
                         <div class="col-10 p-0 display-flex flex-row">
                             <div class="col">Имя</div>
@@ -33,13 +33,13 @@
                         </div>
                         <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
                             <div class="col-12 col-lg">
-                                <b>{{ model.name || 'Без имени' }} </b>
+                                {{ model.name || 'Без имени' }}
                             </div>
                             <div class="col-12 col-lg">
-                                <span class="d-lg-none">ID:</span><b> {{ model.idt_model }}</b>
+                                <span class="d-lg-none">ID:</span> {{ model.idt_model }}
                             </div>
                             <div class="d-none d-lg-block col-lg text-lg-center">
-                                <b> {{ model.modifications.length }}</b>
+                                {{ model.modifications.length }}
                             </div>
                             <div class="col-12 col-lg text-lg-center">
                                 <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"

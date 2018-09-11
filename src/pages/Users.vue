@@ -1,30 +1,17 @@
 <template>
     <div>
-        <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative">
-            <div class="col">Имя</div>
-            <div class="col">ID</div>
-            <div class="col">Дата регистрации</div>
-            <div class="col">Последняя активность</div>
-            <div class="col">Телефон</div>
-            <div class="col">Email</div>
-            <!-- <span v-if="count">
-                <b v-thousands="count"></b>
-                <span v-decl-num="[['пользователь', 'пользователя', 'пользователей'], count]"></span>
-            </span>
-            <a href="#"
-               v-on:click.prevent="isFilterShown = !isFilterShown"
-               class="text-dark btn btn-link ml-auto">
-                Фильтр
-                <span class="bg-danger text-white rounded px-2"
-                      v-if="Object.values(filterOptions).length">
-                    {{Object.values(filterOptions).length}}
-                </span>
-            </a> -->
+        <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative font-weight-bold">
+            <div class="col d-none d-xl-block">Имя</div>
+            <div class="col d-none d-xl-block">ID</div>
+            <div class="col d-none d-xl-block">Дата регистрации</div>
+            <div class="col d-none d-xl-block">Последняя активность</div>
+            <div class="col d-none d-xl-block">Телефон</div>
+            <div class="col d-none d-xl-block">Email</div>
             <div class="filter-table-container d-flex"
                  :class="{'filter-table-container--filter-shown': isFilterShown}">
                 <a href="#"
                    v-on:click.prevent="isFilterShown = !isFilterShown"
-                   class="filter-btn text-dark btn btn-link ml-auto">
+                   class="filter-btn text-dark btn btn-link font-weight-normal">
                     Фильтр
                 </a>
             </div>
@@ -38,20 +25,12 @@
             <loader v-if="isLoaderShown"></loader>
             <div class="d-flex align-items-start">
                 <div class="widget-min-height relative w-100">
-                    <!-- <div class="d-none d-lg-flex p-4">
-                        <div class="col">Имя</div>
-                        <div class="col">ID</div>
-                        <div class="col">Дата регистрации</div>
-                        <div class="col">Последняя активность</div>
-                        <div class="col">Телефон</div>
-                        <div class="col">Email</div>
-                    </div> -->
                     <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
                           v-if="count"
                           v-for="(user, i) in users"
                           :key="i">
                         <div class="col-12 col-xl">
-                            <span v-if="user.name"><b>{{user.name}}</b></span>
+                            <span v-if="user.name">{{user.name}}</span>
                             <span v-else>Имя неизвестно</span>
                         </div>
                         <div class="col-12 col-xl">
@@ -72,19 +51,6 @@
                             <span v-if="user.email">{{user.email}}</span>
                             <span v-else>Не указан</span>
                         </div>
-                        <!-- <div class="table-flex-col mb-2">
-                            <div>id <b>{{user.idt_user}}</b></div>
-                            <small>Зарегистрирован: - </small><br>
-                        </div>
-                        <div class="table-flex-col">
-                            <div v-if="user.name"><b>{{user.name}}</b></div>
-                            <div v-else>Имя неизвестно</div>
-                        </div>
-                        <div class="table-flex-col">
-                            <div>{{user.phone}}</div>
-                            <div>{{user.email}}</div>
-                            <div v-if="!user.phone && !user.email">Контакты не указаны</div>
-                        </div> -->
                     </span>
                     <pagination :count="count"
                                 :itemsPerPage="itemsPerPage"
@@ -120,7 +86,7 @@ export default {
             isLoaderShown: false,
             isFilterShown: false,
             filterOptions: {},
-            itemsPerPage: 7,
+            itemsPerPage: 9,
             count: null,
             searchText: '',
         }
