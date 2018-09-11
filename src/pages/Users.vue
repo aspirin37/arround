@@ -69,7 +69,7 @@
                         <div class="table-flex-col">
                             <div>{{user.phone}}</div>
                             <div>{{user.email}}</div>
-                            <div v-if="!user.phone && !user.email"></div>
+                            <div v-if="!user.phone && !user.email">Контакты не указаны</div>
                         </div>
                     </span>
                     <pagination :count="count"
@@ -79,7 +79,8 @@
                                 @pageChanged="getUsers"
                                 ref="pagination"></pagination>
                 </div>
-                <!-- <search-filter v-show="isShowFilter"></search-filter> -->
+                <search-filter v-show="isFilterShown"
+                               @search-updated="updateSearchOptions" />
             </div>
         </div>
     </div>
@@ -107,17 +108,24 @@ export default {
             filterOptions: {},
             itemsPerPage: 7,
             count: null,
+            searchText: '',
         }
     },
     created() {
         this.getUsers(0, this.itemsPerPage, false, true)
+    },
+    watch: {
+        searchText() {
+            this.getUsers(0, this.itemsPerPage, false)
+        }
     },
     methods: {
         getUsers(offset, limit, addMore, isLoaderNeeded) {
             if (isLoaderNeeded) this.isLoaderShown = true
             let options = {
                 offset: offset || 0,
-                limit: this.itemsPerPage
+                limit: this.itemsPerPage,
+                search: this.searchText || null
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
                 this.users = addMore ? this._.union(this.users, res.body.users) : res.body.users
@@ -127,6 +135,9 @@ export default {
                 this.isLoaderShown = false
             })
         },
+        updateSearchOptions(options) {
+            this.searchText = options
+        }
     }
 }
 </script>

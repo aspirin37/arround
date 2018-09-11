@@ -1,106 +1,119 @@
-.order-table-pay-type{
-  width: 20px;
-  height: 20px;
-  margin-bottom: -2px;
-  margin-top: -2px;
+.order-table-pay-type {
+    width: 20px;
+    height: 20px;
+    margin-bottom: -2px;
+    margin-top: -2px;
 }
 
-.option-icon{
-  width: 20px;
-  height: 20px;
+.option-icon {
+    width: 20px;
+    height: 20px;
 }
 
-.order-address-status{
-  .address-marker{
-    z-index: 9;
+.order-address-status {
+    .address-marker {
+        z-index: 9;
+        position: relative;
+    }
+
+    &--2 {
+        &:after {
+            content: '';
+            width: 1px;
+            height: calc(100% - 32px);
+            position: absolute;
+            left: 12px;
+            top: 32px;
+            z-index: 1;
+            border-left: 2px dashed $gray-300;
+        }
+    }
+
+    &--3,
+    &--4 {
+        &:after {
+            content: '';
+            width: 1px;
+            height: calc(100% - 32px);
+            position: absolute;
+            left: 12px;
+            top: 32px;
+            z-index: 1;
+            border-left: 2px solid $gray-300;
+        }
+    }
+}
+
+.main-filter {
+    flex-shrink: 0;
+    margin-left: -240px;
     position: relative;
-  }
-  &--2{
-    &:after{
-      content: '';
-      width: 1px;
-      height: calc(100% - 32px);
-      position: absolute;
-      left: 12px;
-      top: 32px;
-      z-index: 1;
-      border-left: 2px dashed $gray-300;
+    z-index: 99;
+    right: 0;
+    width: 240px;
+    box-shadow: 0 4px 20px rgba(#000, 0.2);
+
+    @include media-breakpoint-up(lg) {
+        margin-left: 1rem;
     }
-  }
-  &--3, &--4{
-    &:after{
-      content: '';
-      width: 1px;
-      height: calc(100% - 32px);
-      position: absolute;
-      left: 12px;
-      top: 32px;
-      z-index: 1;
-      border-left: 2px solid $gray-300;
-    }
-  }
 }
 
-.main-filter{
-  margin-left: -240px;
-  position: relative;
-  z-index: 99;
-  right: 0;
-  width: 240px;
-  box-shadow: 0 4px 20px rgba(#000, 0.2);
-  @include media-breakpoint-up(lg) {
-    margin-left: 1rem;
-  }
+.orders-item-addresses {
+    min-height: 75px;
+    max-height: 75px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        height: 10px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        z-index: 9;
+        background: linear-gradient(to bottom, rgba(#fff, 0), #fff);
+    }
+
+    &:hover {
+        max-height: 200px;
+
+        &:after {
+            display: none;
+        }
+    }
 }
 
-.orders-item-addresses{
-  min-height: 75px;
-  max-height: 75px;
-  overflow: hidden;
-  transition: max-height 0.3s;
-  position: relative;
-  &:after{
-    content: '';
-    position: absolute;
-    height: 10px;
+.table-flex-col {
     width: 100%;
-    bottom: 0;
-    left: 0;
-    z-index: 9;
-    background: linear-gradient(to bottom, rgba(#fff, 0), #fff);
-  }
-  &:hover{
-    max-height: 200px;
-    &:after{
-      display: none;
+
+    @include media-breakpoint-up(md) {
+        width: 100%;
     }
-  }
+
+    @include media-breakpoint-up(lg) {
+        width: 50%;
+    }
+
+    @include media-breakpoint-up(xl) {
+        width: 33.3%;
+    }
 }
 
-.table-flex-col{
-  width: 100%;
-  @include media-breakpoint-up(md) {
-    width: 100%;
-  }
-  @include media-breakpoint-up(lg) {
-    width: 50%;
-  }
-  @include media-breakpoint-up(xl) {
-    width: 33.3%;
-  }
-}
+.list-type {
+    width: 16px;
+    height: 16px;
 
-.list-type{
-  width: 16px;
-  height: 16px;
-  &--grid{
-    background-image: url(./assets/icons/grid-view.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  &--list{
-    background-image: url(./assets/icons/list-view.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
+    &--grid {
+        background-image: url(./assets/icons/grid-view.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    &--list {
+        background-image: url(./assets/icons/list-view.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
 }
