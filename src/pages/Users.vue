@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-12 col-xl">
                             <span class="d-xl-none">ID: </span>
-                            <b>{{user.idt_user}}</b>
+                            {{user.idt_user}}
                         </div>
                         <div class="col-12 col-xl">
                             <span class="d-xl-none">Дата регистрации: </span>
