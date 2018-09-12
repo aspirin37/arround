@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative font-weight-bold">
-            <div class="col d-none d-xl-block">Имя</div>
-            <div class="col d-none d-xl-block">ID</div>
+            <div class="col d-none d-xl-block id-column">ID</div>
             <div class="col d-none d-xl-block">Дата регистрации</div>
-            <div class="col d-none d-xl-block">Последняя активность</div>
+            <div class="col d-none d-xl-block">Имя</div>
             <div class="col d-none d-xl-block">Телефон</div>
             <div class="col d-none d-xl-block">Email</div>
+            <div class="col d-none d-xl-block">Последняя активность</div>
             <div class="filter-table-container d-flex"
                  :class="{'filter-table-container--filter-shown': isFilterShown}">
                 <a href="#"
@@ -29,11 +29,7 @@
                           v-if="count"
                           v-for="(user, i) in users"
                           :key="i">
-                        <div class="col-12 col-xl">
-                            <span v-if="user.name">{{user.name}}</span>
-                            <span v-else>Имя неизвестно</span>
-                        </div>
-                        <div class="col-12 col-xl">
+                        <div class="col-12 col-xl id-column">
                             <span class="d-xl-none">ID: </span>
                             {{user.idt_user}}
                         </div>
@@ -42,7 +38,9 @@
                             -
                         </div>
                         <div class="col-12 col-xl">
-                            <span class="d-xl-none">Последняя активность: </span>-</div>
+                            <span v-if="user.name">{{user.name}}</span>
+                            <span v-else>Имя неизвестно</span>
+                        </div>
                         <div class="col-12 col-xl">
                             <span v-if="user.phone">{{user.phone}}</span>
                             <span v-else>Не указан</span>
@@ -50,6 +48,9 @@
                         <div class="col-12 col-xl">
                             <span v-if="user.email">{{user.email}}</span>
                             <span v-else>Не указан</span>
+                        </div>
+                        <div class="col-12 col-xl">
+                            <span class="d-xl-none">Последняя активность: </span>-
                         </div>
                     </span>
                     <pagination :count="count"
@@ -140,5 +141,15 @@ export default {
     right: 0;
 
     bottom: -9px;
+}
+
+.id-column {
+    width: auto;
+
+    @media (min-width: 1200px) {
+        width: 100px !important;
+    }
+
+    ;
 }
 </style>
