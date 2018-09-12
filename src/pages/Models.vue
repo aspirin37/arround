@@ -9,7 +9,7 @@
             <loader v-if="isLoaderShown"></loader>
             <div class="page-table"
                  v-if="models.length">
-                <div class="d-none d-lg-flex p-4 font-weight-bold">
+                <div class="d-none d-lg-flex px-4 mb-3 font-weight-bold">
                     <div class="col-2">Превью</div>
                     <div class="col-10 p-0 display-flex flex-row">
                         <div class="col">Имя</div>

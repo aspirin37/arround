@@ -247,6 +247,8 @@
 
 .pagination {
     &>li {
+        display: flex;
+
         &.active {
             a {
 
@@ -263,6 +265,10 @@
             padding: 6px;
             min-width: 32px;
             text-align: center;
+        }
+
+        &.disabled .page-link {
+            background-color: transparent;
         }
     }
 }

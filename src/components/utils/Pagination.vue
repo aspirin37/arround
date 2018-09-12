@@ -8,12 +8,12 @@
                   v-on:click.prevent="toPage(defaultPage + 1, true)">Показать еще</span>
         </span>
         <div class="d-flex w-100 justify-content-between">
-            <span class="page-item"
-                  v-bind:class="{'disabled' : defaultPage === 0}">
-                <span class="page-link rounded px-3"
-                      v-on:click.prevent="toPage(defaultPage - 1)">‹<span class="d-none d-md-inline-block ml-1">Назад</span></span>
-            </span>
             <ul class="pagination mb-0 vertical-middle">
+                <li class="page-item"
+                    v-bind:class="{'disabled' : defaultPage === 0}">
+                    <span class="page-link px-3"
+                          v-on:click.prevent="toPage(defaultPage - 1)">‹</span>
+                </li>
                 <li class="page-item text-dark"
                     v-bind:class="[{'active' : defaultPage === 0}]"
                     v-if="pages > 1">
@@ -39,12 +39,12 @@
                        class="page-link"
                        v-on:click.prevent="toPage(pages - 1)">{{pages}}</a>
                 </li>
+                <li class="page-item"
+                    v-bind:class="{'disabled' : defaultPage === pages - 1}">
+                    <span class="page-link px-3"
+                          v-on:click.prevent="toPage(defaultPage + 1)">›</span>
+                </li>
             </ul>
-            <span class="page-item"
-                  v-bind:class="{'disabled' : defaultPage === pages - 1}">
-                <span class="page-link rounded px-3"
-                      v-on:click.prevent="toPage(defaultPage + 1)"><span class="d-none d-md-inline-block mr-2">Вперед</span>›</span>
-            </span>
         </div>
     </nav>
 </template>
@@ -123,3 +123,14 @@ export default {
     }
 }
 </script>
+// <style lang="scss" //
+       scoped>
+// .page-item {
+//     display: flex;
+
+//     &.disabled .page-link {
+//         background-color: rgba(255, 255, 255, 0.7)
+//     }
+// }
+//
+</style>
