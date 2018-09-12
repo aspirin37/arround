@@ -1,68 +1,54 @@
 <template>
-    <div>
-        <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative font-weight-bold">
-            <div class="col d-none d-xl-block id-column">ID</div>
-            <div class="col d-none d-xl-block">Дата регистрации</div>
-            <div class="col d-none d-xl-block">Имя</div>
-            <div class="col d-none d-xl-block">Телефон</div>
-            <div class="col d-none d-xl-block">Email</div>
-            <div class="col d-none d-xl-block">Последняя активность</div>
-            <div class="filter-table-container d-flex"
-                 :class="{'filter-table-container--filter-shown': isFilterShown}">
-                <a href="#"
-                   v-on:click.prevent="isFilterShown = !isFilterShown"
-                   class="filter-btn text-dark btn btn-link font-weight-normal">
-                    Фильтр
-                </a>
-            </div>
+    <div class="page-container">
+        <div class="text-center cap"
+             v-if="!count && !isLoaderShown">
+            <div class="cap__noresults ml-auto mr-auto"></div>
+            <p class="lead cap__text mb-0">Пользователи не найдены</p>
         </div>
-        <div class="widget-min-height relative">
-            <div class="text-center cap"
-                 v-if="!count && !isLoaderShown">
-                <div class="cap__noresults ml-auto mr-auto"></div>
-                <p class="lead cap__text mb-0">Пользователи не найдены</p>
+        <loader v-if="isLoaderShown"></loader>
+        <div class="page-table"
+             v-if="count">
+            <div class="d-flex flex-wrap flex-md-nowrap align-items-center p-4 position-relative font-weight-bold">
+                <div class="col d-none d-xl-block id-column">ID</div>
+                <div class="col d-none d-xl-block">Дата регистрации</div>
+                <div class="col d-none d-xl-block">Имя</div>
+                <div class="col d-none d-xl-block">Телефон</div>
+                <div class="col d-none d-xl-block">Email</div>
+                <div class="col d-none d-xl-block">Последняя активность</div>
             </div>
-            <loader v-if="isLoaderShown"></loader>
-            <div class="d-flex align-items-start">
-                <div class="widget-min-height relative w-100">
-                    <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
-                          v-if="count"
-                          v-for="(user, i) in users"
-                          :key="i">
-                        <div class="col-12 col-xl id-column">
-                            <span class="d-xl-none">ID: </span>
-                            {{user.idt_user}}
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span class="d-xl-none">Дата регистрации: </span>
-                            -
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.name">{{user.name}}</span>
-                            <span v-else>Имя неизвестно</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.phone">{{user.phone}}</span>
-                            <span v-else>Не указан</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.email">{{user.email}}</span>
-                            <span v-else>Не указан</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span class="d-xl-none">Последняя активность: </span>-
-                        </div>
-                    </span>
-                    <pagination :count="count"
-                                :itemsPerPage="itemsPerPage"
-                                :pushQuery="true"
-                                :moreBtn="true"
-                                @pageChanged="getUsers"
-                                ref="pagination"></pagination>
+            <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
+                  v-for="(user, i) in users"
+                  :key="i">
+                <div class="col-12 col-xl id-column">
+                    <span class="d-xl-none">ID: </span>
+                    {{user.idt_user}}
                 </div>
-                <search-filter v-show="isFilterShown"
-                               @search-updated="updateSearchOptions" />
-            </div>
+                <div class="col-12 col-xl">
+                    <span class="d-xl-none">Дата регистрации: </span>
+                    -
+                </div>
+                <div class="col-12 col-xl">
+                    <span v-if="user.name">{{user.name}}</span>
+                    <span v-else>Имя неизвестно</span>
+                </div>
+                <div class="col-12 col-xl">
+                    <span v-if="user.phone">{{user.phone}}</span>
+                    <span v-else>Не указан</span>
+                </div>
+                <div class="col-12 col-xl">
+                    <span v-if="user.email">{{user.email}}</span>
+                    <span v-else>Не указан</span>
+                </div>
+                <div class="col-12 col-xl">
+                    <span class="d-xl-none">Последняя активность: </span>-
+                </div>
+            </span>
+            <pagination :count="count"
+                        :itemsPerPage="itemsPerPage"
+                        :pushQuery="true"
+                        :moreBtn="true"
+                        @pageChanged="getUsers"
+                        ref="pagination"></pagination>
         </div>
     </div>
 </template>

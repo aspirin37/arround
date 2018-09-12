@@ -5,12 +5,10 @@
               :class="{'main-content--small' : smallSize}">
             <sidebar v-on:toggleSize="toggleSidebar" />
             <div class="w-100 overflow-hidden">
-                <div class="px-3 px-xl-4  py-3 py-xl-4">
-                    <transition name="page"
-                                mode="out-in">
-                        <router-view />
-                    </transition>
-                </div>
+                <transition name="page"
+                            mode="out-in">
+                    <router-view />
+                </transition>
             </div>
         </main>
     </div>

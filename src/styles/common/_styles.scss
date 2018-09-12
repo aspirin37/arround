@@ -356,8 +356,10 @@
     box-shadow: 0 1px 12px 0 rgba(#000, 0.15);
 }
 
-.widget-min-height {
+.page-container {
+    position: relative;
     min-height: 300px;
+    padding: 1rem;
 
     .cap {
         position: absolute;
@@ -366,6 +368,16 @@
         transform: translate(0, -50%);
         left: 0;
     }
+
+    @include media-breakpoint-down(xl) {
+        padding: 1.5rem;
+    }
+}
+
+.widget-min-height {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
 }
 
 .widget {
