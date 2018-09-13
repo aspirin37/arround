@@ -14,7 +14,7 @@
                        @keyup="updateSearch"
                        placeholder="Поиск...">
                 <pagination :count="count"
-                            :itemsPerPage="itemsPerPage"
+                            :limit="limit"
                             @pageChanged="getUsers" />
             </div>
         </div>
@@ -87,21 +87,21 @@ export default {
             isLoaderShown: false,
             isFilterShown: false,
             filterOptions: {},
-            itemsPerPage: 20,
+            limit: 20,
             count: null,
             searchText: '',
             searchTimout: null,
         }
     },
     created() {
-        this.getUsers(0, this.itemsPerPage, true)
+        this.getUsers(0, true)
     },
     methods: {
-        getUsers(offset, limit, isLoaderNeeded) {
+        getUsers(offset, isLoaderNeeded) {
             if (isLoaderNeeded) this.isLoaderShown = true
             let options = {
                 offset: offset || 0,
-                limit: this.itemsPerPage,
+                limit: this.limit,
                 search: this.searchText
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
@@ -115,7 +115,7 @@ export default {
         updateSearch() {
             clearTimeout(this.searchTimout);
             this.searchTimout = setTimeout(() => {
-                this.getUsers(0, this.itemsPerPage)
+                this.getUsers(0)
             }, 300);
         },
         concatUsers() {
