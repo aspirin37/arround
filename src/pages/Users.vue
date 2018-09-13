@@ -13,18 +13,22 @@
                        v-model="searchText"
                        @keyup="updateSearch"
                        placeholder="Поиск...">
-                <pagination :count="count"
-                            :limit="limit"
-                            @pageChanged="getUsers" />
+                <b-pagination size="md"
+                              class="mb-0"
+                              :total-rows="count"
+                              v-model="currentPage"
+                              :per-page="limit"
+                              @change="getUsers">
+                </b-pagination>
             </div>
         </div>
         <div class="page-container">
             <div class="text-center cap"
-                 v-if="!count && !isLoaderShown">
+                 v-if="!count && !isPageLoaderShown">
                 <div class="cap__noresults ml-auto mr-auto"></div>
                 <p class="lead cap__text mb-0">Пользователи не найдены</p>
             </div>
-            <loader v-if="isLoaderShown"></loader>
+            <loader v-if="isPageLoaderShown"></loader>
             <div class="page-table"
                  v-if="count">
                 <div class="d-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
@@ -35,34 +39,39 @@
                     <div class="col d-none d-xl-block">Email</div>
                     <div class="col d-none d-xl-block">Последняя активность</div>
                 </div>
-                <div class="page-table__body">
-                    <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
-                          v-for="(user, i) in users"
-                          :key="i">
-                        <div class="col-12 col-xl id-column">
-                            <span class="d-xl-none">ID: </span>
-                            {{user.idt_user}}
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span class="d-xl-none">Дата регистрации: </span>
-                            -
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.name">{{user.name}}</span>
-                            <span v-else>Имя неизвестно</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.phone">{{user.phone}}</span>
-                            <span v-else>Не указан</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span v-if="user.email">{{user.email}}</span>
-                            <span v-else>Не указан</span>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <span class="d-xl-none">Последняя активность: </span>-
-                        </div>
-                    </span>
+                <div class="page-table__body"
+                     @scroll="onScroll">
+                    <div class="page-table__wrapper">
+                        <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
+                              v-for="(user, i) in users"
+                              :key="i">
+                            <div class="col-12 col-xl id-column">
+                                <span class="d-xl-none">ID: </span>
+                                {{user.idt_user}}
+                            </div>
+                            <div class="col-12 col-xl">
+                                <span class="d-xl-none">Дата регистрации: </span>
+                                -
+                            </div>
+                            <div class="col-12 col-xl">
+                                <span v-if="user.name">{{user.name}}</span>
+                                <span v-else>Имя неизвестно</span>
+                            </div>
+                            <div class="col-12 col-xl">
+                                <span v-if="user.phone">{{user.phone}}</span>
+                                <span v-else>Не указан</span>
+                            </div>
+                            <div class="col-12 col-xl">
+                                <span v-if="user.email">{{user.email}}</span>
+                                <span v-else>Не указан</span>
+                            </div>
+                            <div class="col-12 col-xl">
+                                <span class="d-xl-none">Последняя активность: </span>-
+                            </div>
+                        </span>
+                        <loader :isScrollLoader="true"
+                                v-if="isScrollLoaderShown"></loader>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +80,6 @@
 <script>
 import { UsersApi } from '@/services/api'
 import Loader from '@/components/utils/Loader'
-import Pagination from '@/components/utils/Pagination'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 export default {
@@ -79,47 +87,72 @@ export default {
         Loader,
         Thumbnail,
         ThumbnailsOuter,
-        Pagination,
     },
     data() {
         return {
             users: [],
-            isLoaderShown: false,
+            isScrollLoaderShown: false,
+            isPageLoaderShown: false,
             isFilterShown: false,
             filterOptions: {},
+            currentPage: 1,
             limit: 20,
-            count: null,
+            count: 0,
             searchText: '',
             searchTimout: null,
         }
     },
-    created() {
-        this.getUsers(0, true)
+    computed: {
+        totalPages() {
+            return Math.ceil(this.count / this.limit)
+        }
+    },
+    mounted() {
+        this.getUsers(this.currentPage, true)
     },
     methods: {
-        getUsers(offset, isLoaderNeeded) {
-            if (isLoaderNeeded) this.isLoaderShown = true
+        getUsers(page, isLoaderNeeded, isScrolled) {
+            if (isScrolled) this.isScrollLoaderShown = true
+            if (isLoaderNeeded) this.isPageLoaderShown = true
+            if (!isScrolled && !isLoaderNeeded) document.querySelector('.page-table__body').scrollTo(0, 0)
             let options = {
-                offset: offset || 0,
+                offset: this.limit * (page - 1),
                 limit: this.limit,
                 search: this.searchText
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
-                this.users = res.body.users
+                this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
                 this.count = res.body.count
-                this.isLoaderShown = false
+                this.currentPage = page
+
+                this.isPageLoaderShown = false
+                this.isScrollLoaderShown = false
             }).catch(() => {
-                this.isLoaderShown = false
+                this.isPageLoaderShown = false
+                this.isScrollLoaderShown = false
             })
         },
         updateSearch() {
             clearTimeout(this.searchTimout);
             this.searchTimout = setTimeout(() => {
-                this.getUsers(0)
+                this.getUsers(this.currentPage)
             }, 300);
         },
-        concatUsers() {
+        onScroll(evt) {
+            let table = evt.target,
+                wrapper = table.firstElementChild
 
+            let scrollTop = table.scrollTop,
+                tableHeight = table.offsetHeight,
+                wrapperHeight = wrapper.offsetHeight
+
+            let diffHeight = wrapperHeight - tableHeight
+
+            if (diffHeight <= scrollTop && !this.isScrollLoaderShown) {
+                if (this.currentPage + 1 <= this.totalPages) {
+                    this.getUsers(this.currentPage + 1, false, true)
+                }
+            }
         }
     }
 }

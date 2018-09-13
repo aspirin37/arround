@@ -250,7 +250,9 @@
         display: flex;
 
         &.active {
-            a {
+
+            a,
+            span {
 
                 &,
                 &:hover,
@@ -261,7 +263,8 @@
             }
         }
 
-        a.page-link {
+        a.page-link,
+        span.page-link {
             padding: 6px;
             min-width: 32px;
             text-align: center;
