@@ -95,7 +95,7 @@ export default {
             isLoaderShown: false,
             isFilterShown: false,
             filterOptions: {},
-            itemsPerPage: 21,
+            itemsPerPage: 20,
             count: null,
             searchText: '',
             searchTimout: null,
