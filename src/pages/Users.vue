@@ -3,8 +3,10 @@
         <div class="service-bar d-flex align-items-end px-4 py-3 border-bottom">
             <span class="page-heading">Всего пользователей: {{ count }}</span>
             <div class="d-flex align-items-center ml-auto">
-                <a href="#"
-                   class="dl-excel mr-3"></a>
+                <button class="d-flex btn btn-link mr-3">
+                    Экспорт CSV
+                    <i class="dl-excel ml-2"></i>
+                </button>
                 <input type="text"
                        style="width: 250px"
                        class="form-control bg-white mr-3"
@@ -93,7 +95,7 @@ export default {
             isLoaderShown: false,
             isFilterShown: false,
             filterOptions: {},
-            itemsPerPage: 20,
+            itemsPerPage: 21,
             count: null,
             searchText: '',
             searchTimout: null,

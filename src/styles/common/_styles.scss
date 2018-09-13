@@ -769,10 +769,10 @@ span.flatpickr-weekday {
 }
 
 .dl-excel {
-    display: block;
+    display: flex;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     background-image: url(./assets/excel.png);
     background-repeat: no-repeat;
     background-position: 50% 50%;

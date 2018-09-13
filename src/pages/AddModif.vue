@@ -1,5 +1,5 @@
 <template>
-    <div class="widget-min-height relative">
+    <div class="page-container widget-min-height">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
                 <h2 class="px-2">{{ modelName || 'Без имени' }} - ID: {{ modelId }}</h2>
