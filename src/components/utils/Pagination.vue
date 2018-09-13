@@ -1,52 +1,46 @@
 <template>
-    <nav v-if="count >= itemsPerPage"
-         class="">
-        <span class="page-item text-center"
-              v-bind:class="{'disabled' : defaultPage === pages - 1}"
-              v-if="moreBtn">
-            <span class="page-link rounded mb-2"
-                  v-on:click.prevent="toPage(defaultPage + 1, true)">Показать еще</span>
-        </span>
-        <div class="d-flex w-100 justify-content-between">
-            <ul class="pagination mb-0 vertical-middle">
-                <li class="page-item"
-                    v-bind:class="{'disabled' : defaultPage === 0}">
-                    <span class="page-link px-3"
-                          v-on:click.prevent="toPage(defaultPage - 1)">‹</span>
-                </li>
-                <li class="page-item text-dark"
-                    v-bind:class="[{'active' : defaultPage === 0}]"
-                    v-if="pages > 1">
-                    <a href="#"
-                       class="page-link"
-                       v-on:click.prevent="toPage(0)">1</a>
-                </li>
-                <li class="page-item pr-1"
-                    v-if="(defaultPage - 1) > 1"></li>
-                <li class="page-item"
-                    v-for="(page, index) in pages"
-                    v-bind:class="[{'active' : page === defaultPage + 1}]"
-                    v-if="(Math.abs(page - defaultPage) < 1 || Math.abs(defaultPage - page + 1) < 2 || page == 1) && page !== pages && page !== 1"
-                    :key="index"><a href="#"
-                       class="page-link"
-                       v-on:click.prevent="toPage(index)">{{page}}</a></li>
-                <li class="page-item pl-1"
-                    v-if="(defaultPage + 3) < pages"></li>
-                <li class="page-item"
-                    v-bind:class="[{'active' : pages === defaultPage + 1}]"
-                    v-if="pages > 1">
-                    <a href="#"
-                       class="page-link"
-                       v-on:click.prevent="toPage(pages - 1)">{{pages}}</a>
-                </li>
-                <li class="page-item"
-                    v-bind:class="{'disabled' : defaultPage === pages - 1}">
-                    <span class="page-link px-3"
-                          v-on:click.prevent="toPage(defaultPage + 1)">›</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- <nav v-if="count >= itemsPerPage">
+        <div class="d-flex w-100 justify-content-between"> -->
+    <ul class="pagination mb-0 vertical-middle"
+        v-if="count >= itemsPerPage">
+        <li class="page-item"
+            v-bind:class="{'disabled' : defaultPage === 0}">
+            <span class="page-link px-3"
+                  v-on:click.prevent="toPage(defaultPage - 1)">‹</span>
+        </li>
+        <li class="page-item text-dark"
+            v-bind:class="[{'active' : defaultPage === 0}]"
+            v-if="pages > 1">
+            <a href="#"
+               class="page-link"
+               v-on:click.prevent="toPage(0)">1</a>
+        </li>
+        <li class="page-item pr-1"
+            v-if="(defaultPage - 1) > 1"></li>
+        <li class="page-item"
+            v-for="(page, index) in pages"
+            v-bind:class="[{'active' : page === defaultPage + 1}]"
+            v-if="(Math.abs(page - defaultPage) < 1 || Math.abs(defaultPage - page + 1) < 2 || page == 1) && page !== pages && page !== 1"
+            :key="index"><a href="#"
+               class="page-link"
+               v-on:click.prevent="toPage(index)">{{page}}</a></li>
+        <li class="page-item pl-1"
+            v-if="(defaultPage + 3) < pages"></li>
+        <li class="page-item"
+            v-bind:class="[{'active' : pages === defaultPage + 1}]"
+            v-if="pages > 1">
+            <a href="#"
+               class="page-link"
+               v-on:click.prevent="toPage(pages - 1)">{{pages}}</a>
+        </li>
+        <li class="page-item"
+            v-bind:class="{'disabled' : defaultPage === pages - 1}">
+            <span class="page-link px-3"
+                  v-on:click.prevent="toPage(defaultPage + 1)">›</span>
+        </li>
+    </ul>
+    <!-- </div>
+    </nav> -->
 </template>
 <script>
 export default {
@@ -123,14 +117,3 @@ export default {
     }
 }
 </script>
-// <style lang="scss" //
-       scoped>
-// .page-item {
-//     display: flex;
-
-//     &.disabled .page-link {
-//         background-color: rgba(255, 255, 255, 0.7)
-//     }
-// }
-//
-</style>

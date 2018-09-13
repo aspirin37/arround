@@ -15,9 +15,7 @@
                        placeholder="Поиск...">
                 <pagination :count="count"
                             :itemsPerPage="itemsPerPage"
-                            :pushQuery="true"
-                            @pageChanged="getUsers"
-                            ref="pagination"></pagination>
+                            @pageChanged="getUsers" />
             </div>
         </div>
         <div class="page-container">
@@ -66,12 +64,6 @@
                         </div>
                     </span>
                 </div>
-                <!-- <pagination :count="count"
-                            :itemsPerPage="itemsPerPage"
-                            :pushQuery="true"
-                            :moreBtn="true"
-                            @pageChanged="getUsers"
-                            ref="pagination"></pagination> -->
             </div>
         </div>
     </div>
@@ -102,18 +94,18 @@ export default {
         }
     },
     created() {
-        this.getUsers(0, this.itemsPerPage, false, true)
+        this.getUsers(0, this.itemsPerPage, true)
     },
     methods: {
-        getUsers(offset, limit, addMore, isLoaderNeeded) {
+        getUsers(offset, limit, isLoaderNeeded) {
             if (isLoaderNeeded) this.isLoaderShown = true
             let options = {
                 offset: offset || 0,
                 limit: this.itemsPerPage,
-                search: this.searchText || null
+                search: this.searchText
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
-                this.users = addMore ? this._.union(this.users, res.body.users) : res.body.users
+                this.users = res.body.users
                 this.count = res.body.count
                 this.isLoaderShown = false
             }).catch(() => {
@@ -126,6 +118,9 @@ export default {
                 this.getUsers(0, this.itemsPerPage)
             }, 300);
         },
+        concatUsers() {
+
+        }
     }
 }
 </script>
@@ -149,12 +144,4 @@ export default {
 
     bottom: -9px;
 }
-
-// .id-column {
-//     width: auto;
-
-//     @media (min-width: 1200px) {
-//         width: 100px !important;
-//     }
-// }
 </style>
