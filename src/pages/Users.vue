@@ -124,7 +124,7 @@ export default {
                 if (isScrolled) {
                     setTimeout(() => {
                         this.currentPage = page
-                    }, 2000)
+                    }, 500)
                 } else {
                     this.currentPage = page
                 }
