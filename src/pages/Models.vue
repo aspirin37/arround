@@ -1,13 +1,13 @@
 <template>
     <div class="page-container">
         <div class="text-center cap"
-             v-if="!models.length && !isLoaderShown">
+             v-if="!models || !models.length && !isLoaderShown">
             <div class="cap__noresults ml-auto mr-auto"></div>
             <p class="lead cap__text mb-0">Модели не найдены</p>
         </div>
         <loader v-if="isLoaderShown"></loader>
         <div class="page-table"
-             v-if="models.length">
+             v-if="models && models.length">
             <div class="d-none d-lg-flex px-4 mb-3 font-weight-bold">
                 <div class="col-2">Превью</div>
                 <div class="col-10 p-0 display-flex flex-row">

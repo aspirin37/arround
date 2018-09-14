@@ -794,3 +794,9 @@ span.flatpickr-weekday {
         }
     }
 }
+
+@for $i from 1 through 10 {
+    .flex-grow-#{$i} {
+        flex-grow: $i;
+    }
+}

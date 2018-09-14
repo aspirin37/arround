@@ -16,7 +16,8 @@
                           :total-rows="count"
                           v-model="currentPage"
                           :per-page="limit"
-                          @change="getUsers">
+                          @change="getUsers"
+                          v-if="count > limit">
             </b-pagination>
         </div>
         <div class="page-container">
@@ -29,43 +30,44 @@
             <div class="page-table"
                  v-if="count">
                 <div class="d-none d-xl-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
-                    <div class="col id-column">ID</div>
-                    <div class="col">Дата регистрации</div>
-                    <div class="col">Имя</div>
-                    <div class="col">Телефон</div>
-                    <div class="col">Email</div>
-                    <div class="col">Последняя активность</div>
+                    <div class="col flex-grow-1">ID</div>
+                    <div class="col flex-grow-3">Дата регистрации</div>
+                    <div class="col flex-grow-3">Имя</div>
+                    <div class="col flex-grow-3">Телефон</div>
+                    <div class="col flex-grow-3">Email</div>
+                    <div class="col flex-grow-3">Последняя активность</div>
                 </div>
                 <div class="page-table__body"
-                     @scroll="onScroll">
+                     @scroll="onScroll($event, onScrollAction)">
                     <div class="page-table__wrapper">
-                        <span class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
-                              v-for="(user, i) in users"
-                              :key="i">
-                            <div class="col-12 col-xl id-column">
+                        <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
+                                     :to="{name: 'User', params: {id: user.idt_user, user }}"
+                                     v-for="(user, i) in users"
+                                     :key="i">
+                            <div class="col-12 col-xl flex-grow-1">
                                 <span class="d-xl-none">ID: </span>
                                 {{user.idt_user}}
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <span class="d-xl-none">Дата регистрации: </span>
                                 -
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <span v-if="user.name">{{user.name}}</span>
                                 <span v-else>Имя неизвестно</span>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <span v-if="user.phone">{{user.phone}}</span>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <span v-if="user.email">{{user.email}}</span>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <span class="d-xl-none">Последняя активность: </span>-
                             </div>
-                        </span>
+                        </router-link>
                         <loader :isScrollLoader="true"
                                 v-if="isScrollLoaderShown"></loader>
                     </div>
@@ -79,7 +81,9 @@ import { UsersApi } from '@/services/api'
 import Loader from '@/components/utils/Loader'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
+import onScroll from '@/mixins/on-scroll'
 export default {
+    mixins: [onScroll],
     components: {
         Loader,
         Thumbnail,
@@ -106,7 +110,6 @@ export default {
     },
     mounted() {
         this.getUsers(this.currentPage, true)
-        console.log(process.env.NODE_ENV)
     },
     methods: {
         getUsers(page, isLoaderNeeded, isScrolled) {
@@ -121,13 +124,7 @@ export default {
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
                 this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
                 this.count = res.body.count
-                if (isScrolled) {
-                    setTimeout(() => {
-                        this.currentPage = page
-                    }, 500)
-                } else {
-                    this.currentPage = page
-                }
+                this.currentPage = page
 
                 this.isPageLoaderShown = false
                 this.isScrollLoaderShown = false
@@ -142,21 +139,8 @@ export default {
                 this.getUsers(this.currentPage)
             }, 300);
         },
-        onScroll(evt) {
-            let table = evt.target,
-                wrapper = table.firstElementChild
-
-            let scrollTop = table.scrollTop,
-                tableHeight = table.offsetHeight,
-                wrapperHeight = wrapper.offsetHeight
-
-            let diffHeight = wrapperHeight - tableHeight
-
-            if (diffHeight <= scrollTop && !this.isScrollLoaderShown) {
-                if (this.currentPage + 1 <= this.totalPages) {
-                    this.getUsers(this.currentPage + 1, false, true)
-                }
-            }
+        onScrollAction() {
+            this.getUsers(this.currentPage + 1, false, true)
         }
     }
 }

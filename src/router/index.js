@@ -6,6 +6,7 @@ import Models from '@/pages/Models'
 import Model from '@/pages/Model'
 import AddModif from '@/pages/AddModif'
 import Users from '@/pages/Users'
+import User from '@/pages/User'
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
             path: 'users',
             name: 'Users',
             component: Users
+        }, {
+            path: 'users/user/:id',
+            name: 'User',
+            component: User
         }]
     }, {
         path: '/sign-in',
