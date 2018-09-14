@@ -7,7 +7,7 @@
                 <thumbnails-outer class="mb-3">
                     <thumbnail :img="user.avatar || userCap"
                                :thumb="user.avatar || userCap"
-                               :linkClasses="['circle-avatar rounded-circle mr-3 bg-light d-inline-block']"
+                               :linkClasses="['circle-avatar circle-avatar--user-info rounded-circle mr-3 bg-light d-inline-block']"
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
                 <div>

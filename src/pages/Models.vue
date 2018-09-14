@@ -26,35 +26,39 @@
                         <div class="col text-lg-center">Действия</div>
                     </div>
                 </div>
-                <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
-                             :to="{name: 'Model', params: {id: model.idt_model }}"
-                             v-for="(model, i) in models"
-                             :key="i">
-                    <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
-                        <thumbnails-outer>
-                            <thumbnail :img="model.modifications[0].url_icon"
-                                       :thumb="model.modifications[0].url_icon"
-                                       :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
-                                       :thumbClasses="['font-size-0']"></thumbnail>
-                        </thumbnails-outer>
+                <div class="page-table__body">
+                    <div class="page-table__wrapper">
+                        <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
+                                     :to="{name: 'Model', params: {id: model.idt_model }}"
+                                     v-for="(model, i) in models"
+                                     :key="i">
+                            <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
+                                <thumbnails-outer>
+                                    <thumbnail :img="model.modifications[0].url_icon"
+                                               :thumb="model.modifications[0].url_icon"
+                                               :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
+                                               :thumbClasses="['font-size-0']"></thumbnail>
+                                </thumbnails-outer>
+                            </div>
+                            <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
+                                <div class="col-12 col-lg">
+                                    {{ model.name || 'Без имени' }}
+                                </div>
+                                <div class="col-12 col-lg">
+                                    <span class="d-lg-none">ID:</span> {{ model.idt_model }}
+                                </div>
+                                <div class="d-none d-lg-block col-lg text-lg-center">
+                                    {{ model.modifications.length }}
+                                </div>
+                                <div class="col-12 col-lg text-lg-center">
+                                    <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
+                                            @click.prevent
+                                            disabled>Удалить</button>
+                                </div>
+                            </div>
+                        </router-link>
                     </div>
-                    <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
-                        <div class="col-12 col-lg">
-                            {{ model.name || 'Без имени' }}
-                        </div>
-                        <div class="col-12 col-lg">
-                            <span class="d-lg-none">ID:</span> {{ model.idt_model }}
-                        </div>
-                        <div class="d-none d-lg-block col-lg text-lg-center">
-                            {{ model.modifications.length }}
-                        </div>
-                        <div class="col-12 col-lg text-lg-center">
-                            <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
-                                    @click.prevent
-                                    disabled>Удалить</button>
-                        </div>
-                    </div>
-                </router-link>
+                </div>
             </div>
         </div>
     </div>

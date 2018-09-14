@@ -202,4 +202,14 @@ $percentage : 10%;
         width: 150px;
         height: 150px;
     }
+
+    &--user-info {
+        width: 100px;
+        height: 100px;
+
+        @include media-breakpoint-up(xl) {
+            width: 150px;
+            height: 150px;
+        }
+    }
 }
