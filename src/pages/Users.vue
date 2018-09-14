@@ -113,9 +113,10 @@ export default {
     },
     methods: {
         getUsers(page, isLoaderNeeded, isScrolled) {
+            let table = document.querySelector('.page-table__body')
             if (isScrolled) this.isScrollLoaderShown = true
             if (isLoaderNeeded) this.isPageLoaderShown = true
-            if (!isScrolled && !isLoaderNeeded) document.querySelector('.page-table__body').scrollTo(0, 0)
+            if (table && !isScrolled && !isLoaderNeeded) table.scrollTo(0, 0)
             let options = {
                 offset: this.limit * (page - 1),
                 limit: this.limit,
