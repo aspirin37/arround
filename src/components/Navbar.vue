@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed-top d-flex w-100">
+    <header class="d-flex w-100">
         <router-link to="/models"
                      class="navbar-brand admin-logo mr-0 text-center">
             <img src="@/assets/logo.png"

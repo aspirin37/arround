@@ -52,9 +52,9 @@
 }
 
 .main-content {
-    padding-top: 48px;
-    min-height: 100vh;
 
+    // padding-top: 48px;
+    // min-height: 100vh;
     @include media-breakpoint-up(md) {
         padding-left: 200px;
     }

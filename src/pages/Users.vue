@@ -7,7 +7,7 @@
                 <i class="dl-excel ml-2"></i>
             </button>
             <input type="text"
-                   class="d-none d-xlblock form-control form-control--search bg-white mr-3"
+                   class="d-none d-xl-block form-control form-control--search bg-white mr-3"
                    v-model="searchText"
                    @keyup="updateSearch"
                    placeholder="Поиск...">
