@@ -786,7 +786,7 @@ span.flatpickr-weekday {
 .page-table {
     &__body {
         -webkit-overflow-scrolling: touch;
-        max-height: calc(100vh - 320px);
+        max-height: calc(100vh - 280px);
         overflow: auto;
 
         @include media-breakpoint-up(xl) {
