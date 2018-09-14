@@ -1,16 +1,10 @@
 header {
-    position: relative;
+    position: fixed;
     z-index: 100;
-
-    @include media-breakpoint-up(xl) {
-        position: fixed;
-    }
 }
 
 main {
-    @include media-breakpoint-up(xl) {
-        padding-top: 48px;
-    }
+    padding-top: 48px;
 }
 
 .container {
