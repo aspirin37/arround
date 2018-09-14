@@ -106,6 +106,7 @@ export default {
     },
     mounted() {
         this.getUsers(this.currentPage, true)
+        console.log(process.env.NODE_ENV)
     },
     methods: {
         getUsers(page, isLoaderNeeded, isScrolled) {
