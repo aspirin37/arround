@@ -1,26 +1,23 @@
 <template>
     <div>
-        <div class="service-bar d-flex align-items-end px-4 py-3 border-bottom">
+        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
             <span class="page-heading">Всего пользователей: {{ count }}</span>
-            <div class="d-flex align-items-center ml-auto">
-                <button class="d-flex btn btn-link mr-3">
-                    Экспорт CSV
-                    <i class="dl-excel ml-2"></i>
-                </button>
-                <input type="text"
-                       style="width: 250px"
-                       class="form-control bg-white mr-3"
-                       v-model="searchText"
-                       @keyup="updateSearch"
-                       placeholder="Поиск...">
-                <b-pagination size="md"
-                              class="mb-0"
-                              :total-rows="count"
-                              v-model="currentPage"
-                              :per-page="limit"
-                              @change="getUsers">
-                </b-pagination>
-            </div>
+            <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
+                Экспорт CSV
+                <i class="dl-excel ml-2"></i>
+            </button>
+            <input type="text"
+                   class="d-none d-xlblock form-control form-control--search bg-white mr-3"
+                   v-model="searchText"
+                   @keyup="updateSearch"
+                   placeholder="Поиск...">
+            <b-pagination size="md"
+                          class="align-self-center mb-0"
+                          :total-rows="count"
+                          v-model="currentPage"
+                          :per-page="limit"
+                          @change="getUsers">
+            </b-pagination>
         </div>
         <div class="page-container">
             <div class="text-center cap"
@@ -31,13 +28,13 @@
             <loader v-if="isPageLoaderShown"></loader>
             <div class="page-table"
                  v-if="count">
-                <div class="d-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
-                    <div class="col d-none d-xl-block id-column">ID</div>
-                    <div class="col d-none d-xl-block">Дата регистрации</div>
-                    <div class="col d-none d-xl-block">Имя</div>
-                    <div class="col d-none d-xl-block">Телефон</div>
-                    <div class="col d-none d-xl-block">Email</div>
-                    <div class="col d-none d-xl-block">Последняя активность</div>
+                <div class="d-none d-xl-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
+                    <div class="col id-column">ID</div>
+                    <div class="col">Дата регистрации</div>
+                    <div class="col">Имя</div>
+                    <div class="col">Телефон</div>
+                    <div class="col">Email</div>
+                    <div class="col">Последняя активность</div>
                 </div>
                 <div class="page-table__body"
                      @scroll="onScroll">
