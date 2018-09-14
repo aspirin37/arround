@@ -1,3 +1,18 @@
+header {
+    position: relative;
+    z-index: 100;
+
+    @include media-breakpoint-up(xl) {
+        position: fixed;
+    }
+}
+
+main {
+    @include media-breakpoint-up(xl) {
+        padding-top: 48px;
+    }
+}
+
 .container {
     width: 100%;
     // max-width: $container-lg;

@@ -1,51 +1,61 @@
 <template>
-    <div class="page-container">
-        <div class="text-center cap"
-             v-if="!models || !models.length && !isLoaderShown">
-            <div class="cap__noresults ml-auto mr-auto"></div>
-            <p class="lead cap__text mb-0">Модели не найдены</p>
+    <div>
+        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
+            <span class="page-heading">Всего моделей: {{ models.length }}</span>
+            <input type="text"
+                   class="d-none d-xl-block form-control form-control--search bg-white ml-auto"
+                   v-model="searchText"
+                   @keyup="updateSearch"
+                   placeholder="Поиск...">
         </div>
-        <loader v-if="isLoaderShown"></loader>
-        <div class="page-table"
-             v-if="models && models.length">
-            <div class="d-none d-lg-flex px-4 mb-3 font-weight-bold">
-                <div class="col-2">Превью</div>
-                <div class="col-10 p-0 display-flex flex-row">
-                    <div class="col">Имя</div>
-                    <div class="col">ID</div>
-                    <div class="col text-lg-center">Кол-во модификаций</div>
-                    <div class="col text-lg-center">Действия</div>
-                </div>
+        <div class="page-container">
+            <div class="text-center cap"
+                 v-if="!models || !models.length && !isLoaderShown">
+                <div class="cap__noresults ml-auto mr-auto"></div>
+                <p class="lead cap__text mb-0">Модели не найдены</p>
             </div>
-            <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
-                         :to="{name: 'Model', params: {id: model.idt_model }}"
-                         v-for="(model, i) in models"
-                         :key="i">
-                <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
-                    <thumbnails-outer>
-                        <thumbnail :img="model.modifications[0].url_icon"
-                                   :thumb="model.modifications[0].url_icon"
-                                   :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
-                                   :thumbClasses="['font-size-0']"></thumbnail>
-                    </thumbnails-outer>
-                </div>
-                <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
-                    <div class="col-12 col-lg">
-                        {{ model.name || 'Без имени' }}
-                    </div>
-                    <div class="col-12 col-lg">
-                        <span class="d-lg-none">ID:</span> {{ model.idt_model }}
-                    </div>
-                    <div class="d-none d-lg-block col-lg text-lg-center">
-                        {{ model.modifications.length }}
-                    </div>
-                    <div class="col-12 col-lg text-lg-center">
-                        <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
-                                @click.prevent
-                                disabled>Удалить</button>
+            <loader v-if="isLoaderShown"></loader>
+            <div class="page-table"
+                 v-if="models && models.length">
+                <div class="d-none d-lg-flex px-4 mb-3 font-weight-bold">
+                    <div class="col-2">Превью</div>
+                    <div class="col-10 p-0 display-flex flex-row">
+                        <div class="col">Имя</div>
+                        <div class="col">ID</div>
+                        <div class="col text-lg-center">Кол-во модификаций</div>
+                        <div class="col text-lg-center">Действия</div>
                     </div>
                 </div>
-            </router-link>
+                <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
+                             :to="{name: 'Model', params: {id: model.idt_model }}"
+                             v-for="(model, i) in models"
+                             :key="i">
+                    <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
+                        <thumbnails-outer>
+                            <thumbnail :img="model.modifications[0].url_icon"
+                                       :thumb="model.modifications[0].url_icon"
+                                       :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
+                                       :thumbClasses="['font-size-0']"></thumbnail>
+                        </thumbnails-outer>
+                    </div>
+                    <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
+                        <div class="col-12 col-lg">
+                            {{ model.name || 'Без имени' }}
+                        </div>
+                        <div class="col-12 col-lg">
+                            <span class="d-lg-none">ID:</span> {{ model.idt_model }}
+                        </div>
+                        <div class="d-none d-lg-block col-lg text-lg-center">
+                            {{ model.modifications.length }}
+                        </div>
+                        <div class="col-12 col-lg text-lg-center">
+                            <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
+                                    @click.prevent
+                                    disabled>Удалить</button>
+                        </div>
+                    </div>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -65,6 +75,7 @@ export default {
         return {
             models: [],
             isLoaderShown: false,
+            searchText: '',
             modelTypes
         }
     },
@@ -81,7 +92,8 @@ export default {
                 this.isLoaderShown = false
             })
 
-        }
+        },
+        updateSearch() {},
     }
 }
 </script>
