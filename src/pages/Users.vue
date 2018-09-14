@@ -121,7 +121,13 @@ export default {
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
                 this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
                 this.count = res.body.count
-                this.currentPage = page
+                if (isScrolled) {
+                    setTimeout(() => {
+                        this.currentPage = page
+                    }, 2000)
+                } else {
+                    this.currentPage = page
+                }
 
                 this.isPageLoaderShown = false
                 this.isScrollLoaderShown = false
