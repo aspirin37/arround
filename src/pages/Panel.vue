@@ -30,6 +30,7 @@ export default {
     },
     created() {
         alert(/Chrome/i.test(navigator.userAgent))
+        alert(navigator.userAgent)
         alert(this.$mq)
     },
     computed: {
