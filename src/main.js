@@ -4,6 +4,7 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueResource from 'vue-resource';
 import VueLodash from 'vue-lodash'
+import VueMq from 'vue-mq'
 import DeclNum from './directives/DeclNum'
 import Thousands from './directives/thousands'
 import checkUser from '@/utils/check-user';
@@ -11,6 +12,13 @@ import checkUser from '@/utils/check-user';
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueLodash);
+
+Vue.use(VueMq, {
+    breakpoints: { // default breakpoints - customize this
+        sm: 1200,
+        xl: Infinity,
+    }
+})
 
 Vue.directive('decl-num', DeclNum)
 Vue.directive('thousands', Thousands)

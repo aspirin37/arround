@@ -793,11 +793,17 @@ span.flatpickr-weekday {
 .page-table {
     &__body {
         -webkit-overflow-scrolling: touch;
-        max-height: calc(100vh - 280px);
+        max-height: calc(100vh - 290px);
         overflow: auto;
+
+        &--chrome {
+            max-height: calc(100vh - 270px);
+        }
 
         @include media-breakpoint-up(xl) {
             max-height: calc(100vh - 215px);
+            // &--chrome {
+            // }
         }
     }
 }
@@ -806,4 +812,8 @@ span.flatpickr-weekday {
     .flex-grow-#{$i} {
         flex-grow: $i;
     }
+}
+
+.chrome-mobile .page-table {
+    max-height: calc(100vh - 215px);
 }

@@ -2,7 +2,7 @@
     <div>
         <navbar />
         <main class="main-content flex-column flex-md-row d-flex align-items-start align-items-md-stretch flex-wrap flex-md-nowrap"
-              :class="{'main-content--small' : smallSize}">
+              :class="{'main-content--small' : smallSize, 'chrome-mobile': isMobileChrome}">
             <sidebar v-on:toggleSize="toggleSidebar" />
             <div class="w-100 overflow-hidden">
                 <transition name="page"
@@ -19,19 +19,24 @@ import Sidebar from '../components/Sidebar'
 
 export default {
     name: 'panel',
+    components: {
+        Navbar,
+        Sidebar
+    },
     data() {
         return {
             smallSize: false
         }
     },
-    components: {
-        Navbar,
-        Sidebar
+    computed: {
+        isMobileChrome() {
+            return !!window.chrome && !!window.chrome.webstore && this.$mq == 'sm'
+        }
     },
     methods: {
         toggleSidebar() {
             this.smallSize = !this.smallSize
-        }
+        },
     }
 }
 </script>

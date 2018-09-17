@@ -7,7 +7,7 @@
                  class="navbar-logo">
         </router-link>
         <nav class="navbar navbar-dark bg-theme justify-content-between w-100">
-            <ul class="navbar-nav flex-row">
+            <ul class="d-none d-xl-block navbar-nav flex-row">
                 <li class="nav-item">
                     <a href="#"
                        class="nav-link"
