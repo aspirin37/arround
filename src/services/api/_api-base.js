@@ -7,8 +7,11 @@ switch (process.env.NODE_ENV) {
     case 'staging':
         API_BASE = `https://arapi.a3technology.ru/`;
         break;
+    case 'production':
+        API_BASE = `https://api.arround.io`;
+        break;
     default:
-        API_BASE = `https://arapi.a3technology.ru/`;
+        API_BASE = `https://api.arround.io`;
         break;
 }
 
