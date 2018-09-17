@@ -29,13 +29,14 @@ export default {
         }
     },
     created() {
-        alert(!!window.chrome && !!window.chrome.webstore)
+        alert(/Chrome/i.test(navigator.userAgent))
         alert(this.$mq)
     },
     computed: {
         isMobileChrome() {
-            return !!window.chrome && !!window.chrome.webstore && this.$mq == 'sm'
-        }
+            return /Chrome/i.test(navigator.userAgent) && this.$mq == 'sm'
+        },
+
     },
     methods: {
         toggleSidebar() {

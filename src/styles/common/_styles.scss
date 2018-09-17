@@ -798,8 +798,6 @@ span.flatpickr-weekday {
 
         @include media-breakpoint-up(xl) {
             max-height: calc(100vh - 215px);
-            // &--chrome {
-            // }
         }
     }
 }
@@ -811,6 +809,5 @@ span.flatpickr-weekday {
 }
 
 .chrome-mobile .page-table {
-    // max-height: calc(100vh - 270px);
-    display: none;
+    max-height: calc(100vh - 270px);
 }
