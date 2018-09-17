@@ -29,13 +29,13 @@ export default {
         }
     },
     created() {
-        alert(/Chrome/i.test(navigator.userAgent))
+        alert(/Chrome|crios/i.test(navigator.userAgent))
         alert(navigator.userAgent)
         alert(this.$mq)
     },
     computed: {
         isMobileChrome() {
-            return /Chrome/i.test(navigator.userAgent) && this.$mq == 'sm'
+            return /Chrome|Crios/i.test(navigator.userAgent) && this.$mq == 'sm'
         },
 
     },
