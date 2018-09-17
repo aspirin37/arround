@@ -17,6 +17,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto flex-row">
+                <li class="nav-item"
+                    v-if="user">
+                    <a href="#"
+                       class="nav-link disabled mr-4">
+                        {{ user.email }}
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="#"
                        class="nav-link"
@@ -35,7 +42,9 @@ import { AdminApi } from '@/services/api'
 export default {
     name: 'navbar',
     data() {
-        return {}
+        return {
+            user: null
+        }
     },
     computed: {},
     watch: {
@@ -43,12 +52,26 @@ export default {
             this.showNavbar = false
         }
     },
+    created() {
+        this.getProfile()
+    },
     methods: {
-        async signOut() {
-            await this.$http.delete(AdminApi.signOut)
+        signOut() {
+            this.$http.delete(AdminApi.signOut)
             this.$router.push({ name: 'SignIn' })
             clearCookies()
+        },
+        getProfile() {
+            this.$http.get(AdminApi.getProfile).then((res) => {
+                this.user = res.body.profile
+            })
         }
     }
 }
 </script>
+<style lang="scss"
+       scoped>
+.disabled {
+    cursor: auto
+}
+</style>

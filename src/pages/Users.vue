@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 bsorting-bottom">
+        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
             <span class="page-heading">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
                 Экспорт CSV
