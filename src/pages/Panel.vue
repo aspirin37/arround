@@ -28,11 +28,6 @@ export default {
             smallSize: false
         }
     },
-    created() {
-        alert(/Chrome|crios/i.test(navigator.userAgent))
-        alert(navigator.userAgent)
-        alert(this.$mq)
-    },
     computed: {
         isMobileChrome() {
             return /Chrome|Crios/i.test(navigator.userAgent) && this.$mq == 'sm'
