@@ -37,7 +37,6 @@ export default {
         isMobileChrome() {
             return /Chrome|Crios/i.test(navigator.userAgent) && this.$mq == 'sm'
         },
-
     },
     methods: {
         toggleSidebar() {
