@@ -1,24 +1,16 @@
 <template>
     <div>
-        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
+        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 bsorting-bottom">
             <span class="page-heading">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
                 Экспорт CSV
                 <i class="dl-excel ml-2"></i>
             </button>
             <input type="text"
-                   class="d-none d-xl-block form-control form-control--search bg-white mr-3"
+                   class="d-none d-xl-block form-control form-control--search bg-white"
                    v-model="searchText"
                    @keyup="updateSearch"
                    placeholder="Поиск...">
-            <b-pagination size="md"
-                          class="align-self-center mb-0"
-                          :total-rows="count"
-                          v-model="currentPage"
-                          :per-page="limit"
-                          @change="getUsers"
-                          v-if="count > limit">
-            </b-pagination>
         </div>
         <div class="page-container">
             <div class="text-center cap"
@@ -30,9 +22,15 @@
             <div class="page-table"
                  v-if="count">
                 <div class="d-none d-xl-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
-                    <div class="col flex-grow-1">ID</div>
+                    <div class="col flex-grow-1 cursor-pointer"
+                         @click="changeSorting('id_desc')">
+                        ID <i :class="[this.sorting.id_desc === true ? 'fa-angle-up' : 'fa-angle-down', 'fa ml-1']"></i>
+                    </div>
                     <div class="col flex-grow-3">Дата регистрации</div>
-                    <div class="col flex-grow-3">Имя</div>
+                    <div class="col flex-grow-3 cursor-pointer"
+                         @click="changeSorting('lastname_desc')">
+                        Имя <i :class="[this.sorting.lastname_desc === true ? 'fa-angle-up' : 'fa-angle-down', 'fa ml-1']"></i>
+                    </div>
                     <div class="col flex-grow-3">Телефон</div>
                     <div class="col flex-grow-3">Email</div>
                     <div class="col flex-grow-3">Последняя активность</div>
@@ -56,15 +54,19 @@
                                 <span v-if="user.name">{{user.name}}</span>
                                 <span v-else>Имя неизвестно</span>
                             </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <span v-if="user.phone">{{user.phone}}</span>
+                            <div class="d-none d-xl-block col-xl flex-grow-3">
+                                <a href="#"
+                                   @click.prevent="clickLink(`tel:${user.phone}`)"
+                                   v-if="user.phone">{{user.phone}}</a>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <span v-if="user.email">{{user.email}}</span>
+                            <div class="d-none d-xl-block col-12 col-xl flex-grow-3">
+                                <a href="#"
+                                   @click.prevent="clickLink(`mailto:${user.email}`)"
+                                   v-if="user.email">{{user.email}}</a>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="col-12 col-xl flex-grow-3">
+                            <div class="d-none d-xl-block col-12 col-xl flex-grow-3">
                                 <span class="d-xl-none">Последняя активность: </span>-
                             </div>
                         </router-link>
@@ -77,6 +79,7 @@
     </div>
 </template>
 <script>
+import { clone } from '@/utils/clone'
 import { UsersApi } from '@/services/api'
 import Loader from '@/components/utils/Loader'
 import Thumbnail from '@/components/utils/Thumbnail'
@@ -101,6 +104,12 @@ export default {
             count: 0,
             searchText: '',
             searchTimout: null,
+            sorting: {
+                id_desc: false,
+                lastname_desc: false,
+            },
+            order: 'id_asc'
+
         }
     },
     computed: {
@@ -111,6 +120,11 @@ export default {
     mounted() {
         this.getUsers(this.currentPage, true)
     },
+    watch: {
+        order() {
+            this.getUsers(1)
+        }
+    },
     methods: {
         getUsers(page, isLoaderNeeded, isScrolled) {
             let table = document.querySelector('.page-table__body')
@@ -120,7 +134,8 @@ export default {
             let options = {
                 offset: this.limit * (page - 1),
                 limit: this.limit,
-                search: this.searchText
+                search: this.searchText,
+                order: this.order
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
                 this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
@@ -142,6 +157,29 @@ export default {
         },
         onScrollAction() {
             this.getUsers(this.currentPage + 1, false, true)
+        },
+        clickLink(url) {
+            let link = document.createElement('a');
+            link.setAttribute('href', url)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        },
+        changeSorting(field) {
+            let temp = clone(this.sorting[field])
+            for (let it in this.sorting) {
+                this.sorting[it] = false
+            }
+            this.sorting[field] = !temp
+
+            switch (field) {
+                case 'id_desc':
+                    this.order = this.sorting[field] ? 'id_desc' : 'id_asc'
+                    break;
+                case 'lastname_desc':
+                    this.order = this.sorting[field] ? 'lastname_desc' : 'lastname_asc'
+                    break
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <header class="d-flex w-100">
-        <router-link to="/models"
+        <router-link to="/users"
                      class="navbar-brand admin-logo mr-0 text-center">
             <img src="@/assets/logo.png"
                  alt="logo"

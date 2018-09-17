@@ -15,6 +15,19 @@ export default {
                     action()
                 }
             }
+
+            let previous = table.scrollTop;
+            let body = document.querySelector('body')
+            if(body.clientWidth < 1200) {
+                table.addEventListener('scroll', () => {
+                    if(table.scrollTop > previous) {
+                        this.$root.$emit('hide-menu')
+                    } else {
+                        this.$root.$emit('show-menu')
+                    }
+                    previous = table.scrollTop;
+                })
+            }
         }
     }
 }

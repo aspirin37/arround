@@ -52,8 +52,7 @@
                                 </div>
                                 <div class="col-12 col-lg text-lg-center">
                                     <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
-                                            @click.prevent
-                                            disabled>Удалить</button>
+                                            @click.prevent>Удалить</button>
                                 </div>
                             </div>
                         </router-link>

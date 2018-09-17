@@ -385,13 +385,11 @@ main {
 
 .page-heading {
     margin-right: auto;
-    margin-bottom: 1rem;
     font-size: 16px;
     line-height: 20px;
 
     @include media-breakpoint-up(xl) {
         margin-right: 0;
-        margin-bottom: 0;
         font-size: 19px;
         line-height: 24px;
     }
@@ -799,7 +797,7 @@ span.flatpickr-weekday {
         overflow: auto;
 
         @include media-breakpoint-up(xl) {
-            max-height: calc(100vh - 276px);
+            max-height: calc(100vh - 215px);
         }
     }
 }

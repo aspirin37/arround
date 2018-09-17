@@ -13,8 +13,8 @@
                 <div>
                     <h4 class="mb-0 mt-2 text-nowrap">{{user.name}}</h4>
                     <div class="mb-3">Статус</div>
-                    <div>{{ user.phone }}</div>
-                    <div class="mb-3">{{ user.email }}</div>
+                    <div><a :href="`tel:${user.phone}`">{{ user.phone }}</a></div>
+                    <div class="mb-3"><a :href="`mailto:${user.email}`">{{ user.email }}</a></div>
                     <div>Дата регистрации: </div>
                     <div>Последняя активность: </div>
                 </div>
