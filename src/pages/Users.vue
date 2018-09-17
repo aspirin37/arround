@@ -76,6 +76,9 @@
                 </div>
             </div>
         </div>
+        <div class="footer-bar px-4 pb-3">
+            Показано пользователей: {{ shownUsers }} из {{ count }}
+        </div>
     </div>
 </template>
 <script>
@@ -115,6 +118,9 @@ export default {
     computed: {
         totalPages() {
             return Math.ceil(this.count / this.limit)
+        },
+        shownUsers() {
+            return this.currentPage < this.totalPages ? this.limit * this.currentPage : this.count
         }
     },
     mounted() {
@@ -203,5 +209,11 @@ export default {
     right: 0;
 
     bottom: -9px;
+}
+
+.footer-bar {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 </style>
