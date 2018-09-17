@@ -11,7 +11,7 @@
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
                 <div>
-                    <h4 class="mb-0 mt-2 text-nowrap">{{user.name}}</h4>
+                    <h4 class="mb-0 mt-2">{{user.name}}</h4>
                     <div class="mb-3">Статус</div>
                     <div><a :href="`tel:${user.phone}`">{{ user.phone }}</a></div>
                     <div class="mb-3"><a :href="`mailto:${user.email}`">{{ user.email }}</a></div>
