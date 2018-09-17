@@ -42,17 +42,19 @@
                                      :to="{name: 'User', params: {id: user.idt_user, user }}"
                                      v-for="(user, i) in users"
                                      :key="i">
-                            <div class="col-12 col-xl flex-grow-1">
+                            <div class="d-none d-xl-block col-12 col-xl flex-grow-1">
                                 <span class="d-xl-none">ID: </span>
                                 {{user.idt_user}}
                             </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <span class="d-xl-none">Дата регистрации: </span>
+                            <div class="col-12 col-xl flex-grow-3 date-column">
+                                <span class="d-xl-none">Зарегистрирован: </span>
                                 -
                             </div>
                             <div class="col-12 col-xl flex-grow-3">
-                                <span v-if="user.name">{{user.name}}</span>
+                                <span class="mr-2"
+                                      v-if="user.name">{{user.name}}</span>
                                 <span v-else>Имя неизвестно</span>
+                                <span class="d-xl-none">ID: {{user.idt_user}}</span>
                             </div>
                             <div class="d-none d-xl-block col-xl flex-grow-3">
                                 <a href="#"
@@ -60,13 +62,13 @@
                                    v-if="user.phone">{{user.phone}}</a>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="d-none d-xl-block col-12 col-xl flex-grow-3">
+                            <div class="d-none d-xl-block col-xl flex-grow-3">
                                 <a href="#"
                                    @click.prevent="clickLink(`mailto:${user.email}`)"
                                    v-if="user.email">{{user.email}}</a>
                                 <span v-else>Не указан</span>
                             </div>
-                            <div class="d-none d-xl-block col-12 col-xl flex-grow-3">
+                            <div class="d-none d-xl-block col-xl flex-grow-3">
                                 <span class="d-xl-none">Последняя активность: </span>-
                             </div>
                         </router-link>
@@ -77,7 +79,7 @@
             </div>
         </div>
         <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
-            Показано пользователей: {{ shownUsers }} из {{ count }}
+            Показано: {{ shownUsers }} из {{ count }}
         </div>
     </div>
 </template>
@@ -190,30 +192,15 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-.filter-table-container {
-    position: absolute;
-    height: 21px;
-    right: 0;
-    margin-left: 1rem;
-    width: 240px;
+<style lang="scss"
+       scoped>
+.date-column {
+    order: 2;
+    font-size: 11px;
 
-    &--filter-shown {
-        position: relative;
-        right: -1.5rem;
+    @media (min-width: 1200px) {
+        order: unset;
+        font-size: inherit;
     }
-}
-
-.filter-btn {
-    position: absolute;
-    right: 0;
-
-    bottom: -9px;
-}
-
-.footer-bar {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
 }
 </style>

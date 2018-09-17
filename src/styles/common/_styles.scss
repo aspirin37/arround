@@ -811,3 +811,14 @@ span.flatpickr-weekday {
 .chrome-mobile .page-table__body {
     max-height: calc(100vh - 210px);
 }
+
+.footer-bar {
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    @include media-breakpoint-up(xl) {
+        border: none;
+    }
+}
