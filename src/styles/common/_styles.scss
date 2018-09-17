@@ -817,6 +817,7 @@ span.flatpickr-weekday {
     width: 100%;
     position: fixed;
     bottom: 0;
+    background-color: #f8f7f9;
 
     @include media-breakpoint-up(xl) {
         border: none;
