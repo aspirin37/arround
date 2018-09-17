@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar px-4 pb-3">
+        <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
             Показано пользователей: {{ shownUsers }} из {{ count }}
         </div>
     </div>
@@ -186,7 +186,7 @@ export default {
                     this.order = this.sorting[field] ? 'lastname_desc' : 'lastname_asc'
                     break
             }
-        }
+        },
     }
 }
 </script>
