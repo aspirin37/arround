@@ -52,35 +52,38 @@
                                      :to="{name: 'User', params: {id: user.idt_user, user }}"
                                      v-for="(user, i) in users"
                                      :key="i">
-                            <div class="d-none d-xl-block col-12 col-xl flex-grow-1">
-                                <span class="d-xl-none">ID: </span>
-                                {{user.idt_user}}
-                            </div>
-                            <div class="col-12 col-xl flex-grow-3 date-column">
-                                <span class="d-xl-none">Зарегистрирован: </span>
-                                {{ user.a_time | parseDate }}
-                            </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <span class="mr-2"
-                                      v-if="user.name">{{user.name}}</span>
-                                <span v-else>Имя неизвестно</span>
-                                <!-- <span class="d-xl-none">ID: {{user.idt_user}}</span> -->
-                            </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <a href="#"
-                                   @click.prevent="clickLink(`tel:${user.phone}`)"
-                                   v-if="user.phone">{{user.phone}}</a>
-                                <span v-if="!user.phone && $mq !== 'sm'">Не указан</span>
-                            </div>
-                            <div class="col-12 col-xl flex-grow-3">
-                                <a href="#"
-                                   @click.prevent="clickLink(`mailto:${user.email}`)"
-                                   v-if="user.email">{{user.email}}</a>
-                                <span v-if="!user.email && $mq !== 'sm'">Не указан</span>
-                            </div>
-                            <div class="d-none d-xl-block col-xl flex-grow-3">
-                                <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }}</span>
-                                <span v-else>-</span>
+                            <div class="d-xl-none col-2"></div>
+                            <div class="col-10 col-xl-12 p-0 flex-row">
+                                <div class="d-none d-xl-block col-12 col-xl flex-grow-1">
+                                    <span class="d-xl-none">ID: </span>
+                                    {{user.idt_user}}
+                                </div>
+                                <div class="col-12 col-xl flex-grow-3 date-column">
+                                    <span class="d-xl-none">Зарегистрирован: </span>
+                                    {{ user.a_time | parseDate }}
+                                </div>
+                                <div class="col-12 col-xl flex-grow-3">
+                                    <span class="mr-2"
+                                          v-if="user.name">{{user.name}}</span>
+                                    <span v-else>Имя неизвестно</span>
+                                    <!-- <span class="d-xl-none">ID: {{user.idt_user}}</span> -->
+                                </div>
+                                <div class="col-12 col-xl flex-grow-3">
+                                    <a href="#"
+                                       @click.prevent="clickLink(`tel:${user.phone}`)"
+                                       v-if="user.phone">{{user.phone}}</a>
+                                    <span v-if="!user.phone && $mq !== 'sm'">Не указан</span>
+                                </div>
+                                <div class="col-12 col-xl flex-grow-3">
+                                    <a href="#"
+                                       @click.prevent="clickLink(`mailto:${user.email}`)"
+                                       v-if="user.email">{{user.email}}</a>
+                                    <span v-if="!user.email && $mq !== 'sm'">Не указан</span>
+                                </div>
+                                <div class="d-none d-xl-block col-xl flex-grow-3">
+                                    <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }}</span>
+                                    <span v-else>-</span>
+                                </div>
                             </div>
                         </router-link>
                         <loader :isScrollLoader="true"
