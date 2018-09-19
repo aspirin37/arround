@@ -56,10 +56,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             template: 'index.html',
             inject: true
         }),
-        new webpack.ProvidePlugin({
-            Vue: ['vue/dist/vue.esm.js', 'default'],
-            moment: 'moment',
-        }),
         // copy custom static assets
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, '../static'),

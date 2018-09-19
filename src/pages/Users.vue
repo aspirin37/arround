@@ -64,19 +64,19 @@
                                 <span class="mr-2"
                                       v-if="user.name">{{user.name}}</span>
                                 <span v-else>Имя неизвестно</span>
-                                <span class="d-xl-none">ID: {{user.idt_user}}</span>
+                                <!-- <span class="d-xl-none">ID: {{user.idt_user}}</span> -->
                             </div>
-                            <div class="d-none d-xl-block col-xl flex-grow-3">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <a href="#"
                                    @click.prevent="clickLink(`tel:${user.phone}`)"
                                    v-if="user.phone">{{user.phone}}</a>
-                                <span v-else>Не указан</span>
+                                <span v-if="!user.phone && $mq !== 'sm'">Не указан</span>
                             </div>
-                            <div class="d-none d-xl-block col-xl flex-grow-3">
+                            <div class="col-12 col-xl flex-grow-3">
                                 <a href="#"
                                    @click.prevent="clickLink(`mailto:${user.email}`)"
                                    v-if="user.email">{{user.email}}</a>
-                                <span v-else>Не указан</span>
+                                <span v-if="!user.email && $mq !== 'sm'">Не указан</span>
                             </div>
                             <div class="d-none d-xl-block col-xl flex-grow-3">
                                 <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }}</span>
@@ -125,9 +125,9 @@ export default {
             sorting: {
                 id_desc: false,
                 lastname_desc: false,
-                reg_desc: false,
+                reg_desc: true,
             },
-            order: 'id_asc',
+            order: 'id_desc',
             datesRangeStart: null,
             datesRangeEnd: null,
         }
