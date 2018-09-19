@@ -54,7 +54,7 @@
                                      :key="i">
                             <div class="d-xl-none col-2 p-0">
                                 <thumbnail :img="user.avatar"
-                                           :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
+                                           :linkClasses="['circle-avatar rounded-circle mr-3 bg-light d-inline-block']"
                                            :thumbClasses="['font-size-0']"></thumbnail>
                             </div>
                             <div class="col-10 col-xl-12 pl-2 pl-xl-0 pr-0 flex-row">
