@@ -2,11 +2,13 @@
     <div>
         <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
             <span class="page-heading">Всего моделей: {{ models.length }}</span>
-            <input type="text"
-                   class="d-none d-xl-block form-control form-control--search bg-white ml-auto"
-                   v-model="searchText"
-                   @keyup="updateSearch"
-                   placeholder="Поиск...">
+            <div class="service-bar__input-wrapper ml-auto">
+                <input type="text"
+                       class="d-none d-xl-block form-control form-control--search bg-white ml-auto"
+                       v-model="searchText"
+                       @keyup="updateSearch"
+                       placeholder="Поиск...">
+            </div>
         </div>
         <div class="page-container">
             <div class="text-center cap"

@@ -9,6 +9,8 @@ import DeclNum from './directives/DeclNum'
 import Thousands from './directives/thousands'
 import checkUser from '@/utils/check-user';
 
+import '@/filters';
+
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueLodash);
@@ -32,6 +34,8 @@ Vue.http.interceptors.push((request, next) => {
         }
     })
 });
+
+moment.locale('ru');
 
 const myApp = new Vue({
     el: '#app',

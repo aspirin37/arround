@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-12 col-xl flex-grow-3 date-column">
                                 <span class="d-xl-none">Зарегистрирован: </span>
-                                -
+                                {{ user.a_time | parseDate }}
                             </div>
                             <div class="col-12 col-xl flex-grow-3">
                                 <span class="mr-2"
