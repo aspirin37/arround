@@ -52,8 +52,12 @@
                                      :to="{name: 'User', params: {id: user.idt_user, user }}"
                                      v-for="(user, i) in users"
                                      :key="i">
-                            <div class="d-xl-none col-2"></div>
-                            <div class="col-10 col-xl-12 p-0 flex-row">
+                            <div class="d-xl-none col-2 p-0">
+                                <thumbnail :img="user.avatar"
+                                           :linkClasses="['circle-avatar circle-avatar--model rounded-circle mr-3 bg-light d-inline-block']"
+                                           :thumbClasses="['font-size-0']"></thumbnail>
+                            </div>
+                            <div class="col-10 col-xl-12 pl-2 pl-xl-0 pr-0 flex-row">
                                 <div class="d-none d-xl-block col-12 col-xl flex-grow-1">
                                     <span class="d-xl-none">ID: </span>
                                     {{user.idt_user}}
