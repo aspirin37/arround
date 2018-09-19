@@ -53,7 +53,7 @@
                                      v-for="(user, i) in users"
                                      :key="i">
                             <div class="d-xl-none col-2 p-0">
-                                <thumbnail :img="user.avatar"
+                                <thumbnail :img="user.avatar || userCap"
                                            :linkClasses="['circle-avatar rounded-circle mr-3 bg-light d-inline-block']"
                                            :thumbClasses="['font-size-0']"></thumbnail>
                             </div>
@@ -110,6 +110,7 @@ import Loader from '@/components/utils/Loader'
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import onScroll from '@/mixins/on-scroll'
+import userCap from '@/assets/user-cap.png'
 export default {
     mixins: [onScroll],
     components: {
@@ -137,6 +138,7 @@ export default {
             order: 'id_desc',
             datesRangeStart: null,
             datesRangeEnd: null,
+            userCap
         }
     },
     computed: {
