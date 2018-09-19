@@ -15,8 +15,16 @@
                     <div class="mb-3">Статус</div>
                     <div><a :href="`tel:${user.phone}`">{{ user.phone }}</a></div>
                     <div class="mb-3"><a :href="`mailto:${user.email}`">{{ user.email }}</a></div>
-                    <div>Дата регистрации: </div>
+                    <div>Дата регистрации:</div>
+                    <div class="mb-2">{{ user.a_time | parseDate }}</div>
                     <div>Последняя активность: </div>
+                    <ul v-if="user.sessions.length">
+                        <li v-for="(it, i) in user.sessions"
+                            :key="i"
+                            v-if="user.sessions.length">
+                            {{ it.a_time | parseDate }}</li>
+                    </ul>
+                    <div v-else>Не зарегистрирована</div>
                 </div>
             </div>
             <user-note-about class="mb-3"

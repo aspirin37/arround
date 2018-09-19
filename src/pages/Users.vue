@@ -29,12 +29,15 @@
             <loader v-if="isPageLoaderShown"></loader>
             <div class="page-table"
                  v-if="count">
-                <div class="d-none d-xl-flex flex-wrap flex-md-nowrap align-items-center px-4 mb-3 position-relative font-weight-bold">
+                <div class="page-table__header">
                     <div class="col flex-grow-1 cursor-pointer"
                          @click="changeSorting('id_desc')">
                         ID <i :class="[this.sorting.id_desc === true ? 'fa-angle-up' : 'fa-angle-down', 'fa ml-1']"></i>
                     </div>
-                    <div class="col flex-grow-3">Дата регистрации</div>
+                    <div class="col flex-grow-3 cursor-pointer"
+                         @click="changeSorting('reg_desc')">
+                        Дата регистрации <i :class="[this.sorting.reg_desc === true ? 'fa-angle-up' : 'fa-angle-down', 'fa ml-1']"></i>
+                    </div>
                     <div class="col flex-grow-3 cursor-pointer"
                          @click="changeSorting('lastname_desc')">
                         Имя <i :class="[this.sorting.lastname_desc === true ? 'fa-angle-up' : 'fa-angle-down', 'fa ml-1']"></i>
@@ -77,7 +80,8 @@
                                 <span v-else>Не указан</span>
                             </div>
                             <div class="d-none d-xl-block col-xl flex-grow-3">
-                                <span class="d-xl-none">Последняя активность: </span>-
+                                <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }}</span>
+                                <span v-else>-</span>
                             </div>
                         </router-link>
                         <loader :isScrollLoader="true"
@@ -122,6 +126,7 @@ export default {
             sorting: {
                 id_desc: false,
                 lastname_desc: false,
+                reg_desc: false,
             },
             order: 'id_asc',
             datesRangeStart: null,
@@ -201,6 +206,9 @@ export default {
                     break;
                 case 'lastname_desc':
                     this.order = this.sorting[field] ? 'lastname_desc' : 'lastname_asc'
+                    break
+                case 'reg_desc':
+                    this.order = this.sorting[field] ? 'id_desc' : 'id_asc'
                     break
             }
         },

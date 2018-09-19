@@ -791,6 +791,21 @@ span.flatpickr-weekday {
 }
 
 .page-table {
+    &__header {
+        position: relative;
+        display: none;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding-left: 1.5rem;
+        padding-right: calc(1.5rem + 16px);
+        margin-bottom: 1rem;
+        font-weight: bold;
+
+        @include media-breakpoint-up(xl) {
+            display: flex;
+        }
+    }
+
     &__body {
         -webkit-overflow-scrolling: touch;
         max-height: calc(100vh - 290px);
