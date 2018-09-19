@@ -9,7 +9,6 @@
             <div class="service-bar__input-wrapper service-bar__input-wrapper--calendar mr-2">
                 <input type="text"
                        class="form-control form-control--search bg-white"
-                       :placeholder="dateInputPlaceholder"
                        id="date-picker">
             </div>
             <div class="service-bar__input-wrapper">
@@ -140,9 +139,6 @@ export default {
         shownUsers() {
             return this.currentPage < this.totalPages ? this.limit * this.currentPage : this.count
         },
-        dateInputPlaceholder() {
-            return this.$mq === 'sm' ? '' : 'Поиск по дате регистрации'
-        }
     },
     mounted() {
         this.getUsers(this.currentPage, true)
@@ -180,7 +176,7 @@ export default {
         updateSearch() {
             clearTimeout(this.searchTimout);
             this.searchTimout = setTimeout(() => {
-                this.getUsers(this.currentPage)
+                this.getUsers(1)
             }, 300);
         },
         onScrollAction() {
