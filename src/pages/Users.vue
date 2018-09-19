@@ -6,15 +6,19 @@
                 Экспорт CSV
                 <i class="dl-excel ml-2"></i>
             </button>
-            <input type="text"
-                   class="form-control form-control--search bg-white mr-2"
-                   placeholder="Поиск по дате регистрации"
-                   id="date-picker">
-            <input type="text"
-                   class="form-control form-control--search bg-white"
-                   v-model="searchText"
-                   @keyup="updateSearch"
-                   placeholder="Поиск...">
+            <div class="service-bar__input-wrapper service-bar__input-wrapper--calendar mr-2">
+                <input type="text"
+                       class="form-control form-control--search bg-white"
+                       :placeholder="dateInputPlaceholder"
+                       id="date-picker">
+            </div>
+            <div class="service-bar__input-wrapper">
+                <input type="text"
+                       class="form-control form-control--search bg-white"
+                       v-model="searchText"
+                       @keyup="updateSearch"
+                       placeholder="Поиск...">
+            </div>
         </div>
         <div class="page-container">
             <div class="text-center cap"
@@ -121,8 +125,7 @@ export default {
             },
             order: 'id_asc',
             datesRangeStart: null,
-            datesRangeEnd: null
-
+            datesRangeEnd: null,
         }
     },
     computed: {
@@ -131,6 +134,9 @@ export default {
         },
         shownUsers() {
             return this.currentPage < this.totalPages ? this.limit * this.currentPage : this.count
+        },
+        dateInputPlaceholder() {
+            return this.$mq === 'sm' ? '' : 'Поиск по дате регистрации'
         }
     },
     mounted() {
