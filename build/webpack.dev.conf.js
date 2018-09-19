@@ -34,9 +34,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         host: HOST || config.dev.host,
         port: PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,
-        overlay: config.dev.errorOverlay ?
-            { warnings: false, errors: true } :
-            false,
+        overlay: config.dev.errorOverlay ? { warnings: false, errors: true } : false,
         publicPath: config.dev.assetsPublicPath,
         proxy: config.dev.proxyTable,
         disableHostCheck: true,
@@ -57,6 +55,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             filename: 'index.html',
             template: 'index.html',
             inject: true
+        }),
+        new webpack.ProvidePlugin({
+            moment: 'moment',
         }),
         // copy custom static assets
         new CopyWebpackPlugin([{
@@ -86,8 +87,7 @@ module.exports = new Promise((resolve, reject) => {
                     ],
                 },
                 onErrors: config.dev.notifyOnErrors ?
-                    utils.createNotifierCallback() :
-                    undefined
+                    utils.createNotifierCallback() : undefined
             }))
 
             resolve(devWebpackConfig)

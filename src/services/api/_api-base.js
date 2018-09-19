@@ -10,9 +10,6 @@ switch (process.env.NODE_ENV) {
     case 'production':
         API_BASE = `https://api.arround.io`;
         break;
-    default:
-        API_BASE = `https://api.arround.io`;
-        break;
 }
 
 export default API_BASE

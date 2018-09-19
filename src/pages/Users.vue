@@ -1,13 +1,17 @@
 <template>
     <div>
-        <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
-            <span class="page-heading">Всего пользователей: {{ count }}</span>
+        <div class="service-bar d-flex flex-wrap align-items-end px-3 py-3 border-bottom">
+            <span class="page-heading d-none d-xl-block">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
                 Экспорт CSV
                 <i class="dl-excel ml-2"></i>
             </button>
             <input type="text"
-                   class="d-none d-xl-block form-control form-control--search bg-white"
+                   class="form-control form-control--search bg-white mr-2"
+                   placeholder="Поиск по дате регистрации"
+                   id="date-picker">
+            <input type="text"
+                   class="form-control form-control--search bg-white"
                    v-model="searchText"
                    @keyup="updateSearch"
                    placeholder="Поиск...">
@@ -84,6 +88,8 @@
     </div>
 </template>
 <script>
+import flatpickr from 'flatpickr';
+import Russian from 'flatpickr/dist/l10n/ru';
 import { clone } from '@/utils/clone'
 import { UsersApi } from '@/services/api'
 import Loader from '@/components/utils/Loader'
@@ -113,7 +119,9 @@ export default {
                 id_desc: false,
                 lastname_desc: false,
             },
-            order: 'id_asc'
+            order: 'id_asc',
+            datesRangeStart: null,
+            datesRangeEnd: null
 
         }
     },
@@ -127,6 +135,7 @@ export default {
     },
     mounted() {
         this.getUsers(this.currentPage, true)
+        this.createDatePickerInstance()
     },
     watch: {
         order() {
@@ -189,6 +198,19 @@ export default {
                     break
             }
         },
+        createDatePickerInstance() {
+            flatpickr('#date-picker', {
+                locale: Russian.ru,
+                mode: "range",
+                dateFormat: this.$mq == 'sm' ? 'd.m.y' : 'd.m.Y',
+                onChange: (selectedDates) => {
+                    if (selectedDates.length === 2) {
+                        this.datesRangeStart = selectedDates[0]
+                        this.datesRangeEnd = selectedDates[1]
+                    }
+                },
+            })
+        }
     }
 }
 </script>
