@@ -808,7 +808,7 @@ span.flatpickr-weekday {
 
     &__body {
         -webkit-overflow-scrolling: touch;
-        max-height: calc(100vh - 300px);
+        max-height: calc(100vh - 310px);
         overflow: auto;
 
         @include media-breakpoint-up(xl) {
@@ -824,7 +824,7 @@ span.flatpickr-weekday {
 }
 
 .chrome-mobile .page-table__body {
-    max-height: calc(100vh - 220px);
+    max-height: calc(100vh - 230px);
 }
 
 .footer-bar {
