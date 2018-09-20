@@ -123,6 +123,7 @@ export default {
         Thumbnail,
         ThumbnailsOuter,
     },
+    // 
     data() {
         return {
             users: [],
