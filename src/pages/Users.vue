@@ -251,6 +251,7 @@ export default {
     @media (min-width: 1200px) {
         order: unset;
         padding-right: 15px;
+        // 
 
         & span {
             font-size: inherit;
