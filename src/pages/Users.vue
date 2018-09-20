@@ -89,7 +89,7 @@
                                     <span v-if="!user.email && $mq !== 'sm'">Не указан</span>
                                 </div>
                                 <div class="d-none d-xl-block col-xl flex-grow-3">
-                                    <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }}</span>
+                                    <span v-if="user.sessions.length">{{ user.sessions[0].a_time | parseDate }} <i class="fab fa-apple text-apple ml-2"></i></span>
                                     <span v-else>-</span>
                                 </div>
                             </div>
@@ -242,17 +242,15 @@ export default {
        scoped>
 .date-column {
     order: 2;
+    padding-right: 0;
 
     & span {
         font-size: 11px;
     }
 
-    &__link:hover {
-        text-decoration: none;
-    }
-
     @media (min-width: 1200px) {
         order: unset;
+        padding-right: 15px;
 
         & span {
             font-size: inherit;

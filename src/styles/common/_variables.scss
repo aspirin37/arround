@@ -7,6 +7,7 @@ $gray-600: #666666;
 $gray-700: #555555;
 $gray-800: #444444;
 $gray-900: #333333;
+$aplle: #8e8e93;
 $black: #000000;
 $headings-color: $gray-900;
 $text-muted: $gray-600;
@@ -29,6 +30,7 @@ $theme-colors: map-merge(("primary": $primary,
 "light": $light,
 "dark": $dark,
 "theme": $main-color,
+"apple": $aplle,
 "mesto": $mesto-color), $theme-colors);
 $link-color: #337ab7;
 $navbar-height: 60px;

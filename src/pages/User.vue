@@ -27,7 +27,9 @@
                         <li v-for="(it, i) in user.sessions"
                             :key="i"
                             v-if="user.sessions.length && i < 5">
-                            {{ it.a_time | parseDate }}</li>
+                            {{ it.a_time | parseDate }}
+                            <i class="fab fa-apple text-apple ml-2"></i>
+                        </li>
                     </ul>
                     <div v-else>Не зарегистрирована</div>
                 </div>
