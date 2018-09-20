@@ -46,6 +46,7 @@
                     <div class="col flex-grow-3">Последняя активность</div>
                 </div>
                 <div class="page-table__body"
+                     ref="table-body"
                      @scroll="onScroll($event, onScrollAction)">
                     <div class="page-table__wrapper">
                         <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 mb-2 cursor-pointer rounded d-flex flex-wrap link-reset"
@@ -191,6 +192,12 @@ export default {
         },
         onScrollAction() {
             this.getUsers(this.currentPage + 1, false, true)
+            let options = {
+                scrollTop: this.$refs['table-body'].scrollTop
+            }
+
+            this.$router.push({ query: options })
+            console.log(this.$router.query)
         },
         clickLink(url) {
             let link = document.createElement('a');

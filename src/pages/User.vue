@@ -4,7 +4,7 @@
         <div class="d-flex flex-column current-shadow rounded bg-white d-flex col-12 col-xl-6 p-4"
              v-if="user">
             <div class="d-flex mb-3">
-                <thumbnails-outer class="mb-3">
+                <thumbnails-outer class="mb-3 mr-xl-3">
                     <thumbnail :img="user.avatar || userCap"
                                :thumb="user.avatar || userCap"
                                :linkClasses="['circle-avatar circle-avatar--user-info rounded-circle mr-3 bg-light d-inline-block']"
@@ -21,7 +21,7 @@
                     <ul v-if="user.sessions.length">
                         <li v-for="(it, i) in user.sessions"
                             :key="i"
-                            v-if="user.sessions.length">
+                            v-if="user.sessions.length && i < 5">
                             {{ it.a_time | parseDate }}</li>
                     </ul>
                     <div v-else>Не зарегистрирована</div>
@@ -88,3 +88,14 @@ export default {
     }
 }
 </script>
+<style lang="scss"
+       scoped>
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+</style>

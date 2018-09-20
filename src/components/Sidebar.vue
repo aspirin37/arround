@@ -39,8 +39,4 @@ export default {
 </script>
 <style lang="scss"
        scoped>
-.profile-sidebar {
-    position: fixed;
-    z-index: 1000;
-}
 </style>

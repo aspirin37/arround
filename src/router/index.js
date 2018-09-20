@@ -10,7 +10,7 @@ import User from '@/pages/User'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
         if(savedPosition) {
@@ -54,3 +54,9 @@ export default new Router({
         name: '404',
     }, ]
 })
+
+router.afterEach((to, from) => {
+    console.log(to)
+})
+
+export default router
