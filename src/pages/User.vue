@@ -20,7 +20,7 @@
                     <div>Дата регистрации:</div>
                     <div class="mb-2">{{ user.a_time | parseDate }}
                         <a href="#"
-                           class="fab fa-vk ml-2"></a>
+                           class="social-link fab fa-vk ml-2"></a>
                     </div>
                     <div>Последняя активность: </div>
                     <ul v-if="user.sessions.length">

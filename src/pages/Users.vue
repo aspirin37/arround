@@ -65,10 +65,10 @@
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3 date-column">
                                     <span class="d-xl-none">Зарегистрирован:</span>
-                                    {{ user.a_time | parseDate }}
+                                    <span>{{ user.a_time | parseDate }}</span>
                                     <a href="#"
                                        @click.prevent="clickLink('#')"
-                                       class="fab fa-vk ml-2"></a>
+                                       class="social-link fab fa-vk ml-2"></a>
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3">
                                     <span class="mr-2"
@@ -123,7 +123,6 @@ export default {
         Thumbnail,
         ThumbnailsOuter,
     },
-    // 
     data() {
         return {
             users: [],
@@ -243,11 +242,21 @@ export default {
        scoped>
 .date-column {
     order: 2;
-    font-size: 11px;
+
+    & span {
+        font-size: 11px;
+    }
+
+    &__link:hover {
+        text-decoration: none;
+    }
 
     @media (min-width: 1200px) {
         order: unset;
-        font-size: inherit;
+
+        & span {
+            font-size: inherit;
+        }
     }
 }
 </style>
