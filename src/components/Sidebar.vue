@@ -4,13 +4,13 @@
             <ul class="nav flex-md-column nav-pills text-center text-md-left py-md-2 justify-content-start flex-nowrap overflow-x">
                 <router-link tag="li"
                              :to="{path: it.path}"
-                             class="nav-item relative py-2 py-md-0"
+                             class="nav-item relative"
                              active-class="active"
                              v-for="(it, i) in nav"
                              :key="i">
                     <a class="nav-link d-flex align-items-center py-3">
                         <span :class="`tab-icon tab-icon--${it.icon}`"></span>
-                        <span class="d-none d-md-inline-block profile-nav__text">{{ it.name }}</span>
+                        <span class="d-none d-md-block profile-nav__text">{{ it.name }}</span>
                     </a>
                 </router-link>
             </ul>
@@ -37,3 +37,10 @@ export default {
     },
 }
 </script>
+<style lang="scss"
+       scoped>
+.profile-sidebar {
+    position: fixed;
+    z-index: 1000;
+}
+</style>

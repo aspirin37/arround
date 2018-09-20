@@ -7,7 +7,9 @@
             <div class="w-100 overflow-hidden">
                 <transition name="page"
                             mode="out-in">
-                    <router-view />
+                    <keep-alive include="Users">
+                        <router-view />
+                    </keep-alive>
                 </transition>
             </div>
         </main>

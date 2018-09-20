@@ -30,21 +30,37 @@
             <user-note-about class="mb-3"
                              :currentNote="''"
                              :title="'Заметка о пользователе'"></user-note-about>
+            <div>
+                <button class="btn btn-outline-danger mr-2 align-top mb-2"
+                        @click="toggleModal('ban-client')">Заблокировать</button>
+            </div>
         </div>
+        <modal modalSize="modal-xs"
+               modalTitle="Вы уверены?"
+               ref="ban-client">
+            <div slot="modalBody">
+                <button class="btn btn-theme w-100"
+                        @click="blockUser"
+                        type="button">Да</button>
+            </div>
+        </modal>
     </div>
 </template>
 <script>
 import Thumbnail from '@/components/utils/Thumbnail'
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import Loader from '@/components/utils/Loader'
+import Modal from '@/components/utils/Modal'
 import UserNoteAbout from '@/components/users/UserNoteAbout'
 import userCap from '@/assets/user-cap.png'
+
 export default {
     components: {
         Thumbnail,
         ThumbnailsOuter,
         Loader,
-        UserNoteAbout
+        UserNoteAbout,
+        Modal
     },
     data() {
         return {
@@ -53,8 +69,22 @@ export default {
             userCap
         }
     },
-    created() {
-        console.log(this.$route.params.user)
+    methods: {
+        toggleModal(id) {
+            this.$refs[id].newIsOpen = !this.$refs[id].newIsOpen
+        },
+        blockUser() {
+            let options = {
+                // idt_user: this.clientId,
+                // idc_client_status: 3
+            }
+            //   this.$http.put(api.API_LINK + 'clients', options).then(() => {
+            this.toggleModal('ban-client')
+            // this.getClient()
+            //   }, response => {
+            //     this.errorMessage = response.data.message
+            //   })
+        }
     }
 }
 </script>

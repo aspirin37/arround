@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="service-bar d-flex flex-wrap align-items-end px-3 py-3 border-bottom">
+        <div class="service-bar d-flex flex-wrap align-items-end px-3 px-xl-4 py-3 border-bottom">
             <span class="page-heading d-none d-xl-block">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
                 Экспорт CSV
@@ -112,6 +112,7 @@ import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import onScroll from '@/mixins/on-scroll'
 import userCap from '@/assets/user-cap.png'
 export default {
+    name: 'Users',
     mixins: [onScroll],
     components: {
         Loader,
