@@ -103,7 +103,9 @@
             </div>
         </div>
         <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
-            Показано: {{ shownUsers }} из {{ count }}
+            <span>Показано: {{ shownUsers }} из {{ count }}</span>
+            <a href="#"
+               class="d-flex d-xl-none">Скачать CSV<i class="dl-excel ml-2"></i></a>
         </div>
     </div>
 </template>

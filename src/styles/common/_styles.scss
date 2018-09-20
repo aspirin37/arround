@@ -828,6 +828,8 @@ span.flatpickr-weekday {
 }
 
 .footer-bar {
+    display: flex;
+    justify-content: space-between;
     border-top: 1px solid #dee2e6;
     width: 100%;
     position: fixed;
