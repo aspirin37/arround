@@ -3,20 +3,25 @@
         <loader v-if="isLoaderShown"></loader>
         <div class="d-flex flex-column current-shadow rounded bg-white d-flex col-12 col-xl-6 p-4"
              v-if="user">
-            <div class="d-flex mb-3">
-                <thumbnails-outer class="mb-3 mr-xl-3">
+            <div class="d-flex justify-content-start flex-wrap mb-3">
+                <thumbnails-outer class="mb-3 mr-xl-4">
                     <thumbnail :img="user.avatar || userCap"
                                :thumb="user.avatar || userCap"
                                :linkClasses="['circle-avatar circle-avatar--user-info rounded-circle mr-3 bg-light d-inline-block']"
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
-                <div>
+                <div class="mr-4 pr-4">
                     <h4 class="mb-0 mt-2">{{user.name}}</h4>
                     <div class="mb-3">Статус</div>
                     <div><a :href="`tel:${user.phone}`">{{ user.phone }}</a></div>
                     <div class="mb-3"><a :href="`mailto:${user.email}`">{{ user.email }}</a></div>
+                </div>
+                <div>
                     <div>Дата регистрации:</div>
-                    <div class="mb-2">{{ user.a_time | parseDate }}</div>
+                    <div class="mb-2">{{ user.a_time | parseDate }}
+                        <a href="#"
+                           class="fab fa-vk ml-2"></a>
+                    </div>
                     <div>Последняя активность: </div>
                     <ul v-if="user.sessions.length">
                         <li v-for="(it, i) in user.sessions"

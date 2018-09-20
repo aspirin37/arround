@@ -64,8 +64,11 @@
                                     {{user.idt_user}}
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3 date-column">
-                                    <span class="d-xl-none">Зарегистрирован: </span>
+                                    <span class="d-xl-none">Зарегистрирован:</span>
                                     {{ user.a_time | parseDate }}
+                                    <a href="#"
+                                       @click.prevent="clickLink('#')"
+                                       class="fab fa-vk ml-2"></a>
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3">
                                     <span class="mr-2"
@@ -192,12 +195,6 @@ export default {
         },
         onScrollAction() {
             this.getUsers(this.currentPage + 1, false, true)
-            let options = {
-                scrollTop: this.$refs['table-body'].scrollTop
-            }
-
-            this.$router.push({ query: options })
-            console.log(this.$router.query)
         },
         clickLink(url) {
             let link = document.createElement('a');
