@@ -72,7 +72,9 @@
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3">
                                     <span class="mr-2"
-                                          v-if="user.name">{{user.name}}</span>
+                                          v-if="user.name">{{user.name}}
+                                        <small class="d-xl-none">(#{{user.idt_user}})</small>
+                                    </span>
                                     <span v-else>Имя неизвестно</span>
                                     <!-- <span class="d-xl-none">ID: {{user.idt_user}}</span> -->
                                 </div>
