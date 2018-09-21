@@ -16,6 +16,7 @@
                            v-model="email"
                            placeholder="E-mail"
                            autocomplete="email"
+                           ref="email"
                            required>
                 </div>
                 <div class="form-group relative">
@@ -24,6 +25,7 @@
                            class="form-control"
                            v-model="pass"
                            placeholder="Пароль"
+                           ref="pass"
                            required>
                     <a href="#"
                        class="show-password"
@@ -55,6 +57,9 @@ export default {
             showPassword: false
         };
     },
+    mounted() {
+        this.fixChromePassAutofill()
+    },
     methods: {
         signIn() {
             let options = {
@@ -66,6 +71,14 @@ export default {
             }).catch(err => {
                 this.errorMessage = 'Неверные данные';
             });
+        },
+        fixChromePassAutofill() {
+            setInterval(() => {
+                let email = this.$refs.email.value;
+                let pass = this.$refs.pass.value
+                if (email != '' && this.email != email) this.email = email;
+                if (pass != '' && this.pass != pass) this.pass = pass;
+            }, 50);
         }
     }
 };
