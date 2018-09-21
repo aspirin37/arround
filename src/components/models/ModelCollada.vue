@@ -36,8 +36,10 @@ export default {
                     scene.add(avatar);
                 });
                 //
-                var gridHelper = new THREE.GridHelper(10, 20, 0x000000, 0x000000);
-                scene.add(gridHelper);
+                if (this.$mq !== 'sm') {
+                    var gridHelper = new THREE.GridHelper(10, 20, 0x000000, 0x000000);
+                    scene.add(gridHelper);
+                }
                 //
                 var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
                 scene.add(ambientLight);
