@@ -21,27 +21,27 @@
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
             </div>
-            <div class="d-flex flex-column mr-auto">
+            <div class="d-flex flex-column mb-3 mb-xl-0 mr-4">
                 <h4>Редактирование:</h4>
-                <div class="mb-3">
-                    <button class="btn btn-sm btn-outline-theme mr-2"
+                <div class="mb-2">
+                    <button class="btn w-100 btn-sm btn-outline-theme"
                             @click="clickFileUpload('image-upload')">
                         Заменить превью
                     </button>
-                    <span>{{ newImageFile.name }}</span>
+                    <div class="pt-1 pl-1">{{ newImageFile.name }}</div>
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-sm btn-outline-theme mr-2"
+                <div class="mb-2">
+                    <button class="btn w-100 btn-sm btn-outline-theme"
                             @click="clickFileUpload('zip-upload')">Заменить zip-архив</button>
-                    <span>{{ newZipFile.name }}</span>
+                    <div class="pt-1 pl-1">{{ newZipFile.name }}</div>
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-sm btn-outline-theme mr-2"
+                <div class="mb-2">
+                    <button class="btn w-100 btn-sm btn-outline-theme"
                             @click="clickFileUpload('sfb-upload')">Заменить sfb-архив</button>
-                    <span>{{ newSfbFile.name }}</span>
+                    <div class="pt-1 pl-1">{{ newSfbFile.name }}</div>
                 </div>
                 <div>
-                    <button class="btn btn-sm btn-outline-theme"
+                    <button class="btn w-100 btn-sm btn-outline-theme"
                             @click="isModelShown = true">Смотреть 3D</button>
                 </div>
             </div>
@@ -127,74 +127,7 @@ export default {
     created() {
         this.setDefaultValues()
     },
-    mounted() {
-        // this.createModelInstance()
-    },
     methods: {
-        // createModelInstance() {
-        //     if (!Detector.webgl) Detector.addGetWebGLMessage();
-        //     var container, stats, clock, controls;
-        //     var camera, scene, renderer, mixer;
-        //     init();
-        //     animate();
-
-        //     function init() {
-        //         container = document.getElementById('my-scene');
-        //         camera = new THREE.PerspectiveCamera(25, 500 / 500, 1, 10000);
-        //         camera.position.set(15, 10, -15);
-        //         scene = new THREE.Scene();
-        //         clock = new THREE.Clock();
-        //         // collada
-        //         var loader = new THREE.ColladaLoader();
-        //         loader.load('https://devarapi.a3technology.ru/model/66/stormtrooper.dae', function(collada) {
-        //             var animations = collada.animations;
-        //             var avatar = collada.scene;
-        //             mixer = new THREE.AnimationMixer(avatar);
-        //             var action = mixer.clipAction(animations[0]).play();
-        //             scene.add(avatar);
-        //         });
-        //         //
-        //         var gridHelper = new THREE.GridHelper(10, 20);
-        //         scene.add(gridHelper);
-        //         //
-        //         var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-        //         scene.add(ambientLight);
-        //         var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        //         directionalLight.position.set(1, 1, -1);
-        //         scene.add(directionalLight);
-        //         //
-        //         renderer = new THREE.WebGLRenderer({ antialias: true });
-        //         renderer.setPixelRatio(window.devicePixelRatio);
-        //         renderer.setSize(500, 500);
-        //         container.appendChild(renderer.domElement);
-        //         //
-        //         controls = new THREE.OrbitControls(camera, renderer.domElement);
-        //         controls.target.set(0, 2, 0);
-        //         controls.update();
-        //         //
-        //         window.addEventListener('resize', onWindowResize, false);
-        //     }
-
-        //     function onWindowResize() {
-        //         camera.aspect = 500 / 500;
-        //         camera.updateProjectionMatrix();
-        //         renderer.setSize(500, 500);
-        //     }
-
-        //     function animate() {
-        //         requestAnimationFrame(animate);
-        //         render();
-        //     }
-
-        //     function render() {
-        //         var delta = clock.getDelta();
-        //         if (mixer !== undefined) {
-        //             mixer.update(delta);
-        //         }
-        //         renderer.render(scene, camera);
-        //     }
-
-        // },
         clickFileUpload(id) {
             this.$refs[id].click()
         },
