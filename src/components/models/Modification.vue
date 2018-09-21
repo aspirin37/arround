@@ -64,8 +64,10 @@
             <button class="btn btn-sm btn-outline-secondary"
                     @click="setDefaultValues">Сбросить</button>
         </div>
+        <!-- <keep-alive> -->
         <modelCollada @close-model="isModelShown = false"
                       v-if="isModelShown" />
+        <!-- </keep-alive> -->
         <div class="d-none">
             <input type="file"
                    ref="zip-upload"

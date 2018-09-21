@@ -14,6 +14,7 @@ export default {
     },
     methods: {
         createModelInstance() {
+            let self = this
             if (!Detector.webgl) Detector.addGetWebGLMessage();
             var container, stats, clock, controls;
             var camera, scene, renderer, mixer;
@@ -36,7 +37,7 @@ export default {
                     scene.add(avatar);
                 });
                 //
-                if (this.$mq !== 'sm') {
+                if (self.$mq !== 'sm') {
                     var gridHelper = new THREE.GridHelper(10, 20, 0x000000, 0x000000);
                     scene.add(gridHelper);
                 }
