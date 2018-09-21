@@ -26,7 +26,7 @@
                         <div class="col">Имя</div>
                         <div class="col">ID</div>
                         <div class="col text-lg-center">Кол-во модификаций</div>
-                        <div class="col text-lg-center">Действия</div>
+                        <!-- <div class="col text-lg-center">Действия</div> -->
                     </div>
                 </div>
                 <div class="page-table__body">
@@ -53,10 +53,10 @@
                                 <div class="d-none d-lg-block col-lg text-lg-center">
                                     {{ model.modifications.length }}
                                 </div>
-                                <div class="col-12 col-lg text-lg-center">
+                                <!-- <div class="col-12 col-lg text-lg-center">
                                     <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
                                             @click.prevent>Удалить</button>
-                                </div>
+                                </div> -->
                             </div>
                         </router-link>
                     </div>

@@ -21,7 +21,7 @@
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
             </div>
-            <div class="d-flex flex-column mb-3 mb-xl-0 mr-4">
+            <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
                 <h4>Редактирование:</h4>
                 <div class="mb-2">
                     <button class="btn w-100 btn-sm btn-outline-theme"
@@ -40,21 +40,39 @@
                             @click="clickFileUpload('sfb-upload')">Заменить sfb-архив</button>
                     <div class="pt-1 pl-1">{{ newSfbFile.name }}</div>
                 </div>
-                <div>
-                    <button class="btn w-100 btn-sm btn-outline-theme"
-                            @click="isModelShown = true">Смотреть 3D</button>
+                <div class="d-flex flex-xl-column mb-2">
+                    <label class="custom-check d-block mr-4 mr-xl-0 mb-2">
+                        <input type="checkbox"
+                               class="custom-check__input">
+                        <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
+                        Есть анимация
+                    </label>
+                    <label class="custom-check d-block">
+                        <input type="checkbox"
+                               class="custom-check__input">
+                        <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
+                        Есть звук
+                    </label>
                 </div>
             </div>
-            <div class="d-flex flex-column">
-                <h4>Скачать файлы:</h4>
+            <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
+                <h4>Скачать:</h4>
                 <a class="btn btn-sm btn-outline-theme mr-2 mb-2"
                    :href="modification.url_archive">
-                    <i class="fa fa-download mr-2"></i> ZIP <span class="text-secondary">- 0кб</span>
+                    <i class="fa fa-download mr-2"></i> ZIP
+                    <span class="text-secondary">- 0кб</span>
                 </a>
                 <a class="btn btn-sm btn-outline-theme mr-2"
                    :href="modification.url_sfb">
-                    <i class="fa fa-download mr-2"></i> SFB <span class="text-secondary">- 0кб</span>
+                    <i class="fa fa-download mr-2"></i> SFB
+                    <span class="text-secondary">- 0кб</span>
                 </a>
+            </div>
+            <div class="d-flex flex-column">
+                <h4>Действия:</h4>
+                <button class="btn w-100 btn-sm btn-outline-success mb-2">Активировать</button>
+                <button class="btn w-100 btn-sm btn-outline-theme mb-2"
+                        @click="isModelShown = true">Смотреть 3D</button>
             </div>
         </div>
         <div class="d-flex align-items-end mt-4"
@@ -64,10 +82,10 @@
             <button class="btn btn-sm btn-outline-secondary"
                     @click="setDefaultValues">Сбросить</button>
         </div>
-        <!-- <keep-alive> -->
-        <modelCollada @close-model="isModelShown = false"
-                      v-if="isModelShown" />
-        <!-- </keep-alive> -->
+        <keep-alive>
+            <modelCollada @close-model="isModelShown = false"
+                          v-if="isModelShown" />
+        </keep-alive>
         <div class="d-none">
             <input type="file"
                    ref="zip-upload"
@@ -84,11 +102,11 @@
     </div>
 </template>
 <script>
-import { ModelApi } from '@/services/api'
-import { clone } from '@/utils/clone'
-import Thumbnail from '../utils/Thumbnail'
-import ThumbnailsOuter from '../utils/ThumbnailsOuter'
-import modelCollada from './ModelCollada'
+import { ModelApi } from '@/services/api';
+import { clone } from '@/utils/clone';
+import Thumbnail from '../utils/Thumbnail';
+import ThumbnailsOuter from '../utils/ThumbnailsOuter';
+import modelCollada from './ModelCollada';
 export default {
     props: ['modification'],
     components: {
@@ -105,33 +123,33 @@ export default {
             defaultFileState: {
                 name: '',
                 data: null,
-                src: null,
+                src: null
             },
             isSubmitShown: false,
             isNameInputShown: false,
             isSubmitDisabled: false,
-            isModelShown: false,
-        }
+            isModelShown: false
+        };
     },
     computed: {
         previewSrc() {
-            return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : this.modification.url_icon
+            return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : this.modification.url_icon;
         }
     },
     watch: {
         modification: {
             handler: function() {
-                this.setDefaultValues()
+                this.setDefaultValues();
             },
             deep: true
         }
     },
     created() {
-        this.setDefaultValues()
+        this.setDefaultValues();
     },
     methods: {
         clickFileUpload(id) {
-            this.$refs[id].click()
+            this.$refs[id].click();
         },
         uploadFile(id, evt) {
             const file = this.$refs[id].files[0];
@@ -153,49 +171,52 @@ export default {
                         this.newImageFile.data = file;
                         break;
                 }
-                this.isSubmitShown = true
+                this.isSubmitShown = true;
             };
 
             reader.readAsDataURL(file);
         },
         getFileName(file) {
-            return this.modification[file].substr(this.modification[file].lastIndexOf('/') + 1)
+            return this.modification[file].substr(this.modification[file].lastIndexOf('/') + 1);
         },
         showNameInput() {
-            this.isNameInputShown = true
-            this.isSubmitShown = true
+            this.isNameInputShown = true;
+            this.isSubmitShown = true;
             setTimeout(() => {
-                this.$refs['name-input'].focus()
-            }, 1)
+                this.$refs['name-input'].focus();
+            }, 1);
         },
         setDefaultValues() {
-            this.newZipFile = clone(this.defaultFileState)
-            this.newSfbFile = clone(this.defaultFileState)
-            this.newImageFile = clone(this.defaultFileState)
-            this.newModificationName = this.modification.name || ''
-            this.isNameInputShown = false
-            this.isSubmitShown = false
+            this.newZipFile = clone(this.defaultFileState);
+            this.newSfbFile = clone(this.defaultFileState);
+            this.newImageFile = clone(this.defaultFileState);
+            this.newModificationName = this.modification.name || '';
+            this.isNameInputShown = false;
+            this.isSubmitShown = false;
             document.querySelectorAll('input[type=file]').forEach(it => {
-                it.value = ""
-            })
+                it.value = '';
+            });
         },
         submitChanges() {
-            this.isSubmitDisabled = true
-            let formData = new FormData()
+            this.isSubmitDisabled = true;
+            let formData = new FormData();
             formData.append('idt_model_modif', this.modification.idt_model_modif);
             if (this.newModificationName !== null) formData.append('name', this.newModificationName);
             if (this.newImageFile.data) formData.append('image', this.newImageFile.data);
             if (this.newZipFile.data) formData.append('archive', this.newZipFile.data);
             if (this.newSfbFile.data) formData.append('sfb', this.newSfbFile.data);
 
-            this.$http.put(ModelApi.updateModification, formData).then(() => {
-                this.$parent.$emit('update-model')
-            }).catch(err => {
-                this.isSubmitDisabled = false
-            });
+            this.$http
+                .put(ModelApi.updateModification, formData)
+                .then(() => {
+                    this.$parent.$emit('update-model');
+                })
+                .catch(err => {
+                    this.isSubmitDisabled = false;
+                });
         }
     }
-}
+};
 </script>
 <style lang="scss"
        scoped>
