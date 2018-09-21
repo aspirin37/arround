@@ -21,36 +21,40 @@
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
             </div>
-            <div class="d-flex flex-column">
-                <h4 class="pl-4 mb-2">Превью:</h4>
+            <div class="d-flex flex-column mr-auto">
+                <h4>Редактирование:</h4>
                 <div class="mb-3">
-                    <button class="btn btn--dl btn-sm btn-link mr-auto mr-2"
-                            disabled>
-                        image.png
+                    <button class="btn btn-sm btn-outline-theme mr-2"
+                            @click="clickFileUpload('image-upload')">
+                        Заменить превью
                     </button>
-                    <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickFileUpload('image-upload')"></i>
                     <span>{{ newImageFile.name }}</span>
                 </div>
-                <h4 class="pl-4 mb-3">Файлы:</h4>
-                <div>
-                    <a class="btn btn--dl btn-sm btn-link mr-2 mb-2"
-                       :href="modification.url_archive">
-                        <i class="fa fa-download mr-2"></i> zip
-                    </a>
-                    <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickFileUpload('zip-upload')"></i>
+                <div class="mb-3">
+                    <button class="btn btn-sm btn-outline-theme mr-2"
+                            @click="clickFileUpload('zip-upload')">Заменить zip-архив</button>
                     <span>{{ newZipFile.name }}</span>
                 </div>
-                <div>
-                    <a class="btn btn--dl btn-sm btn-link mr-2"
-                       :href="modification.url_sfb">
-                        <i class="fa fa-download mr-2"></i> sfb
-                    </a>
-                    <i class="btn-link mr-2 fa fa-edit cursor-pointer"
-                       @click="clickFileUpload('sfb-upload')"></i>
+                <div class="mb-3">
+                    <button class="btn btn-sm btn-outline-theme mr-2"
+                            @click="clickFileUpload('sfb-upload')">Заменить sfb-архив</button>
                     <span>{{ newSfbFile.name }}</span>
                 </div>
+                <div>
+                    <button class="btn btn-sm btn-outline-theme"
+                            @click="isModelShown = true">Смотреть 3D</button>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <h4>Скачать файлы:</h4>
+                <a class="btn btn-sm btn-outline-theme mr-2 mb-2"
+                   :href="modification.url_archive">
+                    <i class="fa fa-download mr-2"></i> ZIP <span class="text-secondary">- 0кб</span>
+                </a>
+                <a class="btn btn-sm btn-outline-theme mr-2"
+                   :href="modification.url_sfb">
+                    <i class="fa fa-download mr-2"></i> SFB <span class="text-secondary">- 0кб</span>
+                </a>
             </div>
         </div>
         <div class="d-flex align-items-end mt-4"
@@ -60,6 +64,8 @@
             <button class="btn btn-sm btn-outline-secondary"
                     @click="setDefaultValues">Сбросить</button>
         </div>
+        <modelCollada @close-model="isModelShown = false"
+                      v-if="isModelShown" />
         <div class="d-none">
             <input type="file"
                    ref="zip-upload"
@@ -80,11 +86,13 @@ import { ModelApi } from '@/services/api'
 import { clone } from '@/utils/clone'
 import Thumbnail from '../utils/Thumbnail'
 import ThumbnailsOuter from '../utils/ThumbnailsOuter'
+import modelCollada from './ModelCollada'
 export default {
     props: ['modification'],
     components: {
         Thumbnail,
         ThumbnailsOuter,
+        modelCollada
     },
     data() {
         return {
@@ -100,6 +108,7 @@ export default {
             isSubmitShown: false,
             isNameInputShown: false,
             isSubmitDisabled: false,
+            isModelShown: false,
         }
     },
     computed: {
@@ -118,7 +127,74 @@ export default {
     created() {
         this.setDefaultValues()
     },
+    mounted() {
+        // this.createModelInstance()
+    },
     methods: {
+        // createModelInstance() {
+        //     if (!Detector.webgl) Detector.addGetWebGLMessage();
+        //     var container, stats, clock, controls;
+        //     var camera, scene, renderer, mixer;
+        //     init();
+        //     animate();
+
+        //     function init() {
+        //         container = document.getElementById('my-scene');
+        //         camera = new THREE.PerspectiveCamera(25, 500 / 500, 1, 10000);
+        //         camera.position.set(15, 10, -15);
+        //         scene = new THREE.Scene();
+        //         clock = new THREE.Clock();
+        //         // collada
+        //         var loader = new THREE.ColladaLoader();
+        //         loader.load('https://devarapi.a3technology.ru/model/66/stormtrooper.dae', function(collada) {
+        //             var animations = collada.animations;
+        //             var avatar = collada.scene;
+        //             mixer = new THREE.AnimationMixer(avatar);
+        //             var action = mixer.clipAction(animations[0]).play();
+        //             scene.add(avatar);
+        //         });
+        //         //
+        //         var gridHelper = new THREE.GridHelper(10, 20);
+        //         scene.add(gridHelper);
+        //         //
+        //         var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        //         scene.add(ambientLight);
+        //         var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        //         directionalLight.position.set(1, 1, -1);
+        //         scene.add(directionalLight);
+        //         //
+        //         renderer = new THREE.WebGLRenderer({ antialias: true });
+        //         renderer.setPixelRatio(window.devicePixelRatio);
+        //         renderer.setSize(500, 500);
+        //         container.appendChild(renderer.domElement);
+        //         //
+        //         controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //         controls.target.set(0, 2, 0);
+        //         controls.update();
+        //         //
+        //         window.addEventListener('resize', onWindowResize, false);
+        //     }
+
+        //     function onWindowResize() {
+        //         camera.aspect = 500 / 500;
+        //         camera.updateProjectionMatrix();
+        //         renderer.setSize(500, 500);
+        //     }
+
+        //     function animate() {
+        //         requestAnimationFrame(animate);
+        //         render();
+        //     }
+
+        //     function render() {
+        //         var delta = clock.getDelta();
+        //         if (mixer !== undefined) {
+        //             mixer.update(delta);
+        //         }
+        //         renderer.render(scene, camera);
+        //     }
+
+        // },
         clickFileUpload(id) {
             this.$refs[id].click()
         },
@@ -199,6 +275,10 @@ export default {
 h2::first-letter,
 h4::first-letter {
     text-transform: uppercase
+}
+
+a:hover span {
+    color: white !important;
 }
 
 // dash {
