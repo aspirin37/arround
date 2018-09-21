@@ -205,10 +205,10 @@ export default {
     }
 }
 
-h2::first-letter,
-h4::first-letter {
-    text-transform: uppercase
-}
+// h2::first-letter,
+// h4::first-letter {
+//     text-transform: uppercase
+// }
 
 a:hover span {
     color: white !important;
