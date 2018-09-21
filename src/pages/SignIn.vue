@@ -60,6 +60,9 @@ export default {
     mounted() {
         this.fixChromePassAutofill()
     },
+    destroyed() {
+        clearInterval(this.timer)
+    },
     methods: {
         signIn() {
             let options = {
@@ -73,9 +76,9 @@ export default {
             });
         },
         fixChromePassAutofill() {
-            setInterval(() => {
-                let email = this.$refs.email.value;
-                let pass = this.$refs.pass.value
+            this.timer = setInterval(() => {
+                let email = this.$refs['email'].value;
+                let pass = this.$refs['pass'].value
                 if (email != '' && this.email != email) this.email = email;
                 if (pass != '' && this.pass != pass) this.pass = pass;
             }, 50);
