@@ -9,6 +9,7 @@
                        @keyup="updateSearch"
                        placeholder="Поиск...">
             </div>
+            <button class="btn btn-orange ml-2">Добавить модель</button>
         </div>
         <div class="page-container">
             <div class="text-center cap"
@@ -115,7 +116,7 @@ export default {
 </style>
 <style lang="scss"
        scoped>
-.btn {
+.page-table .btn {
     width: 100px;
 }
 </style>
