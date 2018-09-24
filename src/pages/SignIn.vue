@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-theme btn-block"
-                            type="submit">Войти</button>
+                            type="submit"><span class="btn-loader"></span>Войти</button>
                 </div>
                 <span class="text-danger d-block text-center">{{errorMessage}}</span>
             </form>
@@ -54,7 +54,8 @@ export default {
             email: '',
             pass: '',
             errorMessage: '',
-            showPassword: false
+            showPassword: false,
+            isLoaderShown: false,
         };
     },
     mounted() {
@@ -69,10 +70,13 @@ export default {
                 email: this.email,
                 password: this.pass
             };
+            this.isLoaderShown = true
             this.$http.post(AdminApi.signIn, options).then(() => {
                 this.$router.push('/users');
+                this.isLoaderShown = false
             }).catch(err => {
                 this.errorMessage = 'Неверные данные';
+                this.isLoaderShown = false
             });
         },
         fixChromePassAutofill() {

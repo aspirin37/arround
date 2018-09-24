@@ -147,6 +147,7 @@ export default {
             order: 'id_desc',
             datesRangeStart: null,
             datesRangeEnd: null,
+            scrollPosition: 0,
             userCap
         }
     },
@@ -239,7 +240,7 @@ export default {
                     }
                 },
             })
-        }
+        },
     }
 }
 </script>

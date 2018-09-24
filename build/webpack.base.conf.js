@@ -33,7 +33,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             Vue: ['vue/dist/vue.esm.js', 'default'],
             moment: 'moment',
-            // THREE: 'three',
         }),
     ],
     module: {

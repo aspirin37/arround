@@ -807,12 +807,13 @@ span.flatpickr-weekday {
     }
 
     &__body {
+        scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         max-height: calc(100vh - 300px);
         overflow: auto;
 
         @include media-breakpoint-up(xl) {
-            max-height: calc(100vh - 215px);
+            max-height: calc(100vh - 230px);
         }
     }
 }

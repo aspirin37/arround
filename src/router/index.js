@@ -42,7 +42,10 @@ const router = new Router({
         }, {
             path: 'users/user/:id',
             name: 'User',
-            component: User
+            component: User,
+            meta: {
+                keepScroll: true
+            }
         }]
     }, {
         path: '/sign-in',
@@ -55,8 +58,20 @@ const router = new Router({
     }, ]
 })
 
+router.beforeEach((to, from, next) => {
+    let tableBody = document.querySelector('.page-table__body')
+    if(tableBody) from.meta.scrollPosition = tableBody.scrollTop
+    next()
+})
+
 router.afterEach((to, from) => {
-    // console.log(to)
+    if(from.meta.keepScroll && to.meta.scrollPosition) {
+        setTimeout(() => {
+            document.querySelector('.page-table__body').scrollTo(0, to.meta.scrollPosition);
+        }, 100)
+    } else {
+        to.meta.scrollPosition = 0
+    }
 })
 
 export default router

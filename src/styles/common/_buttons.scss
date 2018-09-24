@@ -184,3 +184,13 @@
     vertical-align: middle;
     color: $gray-600;
 }
+
+.btn-loader {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 20px;
+    width: 20px;
+    background-image: url('/assets/icons/spinner.gif')
+}

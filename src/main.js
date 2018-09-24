@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
+
 import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
@@ -14,6 +16,7 @@ import '@/filters';
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueLodash);
+Vue.use(Vuex)
 
 Vue.use(VueMq, {
     breakpoints: { // default breakpoints - customize this
