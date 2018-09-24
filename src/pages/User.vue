@@ -1,7 +1,7 @@
 <template>
     <div class="page-container">
         <loader v-if="isLoaderShown"></loader>
-        <div class="d-flex flex-column current-shadow rounded bg-white d-flex col-12 col-xl-6 p-4"
+        <div class="d-flex flex-column current-shadow rounded bg-white d-flex p-4"
              v-if="user">
             <div class="d-flex justify-content-start flex-wrap mb-3">
                 <thumbnails-outer class="mb-3 mr-xl-4">

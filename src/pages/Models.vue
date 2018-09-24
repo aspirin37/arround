@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <div class="service-bar d-flex flex-wrap align-items-end px-4 py-3 border-bottom">
             <span class="page-heading">Всего моделей: {{ models.length }}</span>
             <div class="service-bar__input-wrapper ml-auto">

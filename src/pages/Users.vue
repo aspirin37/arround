@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <div class="service-bar d-flex flex-wrap align-items-end px-3 px-xl-4 py-3 border-bottom">
             <span class="page-heading d-none d-xl-block">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">

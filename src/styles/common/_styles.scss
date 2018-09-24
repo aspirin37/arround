@@ -365,6 +365,14 @@ main {
     box-shadow: 0 1px 12px 0 rgba(#000, 0.15);
 }
 
+.page {
+    min-height: calc(100vh - 100px);
+
+    @include media-breakpoint-up(xl) {
+        min-height: calc(100vh - 48px)
+    }
+}
+
 .page-container {
     position: relative;
     min-height: 300px;
