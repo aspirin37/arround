@@ -3,7 +3,7 @@
         <div class="service-bar d-flex flex-wrap align-items-end px-3 px-xl-4 py-3 border-bottom">
             <span class="page-heading d-none d-xl-block">Всего пользователей: {{ count }}</span>
             <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
-                Экспорт CSV
+                Скачать
                 <i class="dl-excel ml-2"></i>
             </button>
             <div class="service-bar__input-wrapper service-bar__input-wrapper--calendar mr-2">
@@ -105,7 +105,7 @@
         <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
             <span>Показано: {{ shownUsers }} из {{ count }}</span>
             <a href="#"
-               class="d-flex d-xl-none">Скачать CSV<i class="dl-excel ml-2"></i></a>
+               class="d-flex d-xl-none">Скачать<i class="dl-excel ml-2"></i></a>
         </div>
     </div>
 </template>

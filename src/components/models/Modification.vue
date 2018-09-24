@@ -70,9 +70,14 @@
             </div>
             <div class="d-flex flex-column">
                 <h4>Действия:</h4>
-                <button class="btn w-100 btn-sm btn-outline-success mb-2">Активировать</button>
+                <button class="btn w-100 btn-sm mb-2"
+                        :class="modification.is_active ? 'btn-outline-theme' : 'btn-outline-success' ">{{modification.is_active ?
+                    'Деактивировать' : 'Активировать' }}</button>
                 <button class="btn w-100 btn-sm btn-outline-theme mb-2"
                         @click="isModelShown = true">Смотреть 3D</button>
+                <button class="btn w-100 btn-sm btn-outline-danger mb-2">
+                    Удалить
+                </button>
             </div>
         </div>
         <div class="d-flex align-items-end mt-4"

@@ -25,8 +25,8 @@
                     <div class="col-10 p-0 display-flex flex-row">
                         <div class="col">Имя</div>
                         <div class="col">ID</div>
+                        <div class="col">Приоритет</div>
                         <div class="col text-lg-center">Кол-во модификаций</div>
-                        <!-- <div class="col text-lg-center">Действия</div> -->
                     </div>
                 </div>
                 <div class="page-table__body">
@@ -50,18 +50,22 @@
                                 <div class="col-12 col-lg">
                                     <span class="d-lg-none">ID:</span> {{ model.idt_model }}
                                 </div>
+                                <div class="col-12 col-lg">
+                                    <span class="d-lg-none">Приоритет:</span> {{ model.sort_order }}
+                                </div>
                                 <div class="d-none d-lg-block col-lg text-lg-center">
                                     {{ model.modifications.length }}
                                 </div>
-                                <!-- <div class="col-12 col-lg text-lg-center">
-                                    <button class="btn btn-sm btn-outline-danger mt-2 mt-lg-0 ml-auto"
-                                            @click.prevent>Удалить</button>
-                                </div> -->
                             </div>
                         </router-link>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
+            <span>Показано: </span>
+            <a href="#"
+               class="d-flex d-xl-none">Скачать CSV<i class="dl-excel ml-2"></i></a>
         </div>
     </div>
 </template>
