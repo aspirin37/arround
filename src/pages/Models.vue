@@ -9,7 +9,8 @@
                        @keyup="updateSearch"
                        placeholder="Поиск...">
             </div>
-            <button class="btn btn-orange ml-2">Добавить модель</button>
+            <button class="btn btn-outline-orange ml-2"
+                    disabled>Добавить модель</button>
         </div>
         <div class="page-container">
             <div class="text-center cap"

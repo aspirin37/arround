@@ -1,24 +1,14 @@
 <template>
-    <div>
-        <!-- <div class="service-bar d-flex flex-wrap align-items-end px-3 px-xl-4 py-3 border-bottom"
-             v-if="model">
-            <div class="page-heading">Модель {{ model.name || 'Без имени' }} <small>(#{{ model.idt_model }})</small>:
-            </div>
-            <div class="service-bar__input-wrapper ml-auto">
-                <input type="text"
-                       class="d-none d-xl-block form-control form-control--search bg-white"
-                       placeholder="Поиск...">
-            </div>
-            <router-link :to="{name: 'AddModif', params: {id: modelId, modelName: model.name, modelPreview: model.modifications[0].url_icon}}"
-                         class="btn btn-orange ml-2">Добавить модификацию</router-link>
-            <button class="btn  btn-outline-danger ml-2"
-                    @click.prevent>Удалить модель</button>
-        </div> -->
+    <div class="page">
         <div class="page-container">
             <loader v-if="isLoaderShown"></loader>
             <div class="widget-min-height"
                  v-if="model">
-                <h4 class="px-2 mb-3">Модель:</h4>
+                <div class="d-flex align-items-baseline">
+                    <h4 class="px-2 mb-3 mr-auto">Модель:</h4>
+                    <span :class="model.is_active ? 'text-success' : 'text-danger' ">{{ model.is_active ? 'Активна' :
+                        'Неактивна' }}</span>
+                </div>
                 <div class="current-shadow rounded bg-white p-4 mb-3">
                     <div class="d-flex flex-column flex-xl-row bg-light-green">
                         <div class="mr-4">
@@ -43,7 +33,7 @@
                         </div>
                         <div class="d-flex flex-column mr-4">
                             <h4>Редактирование:</h4>
-                            <label for="priority">Приоритет</label>
+                            <label for="priority">Приоритет при показе моделей</label>
                             <input type="number"
                                    class="form-control form-control-sm"
                                    v-model="newSortOrder"
@@ -51,11 +41,14 @@
                         </div>
                         <div class="d-flex flex-column mr-4">
                             <h4>Действия:</h4>
+                            <router-link :to="{name: 'AddModif', params: {id: modelId, modelName: model.name, modelPreview: model.modifications[0].url_icon}}"
+                                         class="btn btn-sm btn-outline-orange mb-2">Добавить модификацию</router-link>
                             <button class="btn w-100 btn-sm mb-2"
                                     :class="model.is_active ? 'btn-outline-theme' : 'btn-outline-success' ">
-                                {{model.is_active ? 'Деактивировать' : 'Активировать' }}
+                                {{model.is_active ? 'Деактивировать модель' : 'Активировать модель' }}
                             </button>
-                            <button class="btn w-100 btn-sm btn-outline-danger mb-2">
+                            <button class="btn w-100 btn-sm btn-outline-danger mb-2"
+                                    disabled>
                                 Удалить модель
                             </button>
                         </div>
@@ -70,7 +63,7 @@
                 </div>
                 <h4 class="px-2 mb-3">Список модификаций:</h4>
                 <div class="d-flex flex-wrap">
-                    <div class="d-flex col-12 col-xl-6 mb-3 px-2"
+                    <div class="d-flex col-12 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
                          :key="i">
                         <modification :modification="it" />
@@ -79,7 +72,7 @@
             </div>
         </div>
         <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
-            <span>Показано модификаций: {{ count }} из {{ count }}</span>
+            <span>Всего модификаций: {{ count }}</span>
         </div>
     </div>
 </template>

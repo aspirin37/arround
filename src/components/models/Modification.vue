@@ -1,114 +1,126 @@
 <template>
-    <div class="flex-grow-1 current-shadow rounded bg-white p-4">
-        <div class="d-flex flex-column flex-xl-row">
-            <div class="mr-4">
-                <h4 class="pl-4 mb-3"
-                    v-if="!isNameInputShown">
-                    <a href="#"
-                       class="text-dashed"
-                       @click="showNameInput">{{ newModificationName || 'Без имени' }}</a>
-                    <small> - ID: {{ modification.idt_model_modif }}</small>
-                </h4>
-                <input type="text"
-                       class="form-control form-control-sm mb-3"
-                       v-model="newModificationName"
-                       ref="name-input"
-                       v-else>
-                <thumbnails-outer class="">
-                    <thumbnail :img="previewSrc"
-                               :thumb="previewSrc"
-                               :linkClasses="['circle-avatar circle-avatar--model-info rounded-circle mr-3 bg-light d-inline-block']"
-                               :thumbClasses="['font-size-0']"></thumbnail>
-                </thumbnails-outer>
-            </div>
-            <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
-                <h4>Редактирование:</h4>
-                <div class="mb-2">
-                    <button class="btn w-100 btn-sm btn-outline-theme"
-                            @click="clickFileUpload('image-upload')">
-                        Заменить превью
+    <Collapse :collapseHeader="modification.name">
+        <div slot="header">
+            <span class="modif-status"
+                  :class="modification.is_active ? 'text-success' : 'text-danger' ">{{ modification.is_active ? 'Активна' :
+                'Неактивна' }}</span>
+        </div>
+        <div class="flex-grow-1 current-shadow rounded bg-white p-4"
+             slot="main">
+            <div class="d-flex flex-column flex-xl-row">
+                <div class="mr-4">
+                    <h4 class="pl-4 mb-3"
+                        v-if="!isNameInputShown">
+                        <a href="#"
+                           class="text-dashed"
+                           @click="showNameInput">{{ newModificationName || 'Без имени' }}</a>
+                        <small> - ID: {{ modification.idt_model_modif }}</small>
+                    </h4>
+                    <input type="text"
+                           class="form-control form-control-sm mb-3"
+                           v-model="newModificationName"
+                           ref="name-input"
+                           v-else>
+                    <thumbnails-outer class="">
+                        <thumbnail :img="previewSrc"
+                                   :thumb="previewSrc"
+                                   :linkClasses="['circle-avatar circle-avatar--model-info rounded-circle mr-3 bg-light d-inline-block']"
+                                   :thumbClasses="['font-size-0']"></thumbnail>
+                    </thumbnails-outer>
+                </div>
+                <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
+                    <h4>Редактирование:</h4>
+                    <div class="mb-2">
+                        <button class="btn w-100 btn-sm btn-outline-theme"
+                                @click="clickFileUpload('image-upload')">
+                            Заменить превью
+                        </button>
+                        <div class="pt-1 pl-1">{{ newImageFile.name }}</div>
+                    </div>
+                    <div class="mb-2">
+                        <button class="btn w-100 btn-sm btn-outline-theme"
+                                @click="clickFileUpload('zip-upload')">Заменить zip-архив</button>
+                        <div class="pt-1 pl-1">{{ newZipFile.name }}</div>
+                    </div>
+                    <div class="mb-2">
+                        <button class="btn w-100 btn-sm btn-outline-theme"
+                                @click="clickFileUpload('sfb-upload')">Заменить sfb-архив</button>
+                        <div class="pt-1 pl-1">{{ newSfbFile.name }}</div>
+                    </div>
+                    <div class="d-flex flex-xl-column mb-2">
+                        <label class="custom-check d-block mr-4 mr-xl-0 mb-2">
+                            <input type="checkbox"
+                                   class="custom-check__input">
+                            <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
+                            Есть анимация
+                        </label>
+                        <label class="custom-check d-block">
+                            <input type="checkbox"
+                                   class="custom-check__input">
+                            <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
+                            Есть звук
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
+                    <h4>Скачать:</h4>
+                    <a class="btn btn-sm btn-outline-theme mr-2 mb-2"
+                       :href="modification.url_archive">
+                        <i class="fa fa-download mr-2"></i> ZIP
+                        <span class="text-secondary">- 0кб</span>
+                    </a>
+                    <a class="btn btn-sm btn-outline-theme mr-2"
+                       :href="modification.url_sfb">
+                        <i class="fa fa-download mr-2"></i> SFB
+                        <span class="text-secondary">- 0кб</span>
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <h4>Действия:</h4>
+                    <button class="btn w-100 btn-sm mb-2"
+                            :class="modification.is_active ? 'btn-outline-theme' : 'btn-outline-success' "
+                            disabled>
+                        {{modification.is_active ?
+                        'Деактивировать' : 'Активировать' }}</button>
+                    <button class="btn w-100 btn-sm btn-outline-theme mb-2"
+                            @click="isModelShown = true">Смотреть 3D</button>
+                    <button class="btn w-100 btn-sm btn-outline-danger mb-2"
+                            disabled>
+                        Удалить
                     </button>
-                    <div class="pt-1 pl-1">{{ newImageFile.name }}</div>
-                </div>
-                <div class="mb-2">
-                    <button class="btn w-100 btn-sm btn-outline-theme"
-                            @click="clickFileUpload('zip-upload')">Заменить zip-архив</button>
-                    <div class="pt-1 pl-1">{{ newZipFile.name }}</div>
-                </div>
-                <div class="mb-2">
-                    <button class="btn w-100 btn-sm btn-outline-theme"
-                            @click="clickFileUpload('sfb-upload')">Заменить sfb-архив</button>
-                    <div class="pt-1 pl-1">{{ newSfbFile.name }}</div>
-                </div>
-                <div class="d-flex flex-xl-column mb-2">
-                    <label class="custom-check d-block mr-4 mr-xl-0 mb-2">
-                        <input type="checkbox"
-                               class="custom-check__input">
-                        <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
-                        Есть анимация
-                    </label>
-                    <label class="custom-check d-block">
-                        <input type="checkbox"
-                               class="custom-check__input">
-                        <span class="custom-check__outer"><span class="custom-check__inner"></span></span>
-                        Есть звук
-                    </label>
                 </div>
             </div>
-            <div class="d-flex flex-column mb-3 mb-xl-0 mr-0 mr-xl-4">
-                <h4>Скачать:</h4>
-                <a class="btn btn-sm btn-outline-theme mr-2 mb-2"
-                   :href="modification.url_archive">
-                    <i class="fa fa-download mr-2"></i> ZIP
-                    <span class="text-secondary">- 0кб</span>
-                </a>
-                <a class="btn btn-sm btn-outline-theme mr-2"
-                   :href="modification.url_sfb">
-                    <i class="fa fa-download mr-2"></i> SFB
-                    <span class="text-secondary">- 0кб</span>
-                </a>
+            <div class="d-flex align-items-end mt-4"
+                 v-if="isSubmitShown">
+                <button class="btn btn-sm btn-outline-success mr-2"
+                        @click="submitChanges">Принять изменения</button>
+                <button class="btn btn-sm btn-outline-secondary"
+                        @click="setDefaultValues">Сбросить</button>
             </div>
-            <div class="d-flex flex-column">
-                <h4>Действия:</h4>
-                <button class="btn w-100 btn-sm mb-2"
-                        :class="modification.is_active ? 'btn-outline-theme' : 'btn-outline-success' ">{{modification.is_active ?
-                    'Деактивировать' : 'Активировать' }}</button>
-                <button class="btn w-100 btn-sm btn-outline-theme mb-2"
-                        @click="isModelShown = true">Смотреть 3D</button>
-                <button class="btn w-100 btn-sm btn-outline-danger mb-2">
-                    Удалить
-                </button>
+            <keep-alive>
+                <modelCollada @close-model="isModelShown = false"
+                              v-if="isModelShown" />
+            </keep-alive>
+            <div class="d-none">
+                <input type="file"
+                       ref="zip-upload"
+                       accept="application/zip"
+                       @change="uploadFile('zip-upload', $event)" />
+                <input type="file"
+                       ref="sfb-upload"
+                       @change="uploadFile('sfb-upload', $event)" />
+                <input type="file"
+                       ref="image-upload"
+                       accept="image/*"
+                       @change="uploadFile('image-upload', $event)" />
             </div>
         </div>
-        <div class="d-flex align-items-end mt-4"
-             v-if="isSubmitShown">
-            <button class="btn btn-sm btn-outline-success mr-2"
-                    @click="submitChanges">Принять изменения</button>
-            <button class="btn btn-sm btn-outline-secondary"
-                    @click="setDefaultValues">Сбросить</button>
-        </div>
-        <keep-alive>
-            <modelCollada @close-model="isModelShown = false"
-                          v-if="isModelShown" />
-        </keep-alive>
-        <div class="d-none">
-            <input type="file"
-                   ref="zip-upload"
-                   accept="application/zip"
-                   @change="uploadFile('zip-upload', $event)" />
-            <input type="file"
-                   ref="sfb-upload"
-                   @change="uploadFile('sfb-upload', $event)" />
-            <input type="file"
-                   ref="image-upload"
-                   accept="image/*"
-                   @change="uploadFile('image-upload', $event)" />
-        </div>
-    </div>
+    </Collapse>
 </template>
 <script>
 import { ModelApi } from '@/services/api';
 import { clone } from '@/utils/clone';
+import Collapse from '../utils/Collapse';
 import Thumbnail from '../utils/Thumbnail';
 import ThumbnailsOuter from '../utils/ThumbnailsOuter';
 import modelCollada from './ModelCollada';
@@ -117,6 +129,7 @@ export default {
     components: {
         Thumbnail,
         ThumbnailsOuter,
+        Collapse,
         modelCollada
     },
     data() {
@@ -233,10 +246,9 @@ export default {
     }
 }
 
-// h2::first-letter,
-// h4::first-letter {
-//     text-transform: uppercase
-// }
+.modif-status {
+    font-size: 14px;
+}
 
 a:hover span {
     color: white !important;

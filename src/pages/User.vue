@@ -39,7 +39,8 @@
                              :title="'Заметка о пользователе'"></user-note-about>
             <div>
                 <button class="btn btn-outline-danger mr-2 align-top mb-2"
-                        @click="toggleModal('ban-client')">Заблокировать</button>
+                        @click="toggleModal('ban-client')"
+                        disabled>Заблокировать</button>
             </div>
         </div>
         <modal modalSize="modal-xs"
