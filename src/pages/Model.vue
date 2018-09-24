@@ -44,7 +44,8 @@
                             <router-link :to="{name: 'AddModif', params: {id: modelId, modelName: model.name, modelPreview: model.modifications[0].url_icon}}"
                                          class="btn btn-sm btn-outline-orange mb-2">Добавить модификацию</router-link>
                             <button class="btn w-100 btn-sm mb-2"
-                                    :class="model.is_active ? 'btn-outline-theme' : 'btn-outline-success' ">
+                                    :class="model.is_active ? 'btn-outline-theme' : 'btn-outline-success'"
+                                    @click="changeModelStatus">
                                 {{model.is_active ? 'Деактивировать модель' : 'Активировать модель' }}
                             </button>
                             <button class="btn w-100 btn-sm btn-outline-danger mb-2"
@@ -146,6 +147,15 @@ export default {
         },
         submitChanges() {
 
+        },
+        changeModelStatus() {
+            let options = {
+                idt_model: this.modelId,
+                is_active: !this.model.is_active
+            }
+            this.$http.put(ModelApi.updateModel, { params: options }).then(res => {
+                this.model.is_active = !this.model.is_active
+            })
         }
     }
 }

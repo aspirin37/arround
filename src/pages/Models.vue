@@ -64,9 +64,7 @@
             </div>
         </div>
         <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
-            <span>Показано: </span>
-            <a href="#"
-               class="d-flex d-xl-none">Скачать CSV<i class="dl-excel ml-2"></i></a>
+            <span>Показано: {{ count }}</span>
         </div>
     </div>
 </template>
@@ -88,6 +86,11 @@ export default {
             isLoaderShown: false,
             searchText: '',
             modelTypes
+        }
+    },
+    computed: {
+        count() {
+            return this.models.length || 0
         }
     },
     created() {
