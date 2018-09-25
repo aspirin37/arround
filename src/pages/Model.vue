@@ -150,10 +150,10 @@ export default {
         },
         changeModelStatus() {
             let options = {
-                idt_model: this.modelId,
+                idt_model: +this.modelId,
                 is_active: !this.model.is_active
             }
-            this.$http.put(ModelApi.updateModel, { params: options }).then(res => {
+            this.$http.put(ModelApi.updateModel, options).then(res => {
                 this.model.is_active = !this.model.is_active
             })
         }
