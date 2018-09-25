@@ -45,7 +45,8 @@
                                          class="btn btn-sm btn-outline-orange mb-2">Добавить модификацию</router-link>
                             <button class="btn w-100 btn-sm mb-2"
                                     :class="model.is_active ? 'btn-outline-theme' : 'btn-outline-success'"
-                                    @click="changeModelStatus">
+                                    @click="changeModelStatus"
+                                    disabled>
                                 {{model.is_active ? 'Деактивировать модель' : 'Активировать модель' }}
                             </button>
                             <button class="btn w-100 btn-sm btn-outline-danger mb-2"
