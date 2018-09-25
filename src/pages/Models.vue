@@ -27,7 +27,7 @@
                         <div class="col">Имя</div>
                         <div class="col">ID</div>
                         <div class="col">Приоритет</div>
-                        <div class="col text-lg-center">Кол-во модификаций</div>
+                        <div class="col">Статус</div>
                     </div>
                 </div>
                 <div class="page-table__body">
@@ -46,16 +46,19 @@
                             </div>
                             <div class="col-6 col-lg-10 p-0 flex-row align-items-center">
                                 <div class="col-12 col-lg">
-                                    {{ model.name || 'Без имени' }}
+                                    {{ model.name || 'Без имени' }} <small class="d-lg-none">#{{ model.idt_model }}</small>
                                 </div>
-                                <div class="col-12 col-lg">
-                                    <span class="d-lg-none">ID:</span> {{ model.idt_model }}
+                                <div class="d-none d-lg-block col-12 col-lg">
+                                    {{ model.idt_model }}
                                 </div>
                                 <div class="col-12 col-lg">
                                     <span class="d-lg-none">Приоритет:</span> {{ model.sort_order }}
                                 </div>
-                                <div class="d-none d-lg-block col-lg text-lg-center">
-                                    {{ model.modifications.length }}
+                                <div class="col-12 col-lg">
+                                    <span class="d-lg-none">Статус:</span>
+                                    <span :class="model.is_active ? 'text-success' : 'text-danger'">
+                                        {{ model.is_active ? 'Активна' :'Неактивна' }}
+                                    </span>
                                 </div>
                             </div>
                         </router-link>

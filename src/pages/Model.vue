@@ -146,7 +146,19 @@ export default {
             this.isSubmitShown = false;
         },
         submitChanges() {
+            // this.isSubmitDisabled = true;
+            // let formData = new FormData();
+            // formData.append('idt_model_modif', this.modification.idt_model_modif);
+            // if (this.newModelName !== '' ) formData.append('name', this.newModificationName);
 
+            // this.$http
+            //     .put(ModelApi.updateModification, formData)
+            //     .then(() => {
+            //         this.$parent.$emit('update-model');
+            //     })
+            //     .catch(err => {
+            //         this.isSubmitDisabled = false;
+            //     });
         },
         changeModelStatus() {
             let options = {

@@ -76,7 +76,6 @@
                                         <small class="d-xl-none">(#{{user.idt_user}})</small>
                                     </span>
                                     <span v-else>Имя неизвестно</span>
-                                    <!-- <span class="d-xl-none">ID: {{user.idt_user}}</span> -->
                                 </div>
                                 <div class="col-12 col-xl flex-grow-3">
                                     <a href="#"
@@ -145,8 +144,8 @@ export default {
                 reg_desc: true,
             },
             order: 'id_desc',
-            dateFrom: null,
-            dateTo: null,
+            dateFrom: 0,
+            dateTo: 0,
             scrollPosition: 0,
             userCap
         }
@@ -162,6 +161,7 @@ export default {
     mounted() {
         this.getUsers(this.currentPage, true)
         this.createDatePickerInstance()
+        console.log(moment().subtract(1, 'year').unix(), moment().unix())
     },
     watch: {
         order() {
@@ -178,7 +178,9 @@ export default {
                 offset: this.limit * (page - 1),
                 limit: this.limit,
                 search: this.searchText,
-                order: this.order
+                order: this.order,
+                date_from: this.dateFrom,
+                date_to: this.dateTo
             }
             this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
                 this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
@@ -229,14 +231,15 @@ export default {
         },
         createDatePickerInstance() {
             flatpickr('#date-picker', {
-                allowInput: true,
+                allowInput: this.$mq == 'sm' ? false : true,
                 locale: Russian.ru,
                 mode: "range",
                 dateFormat: this.$mq == 'sm' ? 'd.m.y' : 'd.m.Y',
                 onChange: (selectedDates) => {
                     if (selectedDates.length === 2) {
-                        this.dateFrom = selectedDates[0]
-                        this.dateTo = selectedDates[1]
+                        this.dateFrom = selectedDates[0].getTime() / 1000
+                        this.dateTo = selectedDates[1].getTime() / 1000
+                        this.updateSearch()
                     }
                 },
             })
