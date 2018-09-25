@@ -7,20 +7,14 @@
         position: relative;
 
         &::after {
-            margin-top: -10px;
-            width: 20px;
-            height: 20px;
-        }
-
-        &::after {
             content: '';
             display: block;
             position: absolute;
             top: 50%;
-            margin-top: -12px;
+            margin-top: -10px;
             left: 10px;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background-image: url(./assets/icons/calendar.png);
             background-position: 50% 50%;
             background-size: contain;
@@ -37,11 +31,12 @@
         }
 
         .form-control {
-            padding-left: 38px;
+            padding-left: 32px;
             padding-right: 0.9rem;
             font-size: 0.9rem;
 
             @include media-breakpoint-up(xl) {
+                padding-left: 30px;
                 padding-right: 1.1rem;
                 font-size: 1rem;
             }

@@ -145,8 +145,8 @@ export default {
                 reg_desc: true,
             },
             order: 'id_desc',
-            datesRangeStart: null,
-            datesRangeEnd: null,
+            dateFrom: null,
+            dateTo: null,
             scrollPosition: 0,
             userCap
         }
@@ -235,8 +235,8 @@ export default {
                 dateFormat: this.$mq == 'sm' ? 'd.m.y' : 'd.m.Y',
                 onChange: (selectedDates) => {
                     if (selectedDates.length === 2) {
-                        this.datesRangeStart = selectedDates[0]
-                        this.datesRangeEnd = selectedDates[1]
+                        this.dateFrom = selectedDates[0]
+                        this.dateTo = selectedDates[1]
                     }
                 },
             })
