@@ -231,7 +231,7 @@ export default {
         },
         createDatePickerInstance() {
             flatpickr('#date-picker', {
-                allowInput: this.$mq == 'sm' ? false : true,
+                // allowInput: this.$mq == 'sm' ? false : true,
                 locale: Russian.ru,
                 mode: "range",
                 dateFormat: this.$mq == 'sm' ? 'd.m.y' : 'd.m.Y',

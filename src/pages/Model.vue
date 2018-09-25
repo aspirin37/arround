@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <h4 class="px-2 mb-3">Список модификаций:</h4>
-                <div class="d-flex flex-wrap">
+                <div class="pb-4">
                     <div class="d-flex col-12 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
                          :key="i">

@@ -366,6 +366,7 @@ main {
 }
 
 .page {
+    // 213
     min-height: calc(100vh - 100px);
 
     @include media-breakpoint-up(md) {
@@ -817,7 +818,8 @@ span.flatpickr-weekday {
     &__body {
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
-        max-height: calc(100vh - 300px);
+        // 340
+        max-height: calc(100vh - 340px);
         overflow: auto;
 
         @include media-breakpoint-up(xl) {
