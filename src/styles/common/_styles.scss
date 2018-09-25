@@ -367,12 +367,18 @@ main {
 
 .page {
     // 213
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 213px);
 
     @include media-breakpoint-up(md) {
         min-height: calc(100vh - 48px)
     }
 }
+
+.chrome-mobile .page {
+    min-height: calc(100vh - 100px);
+}
+
+
 
 .page-container {
     position: relative;
