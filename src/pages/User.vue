@@ -1,7 +1,7 @@
 <template>
     <div class="page-container">
         <loader v-if="isLoaderShown"></loader>
-        <div class="d-flex flex-column current-shadow rounded bg-white d-flex p-4"
+        <div class="d-flex flex-column current-shadow rounded bg-white d-flex p-4 mb-4"
              v-if="user">
             <div class="d-flex justify-content-start flex-wrap mb-3">
                 <thumbnails-outer class="mb-3 mr-4">
@@ -42,10 +42,43 @@
                              :currentNote="''"
                              :title="'Заметка о пользователе'"></user-note-about>
             <div>
+                <button class="btn btn-outline-theme mb-2"
+                        :class="{'active': tabSelected == 0}"
+                        @click="tabSelected = 0">Список друзей</button>
+                <button class="btn btn-outline-theme  mb-2"
+                        :class="{'active': tabSelected == 1}"
+                        @click="tabSelected = 1">Раунды</button>
+                <button class="btn btn-outline-theme mb-2"
+                        :class="{'active': tabSelected == 2}"
+                        @click="tabSelected = 2">Жалобы на пользователя</button>
+                <button class="btn btn-outline-theme mb-2"
+                        :class="{'active': tabSelected == 3}"
+                        @click="tabSelected = 3">Жалобы от пользователя</button>
                 <button class="btn btn-outline-danger mr-2 align-top mb-2"
                         @click="toggleModal('ban-client')"
                         disabled>Заблокировать</button>
             </div>
+        </div>
+        <div class="tabs-content d-flex flex-column current-shadow rounded bg-white d-flex p-4 mb-4">
+            <transition name="fade"
+                        mode="out-in">
+                <div key="0"
+                     v-if="tabSelected == 0">
+                    Список друзей
+                </div>
+                <div key="1"
+                     v-if="tabSelected == 1">
+                    Список раундов
+                </div>
+                <div key="2"
+                     v-if="tabSelected == 2">
+                    Жалобы на пользователя
+                </div>
+                <div key="3"
+                     v-if="tabSelected == 3">
+                    Жалобы от пользователя
+                </div>
+            </transition>
         </div>
         <modal modalSize="modal-xs"
                modalTitle="Вы уверены?"
@@ -60,6 +93,7 @@
 </template>
 <script>
 import Thumbnail from '@/components/utils/Thumbnail'
+import Collapse from '@/components/utils/Collapse';
 import ThumbnailsOuter from '@/components/utils/ThumbnailsOuter'
 import Loader from '@/components/utils/Loader'
 import Modal from '@/components/utils/Modal'
@@ -68,6 +102,7 @@ import userCap from '@/assets/user-cap.png'
 
 export default {
     components: {
+        Collapse,
         Thumbnail,
         ThumbnailsOuter,
         Loader,
@@ -76,6 +111,7 @@ export default {
     },
     data() {
         return {
+            tabSelected: 0,
             isLoaderShown: false,
             user: this.$route.params.user,
             userCap
@@ -114,5 +150,13 @@ li {
 .user-dates {
     flex-grow: 1;
     font-size: 12px;
+
+    @media (min-width: 768px) {
+        font-size: 14px;
+    }
+}
+
+.tabs-content {
+    min-height: 400px;
 }
 </style>
