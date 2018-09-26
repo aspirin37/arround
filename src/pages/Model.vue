@@ -35,8 +35,10 @@
                             <h4>Редактирование:</h4>
                             <label for="priority">Приоритет при показе моделей</label>
                             <input type="number"
+                                   step="50"
                                    class="form-control form-control-sm"
                                    v-model="newSortOrder"
+                                   @input="isSubmitShown = true"
                                    id="priority">
                         </div>
                         <div class="d-flex flex-column mr-4">
@@ -95,7 +97,7 @@ export default {
         return {
             model: null,
             newModelName: '',
-            newSortOrder: 0,
+            newSortOrder: null,
             isNameInputShown: false,
             isSubmitShown: false,
             isLoaderShown: false,
@@ -147,19 +149,20 @@ export default {
             this.isSubmitShown = false;
         },
         submitChanges() {
-            // this.isSubmitDisabled = true;
-            // let formData = new FormData();
-            // formData.append('idt_model_modif', this.modification.idt_model_modif);
-            // if (this.newModelName !== '' ) formData.append('name', this.newModificationName);
+            this.isSubmitDisabled = true;
+            let options = {
+                idt_model: +this.modelId,
+                name: this.newModelName,
+                sort_order: +this.newSortOrder
+            }
 
-            // this.$http
-            //     .put(ModelApi.updateModification, formData)
-            //     .then(() => {
-            //         this.$parent.$emit('update-model');
-            //     })
-            //     .catch(err => {
-            //         this.isSubmitDisabled = false;
-            //     });
+            this.$http.put(ModelApi.updateModel, options).then(res => {
+                this.isSubmitDisabled = false
+                this.isSubmitShown = false
+                this.isNameInputShown = false
+            }).catch((err) => {
+                this.isSubmitDisabled = false
+            })
         },
         changeModelStatus() {
             let options = {

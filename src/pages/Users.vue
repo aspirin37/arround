@@ -161,7 +161,6 @@ export default {
     mounted() {
         this.getUsers(this.currentPage, true)
         this.createDatePickerInstance()
-        console.log(moment().subtract(1, 'year').unix(), moment().unix())
     },
     watch: {
         order() {
