@@ -1,7 +1,11 @@
 .profile-sidebar {
     width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 48px;
 
     @include media-breakpoint-up(md) {
+        position: static;
         width: 230px;
         min-width: 230px;
     }
