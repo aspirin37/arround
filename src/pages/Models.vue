@@ -9,8 +9,8 @@
                        @keyup="updateSearch"
                        placeholder="Поиск...">
             </div>
-            <button class="btn btn-outline-orange ml-2"
-                    disabled>Добавить модель</button>
+            <router-link class="btn btn-outline-orange ml-2"
+                         :to="{name: 'AddModel'}">Добавить модель</router-link>
         </div>
         <div class="page-container">
             <div class="text-center cap"

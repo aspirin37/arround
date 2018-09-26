@@ -5,6 +5,7 @@ import SignIn from '@/pages/SignIn'
 import Models from '@/pages/Models'
 import Model from '@/pages/Model'
 import AddModif from '@/pages/AddModif'
+import AddModel from '@/pages/AddModel'
 import Users from '@/pages/Users'
 import User from '@/pages/User'
 
@@ -27,6 +28,10 @@ const router = new Router({
             path: 'models',
             name: 'Models',
             component: Models
+        }, {
+            path: 'models/add-model',
+            name: 'AddModel',
+            component: AddModel
         }, {
             path: 'models/model/:id',
             name: 'Model',

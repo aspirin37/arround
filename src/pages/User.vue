@@ -4,34 +4,38 @@
         <div class="d-flex flex-column current-shadow rounded bg-white d-flex p-4"
              v-if="user">
             <div class="d-flex justify-content-start flex-wrap mb-3">
-                <thumbnails-outer class="mb-3 mr-xl-4">
+                <thumbnails-outer class="mb-3 mr-4">
                     <thumbnail :img="user.avatar || userCap"
                                :thumb="user.avatar || userCap"
                                :linkClasses="['circle-avatar circle-avatar--user-info rounded-circle mr-3 bg-light d-inline-block']"
                                :thumbClasses="['font-size-0']"></thumbnail>
                 </thumbnails-outer>
-                <div class="mr-4 pr-4">
+                <div class="mr-md-4 pr-md-4">
                     <h4 class="mb-0 mt-2">{{user.name}}</h4>
                     <div class="mb-3">Статус</div>
                     <div><a :href="`tel:${user.phone}`">{{ user.phone }}</a></div>
                     <div class="mb-3"><a :href="`mailto:${user.email}`">{{ user.email }}</a></div>
                 </div>
-                <div>
-                    <div>Дата регистрации:</div>
-                    <div class="mb-2">{{ user.a_time | parseDate }}
-                        <a href="#"
-                           class="social-link fab fa-vk ml-2"></a>
+                <div class="user-dates d-flex d-md-block">
+                    <div class="mr-4">
+                        <div>Дата регистрации:</div>
+                        <div class="mb-2">{{ user.a_time | parseDate }}
+                            <a href="#"
+                               class="social-link fab fa-vk ml-2"></a>
+                        </div>
                     </div>
-                    <div>Последняя активность: </div>
-                    <ul v-if="user.sessions.length">
-                        <li v-for="(it, i) in user.sessions"
-                            :key="i"
-                            v-if="user.sessions.length && i < 5">
-                            {{ it.a_time | parseDate }}
-                            <i class="fab fa-apple text-apple ml-2"></i>
-                        </li>
-                    </ul>
-                    <div v-else>Не зарегистрирована</div>
+                    <div>
+                        <div>Последняя активность: </div>
+                        <ul v-if="user.sessions.length">
+                            <li v-for="(it, i) in user.sessions"
+                                :key="i"
+                                v-if="user.sessions.length && i < 5">
+                                {{ it.a_time | parseDate }}
+                                <i class="fab fa-apple text-apple ml-2"></i>
+                            </li>
+                        </ul>
+                        <div v-else>Не зарегистрирована</div>
+                    </div>
                 </div>
             </div>
             <user-note-about class="mb-3"
@@ -105,5 +109,10 @@ ul {
 
 li {
     list-style: none;
+}
+
+.user-dates {
+    flex-grow: 1;
+    font-size: 12px;
 }
 </style>

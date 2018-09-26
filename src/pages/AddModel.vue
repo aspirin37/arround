@@ -2,8 +2,7 @@
     <div class="page-container widget-min-height">
         <div class="d-flex align-items-start">
             <div class="widget-min-height w-100 relative">
-                <h2 class="px-2">{{ modelName || 'Без имени' }} - ID: {{ modelId }}</h2>
-                <h4 class="px-2">Добавление модификации</h4>
+                <h2 class="px-2">Добавление модели</h2>
                 <div class="d-flex col-12 col-xl-6 my-3 px-2">
                     <div class="current-shadow rounded bg-white p-4">
                         <div class="d-flex flex-column flex-xl-row px-4 mb-3 mb-xl-5">
@@ -18,7 +17,7 @@
                                     <label class="mb-2">Введите название:</label>
                                     <input type="text"
                                            class="form-control form-control--modif-name"
-                                           v-model="newModificationName"
+                                           v-model="newModelName"
                                            ref="name-input">
                                 </div>
                                 <div class="form-group mb-3">
@@ -49,8 +48,7 @@
                         </div>
                         <div class="d-flex flex-column flex-xl-row px-4">
                             <button class="btn btn-outline-success mr-xl-2 mb-2"
-                                    @click="addModif"
-                                    :disabled="isSubmitDisabled">Добавить модификацию</button>
+                                    :disabled="isSubmitDisabled">Добавить модель</button>
                             <button class="btn btn-outline-danger mb-2"
                                     @click="setDefaultValues">Сбросить изменения</button>
                             <button class="btn btn-outline-secondary ml-xl-auto"
@@ -87,7 +85,7 @@ export default {
     },
     data() {
         return {
-            newModificationName: null,
+            newModelName: null,
             newZipFile: null,
             newSfbFile: null,
             newImageFile: null,
@@ -100,26 +98,14 @@ export default {
         }
     },
     computed: {
-        modelName() {
-            return this.$route.params.modelName || localStorage.getItem('addModifModelName')
-        },
-        modelPreview() {
-            return this.$route.params.modelPreview || localStorage.getItem('addModifModelPreview')
-        },
-        modelId() {
-            return this.$route.params.id || localStorage.getItem('addModifModelId')
-        },
         previewSrc() {
             return this.newImageFile && this.newImageFile.src ? this.newImageFile.src : ''
         },
         isSubmitDisabled() {
-            return !this.newZipFile.data || !this.newSfbFile.data || !this.newImageFile.data || this.newModificationName === '' || this.isSubmitLoading
+            return !this.newZipFile.data || !this.newSfbFile.data || !this.newImageFile.data || this.newModelName === '' || this.isSubmitLoading
         }
     },
     created() {
-        localStorage.setItem('addModifModelName', this.modelName)
-        localStorage.setItem('addModifModelPreview', this.modelPreview)
-        localStorage.setItem('addModifModelId', this.modelId)
         this.setDefaultValues()
     },
     mounted() {
@@ -155,7 +141,7 @@ export default {
             this.newZipFile = clone(this.defaultFileState)
             this.newSfbFile = clone(this.defaultFileState)
             this.newImageFile = clone(this.defaultFileState)
-            this.newModificationName = ''
+            this.newModelName = ''
             this.isNameInputShown = false
             this.isSubmitShown = false
             document.querySelectorAll('input[type=file]').forEach(it => {
@@ -165,17 +151,16 @@ export default {
         clickFileUpload(id) {
             this.$refs[id].click()
         },
-        addModif() {
+        addModel() {
             this.isSubmitLoading = true;
             let formData = new FormData();
-            formData.append('idt_model', this.modelId);
-            formData.append('name', this.newModificationName);
+            formData.append('name', this.newModelName);
             formData.append('image', this.newImageFile.data);
             formData.append('archive', this.newZipFile.data);
             formData.append('sfb', this.newSfbFile.data);
 
             this.$http.post(ModelApi.updateModification, formData).then(() => {
-                this.$router.push(`/models/model/${this.modelId}`)
+                this.$router.push('/models')
             }).catch(err => {
                 this.isSubmitLoading = false
             });
