@@ -65,7 +65,10 @@
                                 @click="setDefaultValues">Сбросить</button>
                     </div>
                 </div>
-                <h4 class="px-2 mb-3">Список модификаций:</h4>
+                <div class="d-flex px-2 justify-content-between">
+                    <h4 class="mb-3">Список модификаций:</h4>
+                    <h4>Всего модификаций: {{ count }}</h4>
+                </div>
                 <div class="pb-4">
                     <div class="d-flex col-12 mb-3 px-2"
                          v-for="(it, i) in model.modifications"
@@ -74,9 +77,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bar px-4 py-2 pb-xl-3 pt-xl-0">
-            <span>Всего модификаций: {{ count }}</span>
         </div>
     </div>
 </template>
