@@ -2,7 +2,8 @@
     <div class="page">
         <div class="service-bar d-flex flex-wrap align-items-end px-3 px-xl-4 py-3 border-bottom">
             <span class="page-heading d-none d-xl-block">Всего пользователей: {{ count }}</span>
-            <button class="d-none d-xl-flex btn btn-link ml-auto mr-3">
+            <button class="d-none d-xl-flex btn btn-link ml-auto mr-3"
+                    @click="downloadExcel">
                 Скачать
                 <i class="dl-excel ml-2"></i>
             </button>
@@ -157,57 +158,62 @@ export default {
         shownUsers() {
             return this.currentPage < this.totalPages ? this.limit * this.currentPage : this.count
         },
-    },
-    mounted() {
-        this.getUsers(this.currentPage, true)
-        this.createDatePickerInstance()
-    },
-    watch: {
-        order() {
-            this.getUsers(1)
-        }
-    },
-    methods: {
-        getUsers(page, isLoaderNeeded, isScrolled) {
-            let table = document.querySelector('.page-table__body')
-            if (isScrolled) this.isScrollLoaderShown = true
-            if (isLoaderNeeded) this.isPageLoaderShown = true
-            if (table && !isScrolled && !isLoaderNeeded) table.scrollTo(0, 0)
-            let options = {
-                offset: this.limit * (page - 1),
+        usersRequestOptions() {
+            return {
+                offset: this.limit * (this.currentPage - 1),
                 limit: this.limit,
                 search: this.searchText,
                 order: this.order,
                 date_from: this.dateFrom,
                 date_to: this.dateTo
             }
-            this.$http.get(UsersApi.getUserList, { params: options }).then(res => {
+        },
+    },
+    mounted() {
+        this.getUsers(true)
+        this.createDatePickerInstance()
+    },
+    watch: {
+        order() {
+            this.getUsers()
+        }
+    },
+    methods: {
+        async getUsers(isLoaderNeeded, isScrolled) {
+            let table = document.querySelector('.page-table__body')
+            if (isScrolled) this.isScrollLoaderShown = true
+            if (isLoaderNeeded) this.isPageLoaderShown = true
+            if (table && !isScrolled && !isLoaderNeeded) table.scrollTo(0, 0)
+
+            await this.$http.get(UsersApi.getUserList, { params: this.usersRequestOptions }).then(res => {
                 this.users = isScrolled ? this.users.concat(res.body.users) : res.body.users
                 this.count = res.body.count
-                this.currentPage = page
+            })
 
-                this.isPageLoaderShown = false
-                this.isScrollLoaderShown = false
-            }).catch(() => {
-                this.isPageLoaderShown = false
-                this.isScrollLoaderShown = false
+            this.isPageLoaderShown = false
+            this.isScrollLoaderShown = false
+        },
+        downloadExcel() {
+            this.$http.get(UsersApi.getUserListExcel, { params: this.usersRequestOptions }).then(res => {
+                let link = document.createElement('a');
+                link.href = res.url;
+                link.click();
             })
         },
         updateSearch() {
             clearTimeout(this.searchTimout);
             this.searchTimout = setTimeout(() => {
-                this.getUsers(1)
+                this.getUsers()
             }, 300);
         },
         onScrollAction() {
-            this.getUsers(this.currentPage + 1, false, true)
+            this.currentPage++
+            this.getUsers(false, true)
         },
         clickLink(url) {
             let link = document.createElement('a');
-            link.setAttribute('href', url)
-            document.body.appendChild(link)
+            link.href = url
             link.click()
-            document.body.removeChild(link)
         },
         changeSorting(field) {
             let temp = clone(this.sorting[field])

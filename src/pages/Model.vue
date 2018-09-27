@@ -67,7 +67,7 @@
                 </div>
                 <div class="d-flex px-2 justify-content-between">
                     <h4 class="mb-3">Список модификаций:</h4>
-                    <h4>Всего модификаций: {{ count }}</h4>
+                    <h4 class="d-none d-md-block">Всего модификаций: {{ count }}</h4>
                 </div>
                 <div class="pb-4">
                     <div class="d-flex col-12 mb-3 px-2"
