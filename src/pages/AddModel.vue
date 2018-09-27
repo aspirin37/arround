@@ -18,7 +18,7 @@
                                     <input type="text"
                                            class="form-control form-control--modif-name"
                                            v-model="newModelName"
-                                           ref="name-input">
+                                           ref="model-name-input">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="d-block mb-2">Добавьте превью:</label>
@@ -109,7 +109,7 @@ export default {
         this.setDefaultValues()
     },
     mounted() {
-        this.$refs['name-input'].focus()
+        this.$refs['model-name-input'].focus()
     },
     methods: {
         uploadFile(id, evt) {
