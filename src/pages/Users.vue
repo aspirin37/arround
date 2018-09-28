@@ -175,6 +175,7 @@ export default {
     },
     watch: {
         order() {
+            this.currentPage = 1
             this.getUsers()
         }
     },
@@ -203,6 +204,7 @@ export default {
         updateSearch() {
             clearTimeout(this.searchTimout);
             this.searchTimout = setTimeout(() => {
+                this.currentPage = 1
                 this.getUsers()
             }, 300);
         },

@@ -1,7 +1,7 @@
 <template>
     <div :class="thumbClasses">
         <a href="#"
-           v-on:click="toggleShowThumb"
+           @click.prevent="toggleShowThumb"
            :class="linkClasses">
             <img :src="img"
                  alt="">
