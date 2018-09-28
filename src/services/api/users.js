@@ -1,6 +1,6 @@
-import API_BASE from './_api-base';
+// import API_BASE from './_api-base';
 
 export default {
-    getUserList: API_BASE + 'v1/admin/userList',
-    getUserListExcel: API_BASE + 'v1/admin/userListExcel'
+    getUserList: 'v1/admin/userList',
+    getUserListExcel: 'v1/admin/userListExcel'
 };

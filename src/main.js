@@ -10,6 +10,7 @@ import VueMq from 'vue-mq'
 import DeclNum from './directives/DeclNum'
 import Thousands from './directives/thousands'
 import checkUser from '@/utils/check-user';
+import API_BASE from '@/services/api/_api-base';
 
 import '@/filters';
 
@@ -29,6 +30,8 @@ Vue.directive('decl-num', DeclNum)
 Vue.directive('thousands', Thousands)
 
 Vue.config.productionTip = false
+
+Vue.http.options.root = API_BASE
 Vue.http.interceptors.push((request, next) => {
     request.credentials = true;
     next(response => {

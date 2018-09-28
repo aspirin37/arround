@@ -23,6 +23,7 @@ const router = new Router({
     routes: [{
         path: '/',
         name: 'Panel',
+        redirect: '/users',
         component: Panel,
         children: [{
             path: 'models',
