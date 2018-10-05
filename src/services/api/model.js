@@ -4,4 +4,5 @@ export default {
     updateModel: 'v1/admin/model',
     updateModification: 'v1/admin/modif',
     addModification: 'v1/admin/modif',
+    // 
 };
