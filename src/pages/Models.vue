@@ -35,6 +35,7 @@
                         <router-link class="current-shadow bg-white p-3 px-xl-4 pt-xl-4 pt-xl-3 mb-2 rounded d-flex flex-wrap link-reset cursor-pointer"
                                      :to="{name: 'Model', params: {id: model.idt_model }}"
                                      v-for="(model, i) in models"
+                                     v-if="model.modifications.length"
                                      :key="i">
                             <div class="d-flex justify-content-center justify-content-lg-start align-items-center col-6 col-lg-2">
                                 <thumbnails-outer>
